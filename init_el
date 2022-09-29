@@ -1,0 +1,13 @@
+#!/bin/sh
+
+mkdir -p ./chain/
+sudo rm -rf ./chain/el
+mkdir ./chain/el
+
+docker run -it \
+  -v $(pwd):/agora_root \
+  --name el-node --rm \
+  bosagora/agora-el-node:agora_v1.10.23 \
+  --datadir=/agora_root/chain/el \
+  init \
+  /agora_root/config/el/genesis.json

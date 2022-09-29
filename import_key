@@ -1,0 +1,16 @@
+#!/bin/sh
+if [ -z $1 ]
+then
+    echo "Please enter a folder for the key files."
+    exit
+else
+    echo "Import $1"
+fi
+
+docker run -it \
+  -v $(pwd)/:/agora_root \
+  --name validator --rm \
+  bosagora/agora-cl-validator:agora_v3.1.1 \
+  accounts import \
+  --keys-dir=/agora_root/$1 \
+  --wallet-dir=/agora_root/wallet

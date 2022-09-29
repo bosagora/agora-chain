@@ -1,0 +1,13 @@
+#!/bin/sh
+
+mkdir -p ./chain/
+mkdir -p ./chain/cl
+
+docker run -it \
+  -v $(pwd)/:/agora_root \
+  -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp \
+  --name consensus-node --rm \
+  bosagora/agora-cl-node:agora_v3.1.1 \
+  --chain-config-file=/agora_root/config/cl/chain-config.yaml \
+  --config-file=/agora_root/config/cl/config.yaml \
+  --p2p-host-ip=$(curl -s v4.ident.me)

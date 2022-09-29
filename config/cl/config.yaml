@@ -1,0 +1,16 @@
+bootstrap-node:
+  - enr:-LG4QIETd82w1eK9SdNonvQ7NKRMB6FAu1Vu18hAu1JLtvj4EhTQMEDrITrzGOMbLwma0P2nd8B5Nq8LqUA2lu5AsjGGAYOBWSQyh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCOALBnLxsAAP__________gmlkgnY0gmlwhANYSimJc2VjcDI1NmsxoQPi8uDTLh_mSmhkS_btSM-B7alvzetdnEi2W8sVvtIVgIN1ZHCCD6A
+  - enr:-LG4QBXLvZj3a7n1Pi8FUxHGRCMRSrIKJDs9zcpDt908kmdTeFnhPpYlv6eYLKkuZr1pmg1_wUyduH4SJAd7D-en7_6GAYOBWfSGh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCOALBnLxsAAP__________gmlkgnY0gmlwhBKox3yJc2VjcDI1NmsxoQKessJNzFBjrgn2vlxK7MRaD3j_97nDZH34cMhKLAIj6IN1ZHCCD6A
+  - enr:-LG4QMS6sRasvgCOCsgbYA3Ctk99RWavHzOyZJqAeJZYD_xiNB1A7ZUXR1HMDfzWZDYdq-gG4bZQWWl3U-pWSZULVUOGAYOBhigeh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCOALBnLxsAAP__________gmlkgnY0gmlwhDRKYZ2Jc2VjcDI1NmsxoQO0zloqB0LP_gd2_-HWyUnE9o0hF-TDozerdTio3rR7MYN1ZHCCD6A
+contract-deployment-block: 26049
+rpc-host: 0.0.0.0
+monitoring-host: 0.0.0.0
+grpc-gateway-host: 0.0.0.0
+accept-terms-of-use: true
+datadir: /agora_root/chain/cl/
+execution-endpoint: /agora_root/chain/el/geth.ipc
+p2p-allowlist: "public"
+p2p-denylist:
+  - "private"
+
+

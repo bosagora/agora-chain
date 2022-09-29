@@ -1,0 +1,13 @@
+#!/bin/sh
+
+docker run -it \
+  -v $(pwd)/:/agora_root \
+  --network="host" \
+  --name validator --rm \
+  bosagora/agora-cl-validator:agora_v3.1.1 \
+  --datadir=/agora_root/chain/cl/ \
+  --accept-terms-of-use \
+  --beacon-rpc-provider=127.0.0.1:4000 \
+  --wallet-dir=/agora_root/wallet \
+  --proposer-settings-file=/agora_root/config/cl/proposer_config.json \
+  --wallet-password-file=/agora_root/config/cl/password.txt
