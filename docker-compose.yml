@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+    agora-el-node:
+        container_name: agora-el-node
+        image: bosagora/agora-el-node:agora_v1.10.23
+        ports:
+            - "30303:30303"
+            - "30303:30303/udp"
+        restart: always
+        volumes:
+            - ./root/:/root
+        command:
+            --config=/root/config/el/config.toml
+            --datadir=/root/chain/el
+
+    agora-cl-node:
+        container_name: agora-cl-node
+        image: bosagora/agora-cl-node:agora_v3.1.1
+        ports:
+            - "13000:13000"
+            - "12000:12000/udp"
+        volumes:
+            - ./root/:/root
+        restart: always
+        command:
+            --chain-config-file=/root/config/cl/chain-config.yaml
+            --config-file=/root/config/cl/config.yaml
+            --accept-terms-of-use
+            --p2p-host-ip=${P2P_HOST_IP}
+        depends_on:
+            - agora-el-node
+
+    agora-cl-validator:
+        container_name: agora-cl-validator
+        image: bosagora/agora-cl-validator:agora_v3.1.1
+        volumes:
+            - ./root/:/root
+        restart: always
+        command:
+            --datadir=/root/chain/cl/
+            --accept-terms-of-use
+            --beacon-rpc-gateway-provider=agora-cl-node:3500
+            --beacon-rpc-provider=agora-cl-node:4000
+            --wallet-dir=/root/wallet
+            --proposer-settings-file=/root/config/cl/proposer_config.json
+            --wallet-password-file=/root/config/cl/password.txt
+        depends_on:
+            - agora-el-node
+            - agora-cl-node

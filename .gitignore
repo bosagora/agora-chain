@@ -1,0 +1,7 @@
+.idea/
+.doc/
+chain/
+wallet/
+validator_keys?/
+validator_keys??/
+dos2unix/
