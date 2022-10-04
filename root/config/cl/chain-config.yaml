@@ -1,7 +1,7 @@
 # Extends the mainnet preset
 PRESET_BASE: 'mainnet'
 
-CONFIG_NAME: 'agora-testnet'
+CONFIG_NAME: 'agora-mainnet'
 
 
 # Genesis
@@ -73,9 +73,9 @@ PROPOSER_SCORE_BOOST: 70
 
 # Deposit contract
 # ---------------------------------------------------------------
-DEPOSIT_CHAIN_ID: 2019
-DEPOSIT_NETWORK_ID: 2019
-DEPOSIT_CONTRACT_ADDRESS: 0xc11adf2BDF377dbABfB4344B7b8A18D552982680
+DEPOSIT_CHAIN_ID: 2151
+DEPOSIT_NETWORK_ID: 2151
+DEPOSIT_CONTRACT_ADDRESS: 0x557f7ADb3Bb826Aac291ee3CcE47803de430fc7F
 
 
 # Mainnet preset - Altair
