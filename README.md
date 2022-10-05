@@ -19,7 +19,7 @@
 
 ```shell
 wget https://github.com/bosagora/agora-chain/archive/refs/heads/testnet.zip
-unzip testnet.zip
+unzip agora-chain-testnet.zip
 cd agora-chain-testnet
 ```
 
