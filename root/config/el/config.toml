@@ -35,14 +35,12 @@ Percentile = 60
 
 [Node]
 IPCPath = "geth.ipc"
-HTTPHost = "localhost"
 NoUSB = true
 InsecureUnlockAllowed = false
+HTTPHost = "0.0.0.0"
 HTTPPort = 8545
-HTTPVirtualHosts = ["localhost"]
+HTTPVirtualHosts = ["*"]
 HTTPModules = ["eth", "net", "web3", "txpool"]
-WSPort = 8546
-WSModules = ["net", "web3", "eth"]
 
 [Node.P2P]
 MaxPeers = 30
