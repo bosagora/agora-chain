@@ -111,6 +111,7 @@ if "%~1"=="el-node" (
             --name cl-validator --rm ^
             bosagora/agora-cl-validator:v1.0.0 ^
             accounts import ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
             --keys-dir=/root/%~3 ^
             --wallet-dir=/root/wallet
 
@@ -122,6 +123,7 @@ if "%~1"=="el-node" (
           --network="host" ^
           --name cl-validator --rm ^
           bosagora/agora-cl-validator:v1.0.0 ^
+          --chain-config-file=/root/config/cl/chain-config.yaml ^
           --datadir=/root/chain/cl/ ^
           --accept-terms-of-use ^
           --wallet-dir=/root/wallet ^
