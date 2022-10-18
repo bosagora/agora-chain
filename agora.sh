@@ -134,7 +134,6 @@ elif [ "$1" = "validator" ]; then
         --name cl-validator --rm \
         bosagora/agora-cl-validator:v1.0.0 \
         accounts import \
-        --chain-config-file=/root/config/cl/chain-config.yaml \
         --keys-dir=/root/$3 \
         --wallet-dir=/root/wallet
 
