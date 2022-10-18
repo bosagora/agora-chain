@@ -37,7 +37,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         --name el-node --rm  ^
-        bosagora/agora-el-node:v1.0.0  ^
+        bosagora/agora-el-node:v1.0.1  ^
         --datadir=/root/chain/el  ^
         init /root/config/el/genesis.json
 
@@ -48,7 +48,7 @@ if "%~1"=="el-node" (
             docker run -it ^
             -v %cd%\root:/root ^
             --name el-node --rm  ^
-            bosagora/agora-el-node:v1.0.0  ^
+            bosagora/agora-el-node:v1.0.1  ^
             --datadir=/root/chain/el  ^
             init /root/config/el/genesis.json
 
@@ -58,7 +58,7 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -p 30303:30303 -p 30303:30303/udp ^
         --name el-node --rm  ^
-        bosagora/agora-el-node:v1.0.0  ^
+        bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el
 
@@ -111,7 +111,6 @@ if "%~1"=="el-node" (
             --name cl-validator --rm ^
             bosagora/agora-cl-validator:v1.0.0 ^
             accounts import ^
-            --chain-config-file=/root/config/cl/chain-config.yaml ^
             --keys-dir=/root/%~3 ^
             --wallet-dir=/root/wallet
 
@@ -148,7 +147,7 @@ if "%~1"=="el-node" (
             docker run -it ^
             -v %cd%\root:/root ^
             --name el-node --rm  ^
-            bosagora/agora-el-node:v1.0.0  ^
+            bosagora/agora-el-node:v1.0.1  ^
             --datadir=/root/chain/el  ^
             init /root/config/el/genesis.json
 
