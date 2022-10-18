@@ -45,7 +45,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v $(pwd)/root:/root \
         --name el-node --rm \
-        bosagora/agora-el-node:v1.0.0 \
+        bosagora/agora-el-node:v1.0.1 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
@@ -57,7 +57,7 @@ if [ "$1" = "el-node" ]; then
           docker run -it \
           -v $(pwd)/root:/root \
           --name el-node --rm \
-          bosagora/agora-el-node:v1.0.0 \
+          bosagora/agora-el-node:v1.0.1 \
           --datadir=/root/chain/el \
           init \
           /root/config/el/genesis.json
@@ -68,7 +68,7 @@ if [ "$1" = "el-node" ]; then
         -v $(pwd)/root:/root \
         -p 30303:30303 -p 30303:30303/udp \
         --name el-node --rm \
-        bosagora/agora-el-node:v1.0.0 \
+        bosagora/agora-el-node:v1.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el
 
@@ -172,7 +172,7 @@ elif [ "$1" = "docker-compose" ]; then
         docker run -it \
         -v $(pwd)/root:/root \
         --name el-node --rm \
-        bosagora/agora-el-node:v1.0.0 \
+        bosagora/agora-el-node:v1.0.1 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
