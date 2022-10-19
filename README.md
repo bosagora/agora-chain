@@ -61,6 +61,12 @@ Run validator
 ./agora.sh validator run
 ```
 
+Voluntary exit of the validator
+
+```shell
+./agora.sh validator voluntary-exit
+```
+
 ### Using docker-compose for Linux or MacOS
 
 1. Init the execution node
@@ -140,6 +146,12 @@ Run validator
 
 ```shell
 agora.bat validator run
+```
+
+Voluntary exit of the validator
+
+```shell
+agora.bat validator voluntary-exit
 ```
 
 ### Using docker-compose for Windows
