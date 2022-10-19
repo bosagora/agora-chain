@@ -115,6 +115,18 @@ if "%~1"=="el-node" (
             --wallet-dir=/root/wallet
 
         )
+
+     ) else if "%~2"=="voluntary-exit" (
+
+        docker run -it ^
+        -v $(pwd)/root/:/root ^
+        --network=host ^
+        --name cl-validator --rm ^
+        bosagora/agora-cl-validator:v1.0.0 ^
+        accounts voluntary-exit ^
+        --wallet-dir=/root/wallet ^
+        --beacon-rpc-provider=127.0.0.1:4000
+
     ) else if "%~2"=="run" (
 
         docker run -it ^
@@ -133,7 +145,7 @@ if "%~1"=="el-node" (
 
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat validator FLAGS.[0m
-        echo [31mFLAGS can be import, run[0m
+        echo [31mFLAGS can be import, voluntary-exit, run[0m
         exit /B 1
 
     )

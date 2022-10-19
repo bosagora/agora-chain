@@ -137,6 +137,17 @@ elif [ "$1" = "validator" ]; then
         --keys-dir=/root/$3 \
         --wallet-dir=/root/wallet
 
+    elif [ "$2" = "voluntary-exit" ]; then
+
+        docker run -it \
+        -v $(pwd)/root/:/root \
+        --network=host \
+        --name cl-validator --rm \
+        bosagora/agora-cl-validator:v1.0.0 \
+        accounts voluntary-exit \
+        --wallet-dir=/root/wallet \
+        --beacon-rpc-provider=127.0.0.1:4000
+
     elif [ "$2" = "run" ]; then
 
         docker run -it \
@@ -153,7 +164,7 @@ elif [ "$1" = "validator" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be import, run"
+        color "31" "FLAGS can be import, voluntary-exit, run"
         exit 1
 
     fi
