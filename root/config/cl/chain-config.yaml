@@ -8,8 +8,8 @@ CONFIG_NAME: 'agora-mainnet'
 # ---------------------------------------------------------------
 # `2**14` (= 16,384)
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 1024
-# [customized]  2022-12-12 Friday AM 10:00:00 GMT+09:00
-MIN_GENESIS_TIME: 1670806800
+#  (GMT): 2023 January 10 Tuesday AM 1:00:00
+MIN_GENESIS_TIME: 1673312400
 # [customized] Initial fork version
 GENESIS_FORK_VERSION: 0x2F1A0000
 # 604800 seconds (7 days)
