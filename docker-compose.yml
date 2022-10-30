@@ -13,6 +13,7 @@ services:
         command:
             --config=/root/config/el/config.toml
             --datadir=/root/chain/el
+            --syncmode=full
 
     agora-cl-node:
         container_name: agora-cl-node

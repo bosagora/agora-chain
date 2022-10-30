@@ -71,6 +71,7 @@ if [ "$1" = "el-node" ]; then
         bosagora/agora-el-node:v1.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el
+        --syncmode=full
 
     else
 
