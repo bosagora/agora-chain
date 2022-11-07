@@ -17,7 +17,7 @@ services:
 
     agora-cl-node:
         container_name: agora-cl-node
-        image: bosagora/agora-cl-node:v1.0.0
+        image: bosagora/agora-cl-node:v1.0.2
         ports:
             - "13000:13000"
             - "12000:12000/udp"
@@ -34,7 +34,7 @@ services:
 
     agora-cl-validator:
         container_name: agora-cl-validator
-        image: bosagora/agora-cl-validator:v1.0.0
+        image: bosagora/agora-cl-validator:v1.0.2
         volumes:
             - ./root/:/root
         restart: always

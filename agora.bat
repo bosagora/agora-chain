@@ -81,7 +81,7 @@ if "%~1"=="el-node" (
         -v %cd%\root\:/root ^
         -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
         --name cl-node --rm ^
-        bosagora/agora-cl-node:v1.0.0 ^
+        bosagora/agora-cl-node:v1.0.2 ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml ^
         --p2p-host-ip=%P2P_HOST_IP%
@@ -110,7 +110,7 @@ if "%~1"=="el-node" (
             docker run -it ^
             -v %cd%\root\:/root ^
             --name cl-validator --rm ^
-            bosagora/agora-cl-validator:v1.0.0 ^
+            bosagora/agora-cl-validator:v1.0.2 ^
             accounts import ^
             --keys-dir=/root/%~3 ^
             --wallet-dir=/root/wallet
@@ -123,7 +123,7 @@ if "%~1"=="el-node" (
         -v $(pwd)/root/:/root ^
         --network=host ^
         --name cl-validator --rm ^
-        bosagora/agora-cl-validator:v1.0.0 ^
+        bosagora/agora-cl-validator:v1.0.2 ^
         accounts voluntary-exit ^
         --wallet-dir=/root/wallet ^
         --beacon-rpc-provider=127.0.0.1:4000
@@ -134,7 +134,7 @@ if "%~1"=="el-node" (
           -v %cd%\root\:/root ^
           --network="host" ^
           --name cl-validator --rm ^
-          bosagora/agora-cl-validator:v1.0.0 ^
+          bosagora/agora-cl-validator:v1.0.2 ^
           --chain-config-file=/root/config/cl/chain-config.yaml ^
           --datadir=/root/chain/cl/ ^
           --accept-terms-of-use ^
