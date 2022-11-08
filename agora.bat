@@ -43,17 +43,6 @@ if "%~1"=="el-node" (
 
      ) else if "%~2"=="run" (
 
-        if not exist .\root\chain\el (
-
-            docker run -it ^
-            -v %cd%\root:/root ^
-            --name el-node --rm  ^
-            bosagora/agora-el-node:v1.0.1  ^
-            --datadir=/root/chain/el  ^
-            init /root/config/el/genesis.json
-
-        )
-
         docker run -it ^
         -v %cd%\root:/root ^
         -p 30303:30303 -p 30303:30303/udp ^
@@ -156,17 +145,6 @@ if "%~1"=="el-node" (
 ) else if "%~1"=="docker-compose" (
 
     if "%~2"=="up" (
-
-        if not exist .\root\chain\el (
-
-            docker run -it ^
-            -v %cd%\root:/root ^
-            --name el-node --rm  ^
-            bosagora/agora-el-node:v1.0.1  ^
-            --datadir=/root/chain/el  ^
-            init /root/config/el/genesis.json
-
-        )
 
         docker-compose -f docker-compose.yml up -d
 

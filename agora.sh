@@ -52,18 +52,6 @@ if [ "$1" = "el-node" ]; then
 
     elif [ "$2" = "run" ]; then
 
-      if [ ! -d ./root/chain/el ] ; then
-
-          docker run -it \
-          -v $(pwd)/root:/root \
-          --name el-node --rm \
-          bosagora/agora-el-node:v1.0.1 \
-          --datadir=/root/chain/el \
-          init \
-          /root/config/el/genesis.json
-
-      fi
-
         docker run -it \
         -v $(pwd)/root:/root \
         -p 30303:30303 -p 30303:30303/udp \
@@ -178,18 +166,6 @@ elif [ "$1" = "docker-compose" ]; then
         color "31" "Usage: ./agora.sh docker-compose FLAGS."
         color "31" "FLAGS can be import, run"
         exit 1
-
-    fi
-
-    if [ ! -d ./root/chain/el ] ; then
-
-        docker run -it \
-        -v $(pwd)/root:/root \
-        --name el-node --rm \
-        bosagora/agora-el-node:v1.0.1 \
-        --datadir=/root/chain/el \
-        init \
-        /root/config/el/genesis.json
 
     fi
 
