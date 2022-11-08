@@ -12,9 +12,19 @@
     "berlinBlock": 0,
     "londonBlock": 0,
     "arrowglacierBlock": 0,
+    "grayGlacierBlock": 0,
+    "mergeNetsplitBlock": 1375549,
+    "terminalTotalDifficulty": 2411764,
+    "TerminalTotalDifficultyPassed": false,
     "clique": {
       "period": 14,
       "epoch": 30000
+    },
+    "bosagoraBlock": 1202748,
+    "bosagora": {
+      "commonsBudget": "0x71D208bfd49375285301343C719e1EA087c87b43",
+      "commonsBudgetReward": 120000000000000000000,
+      "lastCommonsBudgetRewardBlock": 16202748
     }
   },
   "difficulty": "1",
