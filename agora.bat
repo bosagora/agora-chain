@@ -101,6 +101,7 @@ if "%~1"=="el-node" (
             --name cl-validator --rm ^
             bosagora/agora-cl-validator:v1.0.2 ^
             accounts import ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
             --keys-dir=/root/%~3 ^
             --wallet-dir=/root/wallet
 
@@ -114,6 +115,7 @@ if "%~1"=="el-node" (
         --name cl-validator --rm ^
         bosagora/agora-cl-validator:v1.0.2 ^
         accounts voluntary-exit ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
         --wallet-dir=/root/wallet ^
         --beacon-rpc-provider=127.0.0.1:4000
 
