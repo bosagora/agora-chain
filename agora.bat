@@ -45,7 +45,7 @@ if "%~1"=="el-node" (
 
         docker run -it ^
         -v %cd%\root:/root ^
-        -p 30303:30303 -p 30303:30303/udp ^
+        -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
         --name el-node --rm  ^
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
