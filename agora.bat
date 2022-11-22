@@ -73,7 +73,9 @@ if "%~1"=="el-node" (
         bosagora/agora-cl-node:v1.0.2 ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml ^
-        --p2p-host-ip=%P2P_HOST_IP%
+        --p2p-host-ip=%P2P_HOST_IP% ^
+        --checkpoint-sync-url=https://testnet-sync.bosagora.org ^
+        --genesis-beacon-api-url=https://testnet-sync.bosagora.org
 
     ) else (
 

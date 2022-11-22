@@ -87,7 +87,9 @@ elif [ "$1" = "cl-node" ]; then
         bosagora/agora-cl-node:v1.0.2 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
-        --p2p-host-ip=$(curl -s https://ifconfig.me/ip)
+        --p2p-host-ip=$(curl -s https://ifconfig.me/ip) \
+        --checkpoint-sync-url=https://testnet-sync.bosagora.org \
+        --genesis-beacon-api-url=https://testnet-sync.bosagora.org
 
     else
 
