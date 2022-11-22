@@ -19,6 +19,8 @@ services:
         container_name: agora-cl-node
         image: bosagora/agora-cl-node:v1.0.2
         ports:
+            - "3500:3500"
+            - "4000:4000"
             - "13000:13000"
             - "12000:12000/udp"
         volumes:
