@@ -17,7 +17,7 @@ services:
 
     agora-cl-node:
         container_name: agora-cl-node
-        image: bosagora/agora-cl-node:v1.0.2
+        image: bosagora/agora-cl-node:v1.0.3
         ports:
             - "3500:3500"
             - "4000:4000"
@@ -31,14 +31,12 @@ services:
             --config-file=/root/config/cl/config.yaml
             --accept-terms-of-use
             --p2p-host-ip=${P2P_HOST_IP}
-            --checkpoint-sync-url=https://testnet-sync.bosagora.org
-            --genesis-beacon-api-url=https://testnet-sync.bosagora.org
         depends_on:
             - agora-el-node
 
     agora-cl-validator:
         container_name: agora-cl-validator
-        image: bosagora/agora-cl-validator:v1.0.2
+        image: bosagora/agora-cl-validator:v1.0.3
         volumes:
             - ./root/:/root
         restart: always
