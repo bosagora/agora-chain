@@ -37,7 +37,7 @@ https://docs.docker.com/engine/install/
 ### Install for Linux or MacOS
 
 ```shell
-wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
+wget https://file.bosagora.io/chain/agora-chain-mainnet.zip -O mainnet.zip
 unzip mainnet.zip
 cd agora-chain-mainnet
 ```
@@ -124,7 +124,7 @@ nano ./root/config/cl/proposer_config.json
 ### Install for Windows
 
 ```shell
-curl https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip --output mainnet.zip
+curl https://file.bosagora.io/chain/agora-chain-mainnet.zip --output mainnet.zip
 tar -xf mainnet.zip
 cd agora-chain-mainnet
 ```
