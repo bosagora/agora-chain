@@ -78,7 +78,7 @@ services:
             - "9090:9090"
         volumes:
             - ./monitoring/prometheus/:/etc/prometheus
-            - ./monitoring/prometheus_data/:/prometheus
+            - prometheus_data:/prometheus
         restart: always
         command:
             --web.enable-lifecycle
@@ -93,5 +93,9 @@ services:
         ports:
             - "3000:3000"
         volumes:
-            - ./monitoring/grafana_data/:/var/lib/grafana
+            - grafana_data:/var/lib/grafana
         restart: always
+
+volumes:
+    prometheus_data:
+    grafana_data:

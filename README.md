@@ -37,7 +37,7 @@ https://docs.docker.com/engine/install/
 ### Install for Linux or MacOS
 
 ```shell
-wget https://file.bosagora.io/chain/agora-chain-mainnet.zip -O mainnet.zip
+wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
 unzip mainnet.zip
 cd agora-chain-mainnet
 ```
@@ -156,23 +156,13 @@ nano ./root/config/cl/proposer_config.json
 ./agora.sh docker-compose-monitoring down
 ```
 
-7. Monitoring
-   Launch the URL below to view the login page.  
-   The initial ID is admin. The password is admin.  
-   Please make sure to change your account and password.  
-   http://localhost:3000  
-   The following screens are prepared.  
-   http://localhost:3000/d/FDX6YtOiz/geth-node-dashboard-feb-2022?orgId=1&refresh=10s  
-   http://localhost:3000/d/bosagora2023/boa-staking-dashboard?orgId=1&refresh=1m  
-   http://localhost:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m  
-
 ## For Windows users
 
 
 ### Install for Windows
 
 ```shell
-curl https://file.bosagora.io/chain/agora-chain-mainnet.zip --output mainnet.zip
+curl https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip --output mainnet.zip
 tar -xf mainnet.zip
 cd agora-chain-mainnet
 ```
@@ -290,13 +280,3 @@ agora.bat docker-compose-monitoring up
 ```shell
 agora.bat docker-compose-monitoring down
 ```
-
-7. Monitoring
-   Launch the URL below to view the login page.  
-   The initial ID is admin. The password is admin.  
-   Please make sure to change your account and password.  
-   http://localhost:3000  
-   The following screens are prepared.  
-   http://localhost:3000/d/FDX6YtOiz/geth-node-dashboard-feb-2022?orgId=1&refresh=10s  
-   http://localhost:3000/d/bosagora2023/boa-staking-dashboard?orgId=1&refresh=1m  
-   http://localhost:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m   
