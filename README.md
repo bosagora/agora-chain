@@ -71,7 +71,13 @@ Run consensus node
 Import your key stores
 
 ```shell
-./agora.sh validator import <your key stores folder>
+./agora.sh validator accounts import <your key stores folder>
+```
+
+List your key stores
+
+```shell
+./agora.sh validator accounts list
 ```
 
 Run validator
@@ -83,7 +89,7 @@ Run validator
 Voluntary exit of the validator
 
 ```shell
-./agora.sh validator voluntary-exit
+./agora.sh validator accounts voluntary-exit
 ```
 
 ### Using docker-compose for Linux or MacOS
@@ -95,7 +101,7 @@ Voluntary exit of the validator
 
 2. Import your key stores
 ```shell
-./agora.sh validator import <your key stores folder>
+./agora.sh validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
@@ -158,7 +164,13 @@ agora.bat cl-node run
 Import your key stores
 
 ```shell
-agora.bat validator import <your key stores folder>
+agora.bat validator accounts import <your key stores folder>
+```
+
+List your key stores
+
+```shell
+agora.bat validator accounts list
 ```
 
 Run validator
@@ -170,7 +182,7 @@ agora.bat validator run
 Voluntary exit of the validator
 
 ```shell
-agora.bat validator voluntary-exit
+agora.bat validator accounts voluntary-exit
 ```
 
 ### Using docker-compose for Windows
@@ -182,7 +194,7 @@ agora.bat el-node init
 
 2. Import your key stores
 ```shell
-agora.bat validator import <your key stores folder>
+agora.bat validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
