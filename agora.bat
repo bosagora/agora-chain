@@ -209,11 +209,30 @@ if "%~1"=="el-node" (
 
     )
 
+) else if "%~1"=="docker-compose-monitoring" (
+
+    if "%~2"=="up" (
+
+        docker-compose -f docker-compose-monitoring.yml up -d
+
+    ) else if "%~2"=="down" (
+
+        docker-compose -f docker-compose-monitoring.yml down
+
+    ) else (
+
+        echo [31mFLAGS '%~2' is not found![0m
+        echo [31mUsage: ./agora.bat docker-compose-monitoring FLAGS.[0m
+        echo [31mFLAGS can be up down[0m
+        exit /B 1
+
+    )
+
 ) else (
 
     echo [31mProcess '%~1' is not found![0m
     echo [31mUsage: ./agora.bat PROCESS FLAGS.[0m
-    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose[0m
+    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring[0m
     exit /B 1
 
 )

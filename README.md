@@ -124,6 +124,38 @@ nano ./root/config/cl/proposer_config.json
 ./agora.sh docker-compose down
 ```
 
+### Using docker-compose with monitoring for Linux or MacOS
+
+1. Init the execution node
+```shell
+./agora.sh el-node init
+```
+
+2. Import your key stores
+```shell
+./agora.sh validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+```shell
+nano ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+```shell
+nano ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+```shell
+./agora.sh docker-compose-monitoring up
+```
+
+6. Stop docker-compose
+```shell
+./agora.sh docker-compose-monitoring down
+```
+
 ## For Windows users
 
 
@@ -215,4 +247,36 @@ agora.bat docker-compose up
 6. Stop docker-compose
 ```shell
 agora.bat docker-compose down
+```
+
+### Using docker-compose with monitoring for Windows
+
+1. Init the execution node
+```shell
+agora.bat el-node init
+```
+
+2. Import your key stores
+```shell
+agora.bat validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+```shell
+notepad ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+```shell
+notepad ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+```shell
+agora.bat docker-compose-monitoring up
+```
+
+6. Stop docker-compose
+```shell
+agora.bat docker-compose-monitoring down
 ```

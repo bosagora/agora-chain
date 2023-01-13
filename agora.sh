@@ -253,11 +253,40 @@ elif [ "$1" = "docker-compose" ]; then
 
     fi
 
+elif [ "$1" = "docker-compose-monitoring" ]; then
+
+    if [ "$#" -lt 2 ]; then
+
+        color "31" "Usage: ./agora.sh docker-compose-monitoring FLAGS."
+        color "31" "FLAGS can be up, down"
+        exit 1
+
+    fi
+
+    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+
+    if [ "$2" = "up" ]; then
+
+      docker-compose -f docker-compose-monitoring.yml up -d
+
+    elif [ "$2" = "down" ]; then
+
+      docker-compose -f docker-compose-monitoring.yml down
+
+    else
+
+        color "31" "FLAGS '$2' is not found!"
+        color "31" "Usage: ./agora.sh docker-compose-monitoring FLAGS."
+        color "31" "FLAGS can be up, down"
+        exit 1
+
+    fi
+
 else
 
     color "31" "Process '$1' is not found!"
     color "31" "Usage: ./agora.sh PROCESS FLAGS."
-    color "31" "PROCESS can be el-node, cl-node, validator, docker-compose"
+    color "31" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring"
     exit 1
 
 fi
