@@ -10,7 +10,7 @@ REM Complain if invalid arguments were provided.
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator docker-compose) do (
+for %%a in (el-node cl-node validator docker-compose docker-compose-monitoring) do (
     if %1 equ %%a (
         goto validprocess
     )
