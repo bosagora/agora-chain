@@ -205,6 +205,41 @@ elif [ "$1" = "validator" ]; then
 
         fi
 
+    elif [ "$2" = "slashing-protection-history" ]; then
+
+        if [ "$3" = "export" ]; then
+
+            docker run -it \
+            -v $(pwd)/root/:/root \
+            --network=host \
+            --name cl-validator --rm \
+            bosagora/agora-cl-validator:v1.0.3 \
+            slashing-protection-history export \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --datadir=/root/chain/cl/ \
+            --slashing-protection-export-dir=/root/slashing-protection-export
+
+        elif [ "$3" = "import" ]; then
+
+            docker run -it \
+            -v $(pwd)/root/:/root \
+            --network=host \
+            --name cl-validator --rm \
+            bosagora/agora-cl-validator:v1.0.3 \
+            slashing-protection-history import \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --datadir=/root/chain/cl/ \
+            --slashing-protection-json-file=/root/slashing-protection-export/slashing_protection.json
+
+        else
+
+            color "31" "FLAGS '$3' is not found!"
+            color "31" "Usage: ./agora.sh validator slashing-protection-history FLAGS."
+            color "31" "FLAGS can be import, export"
+            exit 1
+
+        fi
+
     elif [ "$2" = "wallet" ]; then
 
         if [ "$#" -lt 3 ]; then
