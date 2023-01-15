@@ -87,7 +87,28 @@ if "%~1"=="el-node" (
 
 ) else if "%~1"=="validator" (
 
-    if "%~2"=="run" (
+    if "%~2"=="import" (
+
+        if "%~3"=="" (
+
+            echo [31mUsage: ./agora.bat validator import keys-dir.[0m
+            echo [31mkeys-dir is the path to a directory where keystores to be imported are stored[0m
+            exit /B 1
+
+        ) else (
+
+            docker run -it ^
+            -v %cd%\root\:/root ^
+            --name cl-validator --rm ^
+            bosagora/agora-cl-validator:v1.0.3 ^
+            accounts import ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
+            --keys-dir=/root/%~3 ^
+            --wallet-dir=/root/wallet
+
+        )
+
+    ) else if "%~2"=="run" (
 
         docker run -it ^
           -v %cd%\root\:/root ^

@@ -104,12 +104,31 @@ elif [ "$1" = "validator" ]; then
     if [ "$#" -lt 2 ]; then
 
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be run, accounts"
+        color "31" "FLAGS can be run, import, accounts, wallet"
         exit 1
 
     fi
 
-    if [ "$2" = "run" ]; then
+    if [ "$2" = "import" ]; then
+
+        if [ "$#" -lt 3 ]; then
+
+            color "31" "Usage: ./agora.sh validator import keys-dir."
+            color "31" "keys-dir is the path to a directory where keystores to be imported are stored"
+            exit 1
+
+        fi
+
+        docker run -it \
+        -v $(pwd)/root/:/root \
+        --name cl-validator --rm \
+        bosagora/agora-cl-validator:v1.0.3 \
+        accounts import \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --keys-dir=/root/$3 \
+        --wallet-dir=/root/wallet
+
+    elif [ "$2" = "run" ]; then
 
         docker run -it \
         -v $(pwd)/root/:/root \
@@ -219,7 +238,7 @@ elif [ "$1" = "validator" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be run, accounts wallet"
+        color "31" "FLAGS can be run, import, accounts wallet"
         exit 1
 
     fi

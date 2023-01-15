@@ -71,10 +71,16 @@ Run consensus node
 Import your key stores
 
 ```shell
+./agora.sh validator import <your key stores folder>
+```
+
+or
+
+```shell
 ./agora.sh validator accounts import <your key stores folder>
 ```
 
-List your key stores
+List your key stores in your wallet
 
 ```shell
 ./agora.sh validator accounts list
@@ -95,16 +101,25 @@ Voluntary exit of the validator
 ### Using docker-compose for Linux or MacOS
 
 1. Init the execution node
+
 ```shell
 ./agora.sh el-node init
 ```
 
 2. Import your key stores
+
+```shell
+./agora.sh validator import <your key stores folder>
+```
+
+or
+
 ```shell
 ./agora.sh validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
+
 ```shell
 nano ./root/config/cl/password.txt
 ```
@@ -127,16 +142,25 @@ nano ./root/config/cl/proposer_config.json
 ### Using docker-compose with monitoring for Linux or MacOS
 
 1. Init the execution node
+
 ```shell
 ./agora.sh el-node init
 ```
 
 2. Import your key stores
+
+```shell
+./agora.sh validator import <your key stores folder>
+```
+
+or
+
 ```shell
 ./agora.sh validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
+
 ```shell
 nano ./root/config/cl/password.txt
 ```
@@ -184,7 +208,6 @@ agora.bat el-node run
 
 ### Consensus Layer for Windows
 
-
 Run consensus node
 
 ```shell
@@ -196,10 +219,16 @@ agora.bat cl-node run
 Import your key stores
 
 ```shell
+agora.bat validator import <your key stores folder>
+```
+
+or
+
+```shell
 agora.bat validator accounts import <your key stores folder>
 ```
 
-List your key stores
+List your key stores in your wallet
 
 ```shell
 agora.bat validator accounts list
@@ -220,16 +249,25 @@ agora.bat validator accounts voluntary-exit
 ### Using docker-compose for Windows
 
 1. Init the execution node
+
 ```shell
 agora.bat el-node init
 ```
 
 2. Import your key stores
+
+```shell
+agora.bat validator import <your key stores folder>
+```
+
+or
+
 ```shell
 agora.bat validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
+
 ```shell
 notepad ./root/config/cl/password.txt
 ```
@@ -252,21 +290,31 @@ agora.bat docker-compose down
 ### Using docker-compose with monitoring for Windows
 
 1. Init the execution node
+
 ```shell
 agora.bat el-node init
 ```
 
 2. Import your key stores
+
+```shell
+agora.bat validator import <your key stores folder>
+```
+
+or
+
 ```shell
 agora.bat validator accounts import <your key stores folder>
 ```
 
 3. Edit wallet password
+
 ```shell
 notepad ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 notepad ./root/config/cl/proposer_config.json
 ```
