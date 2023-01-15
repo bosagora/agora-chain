@@ -2868,7 +2868,7 @@
           "link": true,
           "linkTargetBlank": true,
           "linkTooltip": "beaconcha.in",
-          "linkUrl": "http://beaconcha.in/validator/${__cell_1:raw}",
+          "linkUrl": "https://www.agorascan.io/validator/${__cell_1:raw}",
           "mappingType": 1,
           "pattern": "pubkey_short",
           "thresholds": [],
