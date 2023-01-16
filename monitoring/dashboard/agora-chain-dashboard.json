@@ -2712,7 +2712,7 @@
           "decimals": 2,
           "link": true,
           "linkTargetBlank": true,
-          "linkTooltip": "beaconcha.in",
+          "linkTooltip": "agorascan.io",
           "linkUrl": "https://www.agorascan.io/validator/${__cell_1:raw}",
           "mappingType": 1,
           "pattern": "pubkey_short",
@@ -3161,7 +3161,7 @@
     {
       "datasource": {
       },
-      "description": "The length of time the beacon chain and validator processes have been running.",
+      "description": "The length of time the agora consensus chain and validator processes have been running.",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
