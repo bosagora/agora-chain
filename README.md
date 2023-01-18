@@ -17,6 +17,9 @@
   - [Consensus Layer](#consensus-layer-for-windows)
   - [Using docker-compose](#using-docker-compose-for-windows)
 
+
+- [AWS 의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-KR.md)
+
 ## Abort
 [Agora-el](https://github.com/bosagora/agora-el) is an execution client that has an EVM.  
 Agora-el was forked from Ethereum's execution client, [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum) version 1.10.23.  
