@@ -719,14 +719,14 @@ cd agora-chain-mainnet
 
 ### 10.3. Grafana 설정하기
 
-웹브라이즈에 다음과 같은 주소를 입력합니다.
+웹브라이즈에 다음과 같은 주소를 입력합니다.  
 ```text
 http://[EC2의 IP]:3000
 ```
-EC2의 IP는 AWS `EC2 대시보드`의 인스턴스 항목에서 찾을 수 있습니다.
+EC2의 IP는 AWS `EC2 대시보드`의 인스턴스 항목에서 찾을 수 있습니다.  
 
-최초 로그인 아이디는 admin이고, 비밀번호는 admin 입니다.
-로그인 하면 비밀번호를 변경하는 화면이 나옵니다. 이때 새로운 비밀번호를 입력하면 비밀번호가 변경됩니다.
+최초 로그인 아이디는 admin이고, 비밀번호는 admin 입니다.  
+로그인 하면 비밀번호를 변경하는 화면이 나옵니다. 이때 새로운 비밀번호를 입력하면 비밀번호가 변경됩니다.  
 
 
 ### 10.4. Grafana 데이타소스 추가하기
@@ -734,15 +734,15 @@ EC2의 IP는 AWS `EC2 대시보드`의 인스턴스 항목에서 찾을 수 있�
 그러면 Data source를 추가할 수 있는 화면으로 전환됩니다.  
 화면 중앙의 `Add data source` 버튼을 클릭합니다.  
 `Prometheus` 를 선택합니다.  
-URL 항목에 `http://prometheus:9090` 을 입력합니다.    
-화면 하단의 `Save & test` 버튼을 클릭합니다.
-모든 과정이 잘 설정되었면 `Data source is working` 라는 팝업메세지가 표시됩니다.
+URL 항목에 `http://prometheus:9090` 을 입력합니다.   
+화면 하단의 `Save & test` 버튼을 클릭합니다.  
+모든 과정이 잘 설정되었면 `Data source is working` 라는 팝업메세지가 표시됩니다.  
 
 ### 10.5. Grafana Dashboard 추가하기
 왼쪽 메뉴의 위에서 네번째 아이콘을 클릭하면 `Dashboards` 리는 메뉴가 나타납니다. 메뉴창에서 `+ import` 를 선택합니다.  
 아래 URL의 내용을 복사하여.  
-`https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json`
-`Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.
-그러면 새로운 Dashboard가 추가되고 화면에 나타납니다.
-각 항목좌측 상단에 i 라는 곳에 마우스를 오버하면 간단한 설명을 보여줍니다.
+`https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json`  
+`Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.  
+그러면 새로운 Dashboard가 추가되고 화면에 나타납니다.  
+각 항목좌측 상단에 i 라는 곳에 마우스를 오버하면 간단한 설명을 보여줍니다.  
 
