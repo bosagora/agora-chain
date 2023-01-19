@@ -1,6 +1,6 @@
 # AWS 의 Ubuntu 에 BOSagora 노드 설치하기
 
-이 문서는 Amazon Web Service내의 Ubuntu서버(EC2) 에 노드를 설치하는 방법이 포함되어 있습니다.  
+이 문서는 Amazon Web Service내의 Ubuntu서버(EC2) 에 노드를 설치하는 방법이 포함되어 있습니다.
 또한 동영상 https://youtu.be/VP2QweI9HnM 와 같이 사용하면 도움이 될 수 있도록 작성하였습니다.
 
 ## 1. AWS EC2 생성하기
@@ -10,14 +10,14 @@
 - 우측 상단의 `인스턴스 시작` 버튼을 클릭 합니다.
 - `인스턴스`의 이름을 설정 합니다.
 - `애플리케인션 및 OS 이미지` 항목에서 `Ubuntu`를 선택 합니다.
-    - Ubuntu Server 20.04 LTS 를 선택합니다.
+  - Ubuntu Server 20.04 LTS 를 선택합니다.
 - `인스턴스의 유형` (하드웨어 리소스)을 선택 합니다.
-    - t3.medium 이상의 인스턴스 유형을 선택합니다.
+  - t3.medium 이상의 인스턴스 유형을 선택합니다.
 - `새 키 페어 생성`을 클릭해 새로운 키 페어 를 생성 합니다.
 - 키 페어 이름을 지정 하고 키 페어 유형과 프라이빗 키 파일 형식을 ( RSA , .pem ) 설정 한 후 키 페어 생성을 클릭해 키 페어 파일을 다운 로드 합니다.
 - `방화벽(보안 그룹)`에서 `보안 그룹 생성` 을 클릭 합니다.
 - `스토리지 구성`에서 인스턴스에 할당 할 볼륨의 크기를 입력 합니다.
-    - 100GB 이상의 볼륨크기를 입력합니다.
+  - 100GB 이상의 볼륨크기를 입력합니다.
 - 하단부에 있는 `인스턴스 시작` 을 클릭 합니다.
 - 인스턴스 시작(생성)이 완료되면 모든 인스턴스 보기를 클릭 한 후, 인스턴스가 생성 된 것을 확인 합니다.
 
@@ -51,6 +51,7 @@
 ## 4. 도커 설치하기
 
 아래 명령어를 실행하여 도커를 설치합니다.
+
 ```shell
 sudo apt update
 sudo apt install docker.io -y
@@ -58,6 +59,7 @@ sudo apt install docker-compose -y
 ```
 
 도커의 명령어를 root 계정외에 다른 계정에서 사용할 수 있도록 현재 계정을 docker 그룹에 포함합니다.
+
 ```shell
 sudo /usr/sbin/groupadd -f docker
 sudo /usr/sbin/usermod -aG docker 'ubuntu'
@@ -69,16 +71,19 @@ sudo chown ubuntu:docker /var/run/docker.sock
 EC2의 인스턴스에 터미널로 접속합니다.
 
 아래 명령어를 실행하여 설치파일을 다운로드 합니다.
+
 ```shell
 wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
 ```
 
 압축을 해제하기 위해서 먼저 아래 명령어를 실행하여 unzip을 설치해야 합니다.
+
 ```shell
 sudo apt install unzip
 ```
 
 아래 명령어를 실행하여 압축을 해제합니다.
+
 ```shell
 unzip mainnet.zip
 ```
@@ -86,6 +91,7 @@ unzip mainnet.zip
 압축을 해제하면 폴더 `agora-chain-mainnet` 가 생성되고 그 아래에 파일들이 생성됩니다.
 
 아래 명령어를 실행하여 설치된 폴더로 이동합니다.
+
 ```shell
 cd agora-chain-mainnet
 ```
@@ -93,6 +99,7 @@ cd agora-chain-mainnet
 ## 6. agora-el-node 시작하기
 
 ### 6.1. 새로운 터미널 접속하기
+
 - AWS `EC2 대시보드`에 접속합니다.
 - `인스턴스` 항목을 선택하면 인스턴스들을 보여주는 화면으로 이동합니다.
 - 접속할 EC2 인스턴스를 선택합니다.
@@ -103,16 +110,19 @@ cd agora-chain-mainnet
 ### 6.2. agora-el-node 를 시작하기
 
 아래 명령어를 실행하여 설치된 폴더로 이동합니다.
+
 ```shell
 cd agora-chain-mainnet
 ```
 
 아래 명령어를 실행하여 agora-el 노드의 설정을 초기화 합니다.
+
 ```shell
 ./agora.sh el-node init
 ```
 
 위 명령어를 실행하면 아래와 같은 로그들이 생성됩니다.
+
 ```log
 INFO [01-17|05:00:03.938] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [01-17|05:00:03.947] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
@@ -133,11 +143,13 @@ INFO [01-17|05:00:04.034] Successfully wrote genesis state         database=ligh
 ### 6.3. agora-el-node 를 실행하여 이전에 생성된 블록을 모두 받기
 
 아래 명령어를 실행하여 agora-el-node 를 실행합니다.
+
 ```shell
 ./agora.sh el-node run
 ```
 
 위 명령어를 실행하면 아래와 같은 로그들이 생성됩니다.
+
 ```log
 INFO [01-17|05:00:42.211] Starting Agora-el (Agora Execution Layer) client... 
 INFO [01-17|05:00:42.212] Bumping default cache on mainnet         provided=1024 updated=4096
@@ -228,6 +240,7 @@ INFO [01-17|05:08:33.160] Imported new chain segment               blocks=1    t
 이전에 실행한 agora-el-node는 종료하지 마시고, EC2의 인스턴스에 새로운 터미널로 접속합니다.
 
 ### 7.1. 새로운 터미널 접속하기
+
 - AWS `EC2 대시보드`에 접속합니다.
 - `인스턴스` 항목을 선택하면 인스턴스들을 보여주는 화면으로 이동합니다.
 - 접속할 EC2 인스턴스를 선택합니다.
@@ -238,16 +251,19 @@ INFO [01-17|05:08:33.160] Imported new chain segment               blocks=1    t
 ### 7.2. agora-cl-node 를 실행하여 이전에 생성된 블록을 모두 받기
 
 아래 명령어를 실행하여 설치된 폴더로 이동합니다.
+
 ```shell
 cd agora-chain-mainnet
 ```
 
 아래 명령어를 실행하여 agora-el-node 를 실행합니다.
+
 ```shell
 ./agora.sh cl-node run
 ```
 
 위 명령어를 실행하면 아래와 같은 로그들이 생성됩니다.
+
 ```log
 Unable to find image 'bosagora/agora-cl-node:v1.0.3' locally
 v1.0.3: Pulling from bosagora/agora-cl-node
@@ -273,6 +289,7 @@ accept
 ```
 
 여기게 `accept`를 입력합니다.
+
 ```log
 [2023-01-17 09:12:34]  WARN flags: Running Agora-cl (Agora Consensus Layer) client using chain configuration yaml file
 [2023-01-17 09:12:34]  WARN node: Agora-cl configured for AGORA MAINNET
@@ -334,10 +351,10 @@ accept
 [2023-01-18 06:59:53]  INFO blockchain: Finished applying state transition attestations=1 slot=49738 syncBitsCount=511
 ```
 
-
 ## 8. agora-cl-validator 시작하기
 
 ### 8.1. 새로운 터미널 접속하기
+
 - AWS `EC2 대시보드`에 접속합니다.
 - `인스턴스` 항목을 선택하면 인스턴스들을 보여주는 화면으로 이동합니다.
 - 접속할 EC2 인스턴스를 선택합니다.
@@ -346,57 +363,66 @@ accept
 - 그러면 터미널로 접속됩니다.
 
 아래 명령어를 실행하여 설치된 폴더로 이동합니다.
+
 ```shell
 cd agora-chain-mainnet
 ```
 
 ### 8.2. 검증자의 키를 임포트하기
 
-하나의 서버에는 여러개의 검증자키를 임포트할 수 있습니다.  
-검증자의 키는 사용자가 키생성 프로그램으로 생성하여야 합니다.  
-검증자키는 검증자 프로그램이 다른 검증자가 제시한 블록에 서명을 할 때 사용됩니다.  
+하나의 서버에는 여러개의 검증자키를 임포트할 수 있습니다.
+검증자의 키는 사용자가 키생성 프로그램으로 생성하여야 합니다.
+검증자키는 검증자 프로그램이 다른 검증자가 제시한 블록에 서명을 할 때 사용됩니다.
 검증자키의 파일이름은 다음과 같은 형태로 되어 있습니다. #는 임의의 숫자입니다.
+
 ```text
 keystore-m_12381_3600_0_0_0-##########.json
 ```
-검증자키를 임포트하면 root/wallet 이라는 폴더가 생성됩니다. 이곳에 여러개의 검증자키가 하나의 파일로 저장됩니다.  
-또한 wallet에 접근하기 위해서는 비밀번호를 입력하여야 합니다.  
-최초 검증자키를 임포트할 때 wallet은 자동으로 생성됩니다. 이때 wallet의 비밀번호를 입력합니다.  
+
+검증자키를 임포트하면 root/wallet 이라는 폴더가 생성됩니다. 이곳에 여러개의 검증자키가 하나의 파일로 저장됩니다.
+또한 wallet에 접근하기 위해서는 비밀번호를 입력하여야 합니다.
+최초 검증자키를 임포트할 때 wallet은 자동으로 생성됩니다. 이때 wallet의 비밀번호를 입력합니다.
 따라서 사용자는 검증자키의 비밀번호와 wallet의 비밀번호 두개가 존재한다는 것을 기억하여야 합니다.
 
 #### 8.2.1. 검증자키를 서버에 전송하기
-서버로 파일을 전송하는 방법은 다양합니다.  
+
+서버로 파일을 전송하는 방법은 다양합니다.
 여기서는 내컴퓨터의 파일의 내용을 복사한 후, 서버에 파일을 생성하여 붙여넣는 방법을 사용해 보겠습니다.
 
 아래 명령어를 사용하여 폴더 root 아래에 mykeys 라는 이름의 폴더를 생성합니다.
+
 ```shell
 mkdir root/mykeys
 ```
 
 아래 명령어를 사용하여 폴더 root/mykeys 아래에 파일 key1.json을 생성하고 편집기를 실행합니다.
+
 ```shell
 nano root/mykeys/key1.json
 ```
 
 - nono 편집기의 명령어의 단축키는 다음과 같습니다.
 
-| 단축키    | 동작                                                           |
-|---------|---------------------------------------------------------------|
-| ctrl+g  | 도움말 표시                                                      |
-| ctrl+x  | nano 종료 (혹은 현재의 file buffer를 닫음)                          |
-| ctrl+o  | 현재 편집 중인 파일 저장                                            |
-| ctrl+j  | 문단을 justify(행의 끝을 나란히 맞추다)한다. 즉, 한 문단을 한 줄로 붙인다.   |
-| ctrl+r  | 현재 file에 다른 file의 내용을 추가한다.                              |
-| ctrl+k  | 현재의 line 혹은 선택된 text 삭제(그리고 저장(copy))                   |
-| ctrl+u  | 붙여넣기 (paste)                                                 |
 
-내 컴퓨터의 검증자키 파일 중 하나를 선택하여 텍스트편집기로 읽어옵니다. 그리고 그 내용을 복사해서 AWS의 터미널에 붙여 넣습니다.  
+| 단축키 | 동작                                                                       |
+| -------- | ---------------------------------------------------------------------------- |
+| ctrl+g | 도움말 표시                                                                |
+| ctrl+x | nano 종료 (혹은 현재의 file buffer를 닫음)                                 |
+| ctrl+o | 현재 편집 중인 파일 저장                                                   |
+| ctrl+j | 문단을 justify(행의 끝을 나란히 맞추다)한다. 즉, 한 문단을 한 줄로 붙인다. |
+| ctrl+r | 현재 file에 다른 file의 내용을 추가한다.                                   |
+| ctrl+k | 현재의 line 혹은 선택된 text 삭제(그리고 저장(copy))                       |
+| ctrl+u | 붙여넣기 (paste)                                                           |
+
+내 컴퓨터의 검증자키 파일 중 하나를 선택하여 텍스트편집기로 읽어옵니다. 그리고 그 내용을 복사해서 AWS의 터미널에 붙여 넣습니다.
 내 컴퓨터의 검증자키 파일은 다음과 같은 형태로 되어 있습니다. #는 임의의 숫자입니다.
+
 ```text
 keystore-m_12381_3600_0_0_0-##########.json
 ```
-이제 root/mykeys/key1.json 에는 내컴퓨터에서 생성한 검증자키 파일의 내용이 복사되었습니다.  
-ctrl+o를 눌러 저장합니다. 그러면 파일이름이 보여주고 저장할지 취소할 지 물어봅니다. 이때 엔터키를 눌러저장을 합니다.  
+
+이제 root/mykeys/key1.json 에는 내컴퓨터에서 생성한 검증자키 파일의 내용이 복사되었습니다.
+ctrl+o를 눌러 저장합니다. 그러면 파일이름이 보여주고 저장할지 취소할 지 물어봅니다. 이때 엔터키를 눌러저장을 합니다.
 그리고 ctrl+x를 눌러서 편집기를 종료합니다.
 
 #### 8.2.2. 검증자키를 임포트하기
@@ -429,6 +455,7 @@ TERMS AND CONDITIONS: https://github.com/bosagora/agora-cl/blob/agora/TERMS_OF_S
 
 Type "accept" to accept this terms and conditions [accept/decline]: (default: decline):
 ```
+
 `accept`를 입력합니다.
 
 ```text
@@ -436,11 +463,13 @@ Type "accept" to accept this terms and conditions [accept/decline]: (default: de
 Password requirements: at least 8 characters
 New wallet password: 
 ```
+
 최초 실행시에는 wallet이 존재하기 않았기 때문에 wallet을 생성하기 위한 비밀번호를 입력합니다.
 
 ```text
 Confirm password: 
 ```
+
 위와 같은 내용이 출력됩니다. 이 때 다시 한번 더 똑같이 비밀번호를 입력합니다.
 
 ```text
@@ -448,6 +477,7 @@ Confirm password:
 [2023-01-17 08:48:26]  INFO validator: You are using an insecure gRPC connection. This is expected when running your beacon node and validator on the same machine as recommended.
 Enter the password for your imported accounts: 
 ```
+
 위와 같은 내용은 출력되면 이제 임포트할 검증자키의 비밀번호를 입력하면 됩니다.
 
 ```text
@@ -455,6 +485,7 @@ Importing accounts, this may take a while...
 Importing accounts... 100% [==========================================]  [1s:0s]
 Successfully imported 1 accounts, view all of them by running `accounts list`
 ```
+
 그러면 폴더내부의 모든 키가 임포트됩니다.
 
 ```text
@@ -462,7 +493,8 @@ Importing accounts, this may take a while...
 [2023-01-17 08:53:06]  WARN accounts: Could not import keystore for 9475fc6d96c368c2efcbc4337e40fd28231dfda319016dc96a6604c716501cf2aefb2f73b5b58261f49d25ee4a035bea: incorrect password for key 0x9475fc6d96c368c2efcbc4337e40fd28231dfda319016dc96a6604c716501cf2aefb2f73b5b58261f49d25ee4a035bea
 Successfully imported 1 accounts, view all of them by running `accounts list`
 ```
-만약 위와 같은 내용일 출력되면 해당 검증자키가 비밀번호를 잘 못 입력하여 임포트할 수 없다는 내용입니다.  
+
+만약 위와 같은 내용일 출력되면 해당 검증자키가 비밀번호를 잘 못 입력하여 임포트할 수 없다는 내용입니다.
 검증자키가 여러개 있을 때, 모두 비밀번호가 같지 않을 수 있기 때문에 개별적으로 메세지가 출력됩니다.
 
 이제 임포트가 완료되었습니다.
@@ -501,32 +533,37 @@ Account 0 | namely-secure-katydid
 ```
 
 ### 8.3. 월렛의 비밀번호가 기록된 텍스트 생성
-검증자 프로그램이 실행되기 위해서는 wallet 의 검증자키를 읽어와야 합니다.   
-그러나 wallet 의 비밀번호는 사용자만 알고 있고, 프로그램은 알 수 없기 때문에 매번실행될 때 마다 물어봅니다.   
-이것은 보안적으로 우수하나 프로그램을 백그라운드로 실행하기에는 해결하기 어려운 점이 있습니다.  
+
+검증자 프로그램이 실행되기 위해서는 wallet 의 검증자키를 읽어와야 합니다.
+그러나 wallet 의 비밀번호는 사용자만 알고 있고, 프로그램은 알 수 없기 때문에 매번실행될 때 마다 물어봅니다.
+이것은 보안적으로 우수하나 프로그램을 백그라운드로 실행하기에는 해결하기 어려운 점이 있습니다.
 따라서 비밀번호를 텍스트로 기록하여 검증자프로그램에게 알려주어야 합니다.
 
-다음 명령어를 사용하여 자동 및 백그라운드 실행을 위한 비밀번호를 입력합니다.  
+다음 명령어를 사용하여 자동 및 백그라운드 실행을 위한 비밀번호를 입력합니다.
 기본값은 password 로 되어 있습니다. 이것을 wallet 의 비밀번호로 변경해 주십시오
 
 ```shell
 nano root/config/cl/password.txt
 ```
+
 nano 편집기의 명령어는 이전과 동일합니다. ctrl+o -> Enter : 저장, ctrl+x : 종료
 
 ### 8.4. 수수료 입금계좌 등록
-2023년 2월 9일 부터 검증자가 블록을 제안하는 기능이 추가됩니다.   
-보스아고라 네트워크는 검증자가 제안한 블록에 포함된 트랜잭션 수수료를 검증자에게 지급합니다.  
-이 보상을 받기 위해서는 입금계좌를 등록하여야 합니다.  
-입급계좌의 정보는 검증자 마다 다르게 설정할 수 있습니다. 여기서는 편의상 하나의 주소로 지급하는 것으로 설정하겠습니다.  
+
+2023년 2월 9일 부터 검증자가 블록을 제안하는 기능이 추가됩니다.
+보스아고라 네트워크는 검증자가 제안한 블록에 포함된 트랜잭션 수수료를 검증자에게 지급합니다.
+이 보상을 받기 위해서는 입금계좌를 등록하여야 합니다.
+입급계좌의 정보는 검증자 마다 다르게 설정할 수 있습니다. 여기서는 편의상 하나의 주소로 지급하는 것으로 설정하겠습니다.
 관련 문서는 이 [링크](https://agora-cl-docs.bosagora.org/docs/execution-node/fee-recipient) 를 참조해주십시오
 
 다음 명령어를 실행해서 수수료 입금계좌를 수정합니다.
+
 ```shell
 nano root/config/cl/proposer_config.json
 ```
 
 그러면 다음과 같은 내용이 이미 있을 것입니다.
+
 ```json
 {
   "proposer_config": {
@@ -541,6 +578,7 @@ nano root/config/cl/proposer_config.json
 ```
 
 아래와 같이 수정하면 됩니다. fee_recipient 에는 사용자의 메타마스크 주소를 입력하면 됩니다.
+
 ```json
 {
   "proposer_config": {
@@ -550,6 +588,7 @@ nano root/config/cl/proposer_config.json
   }
 }
 ```
+
 nano 편집기의 명령어는 이전과 동일합니다. ctrl+o -> Enter : 저장, ctrl+x : 종료
 
 ### 8.5. 검증자 프로그램 실행하기
@@ -561,6 +600,7 @@ agora-el-node 와 agora-cl-node 가 실행 중 일때 다음 명령어를 실행
 ```
 
 그러면 다음과 같은 로그가 출력됩니다.
+
 ```shell
 [2023-01-18 07:01:51]  WARN flags: Running Agora-cl (Agora Consensus Layer) client using chain configuration yaml file
 [2023-01-18 07:01:51]  INFO node: Opened validator wallet keymanager-kind=direct wallet=/root/wallet/direct
@@ -578,23 +618,26 @@ Adding optimizations for validator slashing protection 100% [===================
 ```
 
 40,000 BOA 를 예치한 후 12시간이 지난 검증자들은 그 상태가 활성화(Active) 되고, 검증자로서의 역할을 수행합니다.
-만약 예치한 후 12시간안에 노드를 설치하지 못하면 페널티를 받아 BOA 의 잔고가 감소합니다.  
+만약 예치한 후 12시간안에 노드를 설치하지 못하면 페널티를 받아 BOA 의 잔고가 감소합니다.
 따라서 노드설치와 운영에 대한 것을 습득한 후 40,000 BOA 를 예치하시기 바랍니다.
 
-### docker-compose 를 사용하여 백그라운드로 실행하기
-지금까지 시작된 agora-el-node, agora-cl-node, agora-cl-validator 는 서버와의 접속이 종료되면 프로세스도 종료됩니다.  
-따라서, 서버에 백그라운드에서 동작되도록 설정해 두어야 합니다.  
+## 9. docker-compose 를 사용하여 백그라운드로 실행하기
+
+지금까지 시작된 agora-el-node, agora-cl-node, agora-cl-validator 는 서버와의 접속이 종료되면 프로세스도 종료됩니다.
+따라서, 서버에 백그라운드에서 동작되도록 설정해 두어야 합니다.
 이것을 쉽게 할 수 있는 방법이 docker-compose 를 사용하는 방법입니다.
 
-먼저 agora-el-node, agora-cl-node 의 과거 블록데이터의 동기화가 완료되었는지 확인합니다.  
+먼저 agora-el-node, agora-cl-node 의 과거 블록데이터의 동기화가 완료되었는지 확인합니다.
 모든 블록의 동기화가 완료된 경우 agora-cl-validator, agora-cl-node, agora-el-node 순으로 ctrl+c를 눌러 프로세스를 종료합니다.
 
 아래 명령어를 실행하면 3개의 프로세스가 백그라운드로 실행됩니다.
+
 ```shell
-./agora.sh docker-compose up                                                                                           
+./agora.sh docker-compose up                                                                                         
 ```
 
 그러면 다음과 같은 로그가 출력됩니다.
+
 ```log
 Creating network "agora-chain-mainnet_default" with the default driver
 Creating agora-el-node ... done
@@ -602,19 +645,104 @@ Creating agora-cl-node ... done
 Creating agora-cl-validator ... done
 ```
 
+프로세스를 종료하는 명령어 다음과 같습니다.
+
+```shell
+./agora.sh docker-compose down                                                                                         
+```
+
 노드들의 실행 상태를 보기 위해서는 docker 명령어를 이용하여 로그를 확인하면 됩니다.
 
 아래 명령어를 실행하면 agora-el-node 의 로그를 확인할 수 있습니다. 종료할 때는 ctrl+c를 입력하면 됩니다.
+
 ```shell
 docker logs -f agora-el-node
 ```
 
 아래 명령어를 실행하면 agora-el-node 의 로그를 확인할 수 있습니다. 종료할 때는 ctrl+c를 입력하면 됩니다.
+
 ```shell
 docker logs -f agora-cl-node
 ```
 
 아래 명령어를 실행하면 agora-el-node 의 로그를 확인할 수 있습니다. 종료할 때는 ctrl+c를 입력하면 됩니다.
+
 ```shell
 docker logs -f agora-cl-validator
 ```
+
+## 10. docker-compose 를 사용하여 모니터링 하기
+
+### 10.1. AWS EC2 방화벽(보안그룹)에 규칙 추가하기
+
+- AWS `EC2 대시보드`에 접속합니다.
+- `인스턴스` 항목을 선택하면 인스턴스들을 보여주는 화면으로 이동합니다.
+- 방화벽을 변경할 EC2 인스턴스를 선택합니다.
+- 하단 탭 중 `보안`탭을 선택합니다.
+- 현재 EC2에 설정된 `보안그룹`을 클릭합니다.
+- 오른쪽의 `인바운드 규칙 편집` 버튼을 클릭합니다. 그러면 인바운드 규칙 편집 화면으로 전환됩니다.
+- `규칙 추가` 버튼 를 클릭합니다.
+- 새로 생성된 규칙에서 `유형`: `사용자 지정 TCP`; `포트 범위` : `3000`; `소스` : `Anyway IP4`를 선택합니다.
+- `규칙 저장` 버튼을 클릭합니다.
+
+### 10.2. AWS EC2 방화벽(보안그룹)에 규칙 추가하기
+
+- AWS `EC2 대시보드`에 접속합니다.
+- `인스턴스` 항목을 선택하면 인스턴스들을 보여주는 화면으로 이동합니다.
+- 접속할 EC2 인스턴스를 선택합니다.
+- 오른쪽 상단의 `연결` 버튼을 클릭합니다. 그러면 `인스턴스에 연결` 이라는 화면으로 전환됩니다.
+- 오른쪽 상단의 `연결` 버튼을 클릭합니다.
+- 그러면 터미널로 접속됩니다.
+
+### 10.2. 모니터링 기능이 내장된 도커컴포즈 실행하기 를 시작하기
+
+아래 명령어를 실행하여 설치된 폴더로 이동합니다.
+```shell
+cd agora-chain-mainnet
+```
+
+기존의 프로세스를 모두 종료합니다.
+```shell
+./agora.sh docker-compose down                                                                                         
+```
+
+모니터링 기능이 내장된 도커컴포즈를 실행합니다.
+```shell
+./agora.sh docker-compose-monitoring up  
+```
+
+프로세스를 종료하는 명령어 다음과 같습니다.
+
+```shell
+./agora.sh docker-compose-monitoring down                                                                                         
+```
+
+### 10.3. Grafana 설정하기
+
+웹브라이즈에 다음과 같은 주소를 입력합니다.
+```text
+http://[EC2의 IP]:3000
+```
+EC2의 IP는 AWS `EC2 대시보드`의 인스턴스 항목에서 찾을 수 있습니다.
+
+최초 로그인 아이디는 admin이고, 비밀번호는 admin 입니다.
+로그인 하면 비밀번호를 변경하는 화면이 나옵니다. 이때 새로운 비밀번호를 입력하면 비밀번호가 변경됩니다.
+
+
+### 10.4. Grafana 데이타소스 추가하기
+좌측 메뉴에서 하단의 기어모양의 아이콘을 클리하면 메뉴창이 나타납니다. 메뉴창에서 `Data sources` 를 선택합니다.  
+그러면 Data source를 추가할 수 있는 화면으로 전환됩니다.  
+화면 중앙의 `Add data source` 버튼을 클릭합니다.  
+`Prometheus` 를 선택합니다.  
+URL 항목에 `http://prometheus:9090` 을 입력합니다.    
+화면 하단의 `Save & test` 버튼을 클릭합니다.
+모든 과정이 잘 설정되었면 `Data source is working` 라는 팝업메세지가 표시됩니다.
+
+### 10.5. Grafana Dashboard 추가하기
+왼쪽 메뉴의 위에서 네번째 아이콘을 클릭하면 `Dashboards` 리는 메뉴가 나타납니다. 메뉴창에서 `+ import` 를 선택합니다.  
+아래 URL의 내용을 복사하여.  
+`https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json`
+`Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.
+그러면 새로운 Dashboard가 추가되고 화면에 나타납니다.
+각 항목좌측 상단에 i 라는 곳에 마우스를 오버하면 간단한 설명을 보여줍니다.
+
