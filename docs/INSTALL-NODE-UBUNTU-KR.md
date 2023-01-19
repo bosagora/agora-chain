@@ -741,7 +741,9 @@ URL 항목에 `http://prometheus:9090` 을 입력합니다.
 ### 10.5. Grafana Dashboard 추가하기
 왼쪽 메뉴의 위에서 네번째 아이콘을 클릭하면 `Dashboards` 리는 메뉴가 나타납니다. 메뉴창에서 `+ import` 를 선택합니다.  
 아래 URL의 내용을 복사하여.  
-`https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json`  
+
+https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json
+
 `Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.  
 그러면 새로운 Dashboard가 추가되고 화면에 나타납니다.  
 각 항목좌측 상단에 i 라는 곳에 마우스를 오버하면 간단한 설명을 보여줍니다.  
