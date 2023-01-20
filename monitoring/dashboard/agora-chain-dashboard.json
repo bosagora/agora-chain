@@ -3824,7 +3824,7 @@
           "step": 240
         }
       ],
-      "title": "CP",
+      "title": "CPU",
       "type": "timeseries"
     },
     {
