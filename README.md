@@ -20,6 +20,7 @@
 
 
 - [AWS 의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-KR.md)
+- [Installing the BOSagora's node on Ubuntu on AWS](docs/INSTALL-NODE-UBUNTU-EN.md)
 
 ## Abort
 [Agora-el](https://github.com/bosagora/agora-el) is an execution client that has an EVM.  
@@ -338,3 +339,8 @@ agora.bat docker-compose-monitoring up
 ```shell
 agora.bat docker-compose-monitoring down
 ```
+
+## Additional Information
+
+[AWS 의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-KR.md)  
+[Installing the BOSagora's node on Ubuntu on AWS](docs/INSTALL-NODE-UBUNTU-EN.md)
