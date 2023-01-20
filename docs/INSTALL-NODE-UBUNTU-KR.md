@@ -751,3 +751,15 @@ https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashbo
 복사한 내용을 `Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.  
 그러면 새로운 Dashboard 가 추가되고 화면에 나타납니다.  
 각 항목좌측 상단에 i 라는 곳에 마우스를 오버하면 간단한 설명을 보여줍니다.  
+
+
+## 11. 노드실행 스크립트와 설정들을 업그레이드하기
+
+지금 사용하고 계신 스크립트와 노드실행에 필요한 설정파일들은 지속적을 업그레이드 될 수 있습니다. 
+따라서 사용자는 노드 프로그램과 설정들의 업그레이드 상태를 주기적으로 확인하셔야 합니다. 
+
+다음과 같은 명령어를 실행하여 업그레이드 합니다.
+
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.sh)"
+```
