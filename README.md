@@ -6,6 +6,7 @@
 
 - [For Linux or MacOS users](#for-linux-or-macos-users)
   - [Install](#install-for-linux-or-macos)
+  - [Upgrade](#upgrade-for-linux-or-macos)
   - [Execution Layer](#execution-layer-for-linux-or-macos)
   - [Consensus Layer](#consensus-layer-for-linux-or-macos)
   - [Using docker-compose](#using-docker-compose-for-linux-or-macos)
@@ -43,6 +44,12 @@ https://docs.docker.com/engine/install/
 wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
 unzip mainnet.zip
 cd agora-chain-mainnet
+```
+
+### Upgrade for Linux or MacOS
+
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.sh)"
 ```
 
 ### Execution Layer for Linux or MacOS
