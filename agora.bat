@@ -112,7 +112,7 @@ if "%~1"=="el-node" (
 
         docker run -it ^
           -v %cd%\root\:/root ^
-          -p 8081:8081 \
+          -p 8081:8081 ^
           --network="host" ^
           --name cl-validator --rm ^
           bosagora/agora-cl-validator:v1.0.3 ^
