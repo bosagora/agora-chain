@@ -1,5 +1,13 @@
 #!/bin/bash
 
+mkdir -p monitoring
+mkdir -p monitoring/dashboard
+mkdir -p monitoring/prometheus
+mkdir -p root
+mkdir -p root/config
+mkdir -p root/config/cl
+mkdir -p root/config/el
+
 wget https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json -O monitoring/dashboard/agora-chain-dashboard.json
 wget https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/prometheus/config.yml -O monitoring/prometheus/config.yml
 wget https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/root/config/cl/chain-config.yaml -O root/config/cl/chain-config.yaml

@@ -14,6 +14,7 @@
 
 - [For Windows users](#for-windows-users)
   - [Install](#install-for-windows)
+  - [Upgrade](#upgrade-for-windows)
   - [Execution Layer](#execution-layer-for-windows)
   - [Consensus Layer](#consensus-layer-for-windows)
   - [Using docker-compose](#using-docker-compose-for-windows)
@@ -197,9 +198,16 @@ nano ./root/config/cl/proposer_config.json
 ### Install for Windows
 
 ```shell
-curl https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip --output mainnet.zip
+curl -f -s -S -L -o mainnet.zip https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip
 tar -xf mainnet.zip
 cd agora-chain-mainnet
+```
+
+### Upgrade for Windows
+
+```shell
+curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.bat
+upgrade.bat
 ```
 
 ### Execution Layer for Windows
