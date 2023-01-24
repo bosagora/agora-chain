@@ -18,6 +18,11 @@ services:
             --metrics
             --metrics.addr=0.0.0.0
             --metrics.port=6060
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "5"
+                max-size: "100m"
 
     agora-cl-node:
         container_name: agora-cl-node
@@ -40,6 +45,11 @@ services:
             --disable-peer-scorer=true
         depends_on:
             - agora-el-node
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "5"
+                max-size: "100m"
 
     agora-cl-validator:
         container_name: agora-cl-validator
@@ -63,6 +73,11 @@ services:
         depends_on:
             - agora-el-node
             - agora-cl-node
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "5"
+                max-size: "100m"
 
     node_exporter:
         container_name: node_exporter
@@ -70,6 +85,11 @@ services:
         ports:
             - "9100:9100"
         restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "3"
+                max-size: "10m"
 
     prometheus:
         container_name: prometheus
@@ -84,6 +104,11 @@ services:
         command:
             --web.enable-lifecycle
             --config.file=/etc/prometheus/config.yml
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "3"
+                max-size: "10m"
 
     grafana:
         container_name: grafana
@@ -96,6 +121,11 @@ services:
         volumes:
             - grafana_data:/var/lib/grafana
         restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "3"
+                max-size: "10m"
 
 volumes:
     prometheus_data:
