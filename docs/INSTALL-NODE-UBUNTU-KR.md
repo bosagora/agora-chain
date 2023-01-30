@@ -597,7 +597,7 @@ nano 편집기의 명령어는 이전과 동일합니다. ctrl+o -> Enter : 저�
 
 ### 8.5. 검증자 프로그램 실행하기
 
-agora-el-node 와 agora-cl-node 가 실행 중 일때 다음 명령어를 실행해서 검증자 프로그램을 실행합니다.
+agora-el-node 와 agora-cl-node 의 과거 블록데이타를 모두 수신한 후 agora-el-node 와 agora-cl-node 가 실행 중 일때 다음 명령어를 실행해서 검증자 프로그램을 실행합니다.
 
 ```shell
 ./agora.sh validator run
