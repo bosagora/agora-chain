@@ -10,7 +10,7 @@ It's also written to help you use it with your video https://youtu.be/VP2QweI9Hn
 - Click the `Launch Instances` button in the upper right corner.
 - Set the name of the instance in `Name and tags`.
 - Select `Ubuntu` in the `Application and OS Images (Amazon Machine Image)`.
-  - Select `Ubuntu Server 20.04 LTS`.
+  - Select `Ubuntu Server 22.04 LTS`.
 - Select `Instance type`
   - Select the `t3.medium`.
 - Click `Create new key pair` to create a new key pair.
