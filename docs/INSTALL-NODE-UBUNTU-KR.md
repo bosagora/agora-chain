@@ -700,6 +700,8 @@ docker logs -f agora-cl-validator
 
 ### 10.3. 모니터링 기능이 내장된 도커컴포즈 실행하기 를 시작하기
 
+![](monitoring-screen.png)
+
 아래 명령어를 실행하여 설치된 폴더로 이동합니다.
 
 ```shell
@@ -743,7 +745,8 @@ EC2의 IP는 AWS `EC2 대시보드`의 인스턴스 항목에서 찾을 수 있�
 그러면 Data source 를 추가할 수 있는 화면으로 전환됩니다.  
 화면 중앙의 `Add data source` 버튼을 클릭합니다.  
 `Prometheus` 를 선택합니다.  
-URL 항목에 `http://prometheus:9090` 을 입력합니다.  
+`URL` 항목에 `http://prometheus:9090` 을 입력합니다.  
+`Scrape interval` 항목에 `60s` 을 입력합니다.  
 화면 하단의 `Save & test` 버튼을 클릭합니다.  
 모든 과정이 잘 설정되었면 `Data source is working` 라는 팝업메세지가 표시됩니다.  
 

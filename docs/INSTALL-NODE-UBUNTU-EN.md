@@ -700,6 +700,8 @@ docker logs -f agora-cl-validator
 
 ### 10.3. Start running 'docker-compose' with built-in monitoring capabilities
 
+![](monitoring-screen.png)
+
 Run the command below to navigate to the installed folder.
 ```shell
 cd agora-chain-mainnet
@@ -739,7 +741,8 @@ Click the gear icon at the bottom of the left menu to display the menu window. S
 This switches to a screen where you can add a data source.    
 Click the `Add data source` button in the center of the screen.  
 Select `Prometheus`.  
-Type `http://prometheus:9090` in the URL entry.   
+Type `http://prometheus:9090` in the `URL` entry.   
+Type `60s` in the `Scrape interval` entry.   
 Click the button `Save & test` at the bottom of the screen.  
 If all the courses are set up well, a pop-up message `Data source is working` will be displayed.   
 
