@@ -55,19 +55,19 @@ OpenSSH 구성 요소를 설치하려면 다음을 수행합니다.
 
 서버에 접속하기 위해서는 인스턴스를 생성할 때 받은 키페어가 필요합니다. 
 그리고 그 키페어의 권한 설정이 필요하다. 아래 명령어를 사용하여 권한을 설정합니다. 
-- Windows PowerShell 을 실행합니다.
+- `윈도우즈 명령어 실행창` 을 실행합니다.
 - 아래 명령을 키페어가 있는 폴더에서 순서대로 입력합니다.
 
 ```shell
 icacls my-bosagora-key.pem /reset
-icacls my-bosagora-key.pem /grant:r "$($Env:username):(r)"
+icacls my-bosagora-key.pem /grant:r "%username%:r"
 icacls my-bosagora-key.pem /inheritance:r
 ```
 
 ### 3.3. 서버에 접속하기
 
 Instance 화면으로 이동합니다. 접속할 인스턴스를 선택합니다. 하단에 접속정보 탭을 선택합니다.  
-아래와 같은 접속명령어가 있습니다. 이것을 복사한 후 Windows PowerShell 실행합니다.
+아래와 같은 접속명령어가 있습니다. 이것을 복사한 후 `윈도우즈 명령어 실행창` 에서 실행합니다.
 
 ```shell
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
@@ -134,7 +134,7 @@ cd agora-chain-mainnet
 
 ### 6.1. 새로운 터미널로 서버에 접속하기
 
-윈도우즈 CMD 창에 다음과 같이 입력합니다.  
+`윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
@@ -277,7 +277,7 @@ INFO [01-17|05:08:33.160] Imported new chain segment               blocks=1    t
 
 ### 7.1. 새로운 터미널 접속하기
 
-윈도우즈 CMD 창에 다음과 같이 입력합니다.  
+`윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
@@ -394,7 +394,7 @@ accept
 
 ### 8.1. 새로운 터미널로 서버에 접속하기
 
-윈도우즈 CMD 창에 다음과 같이 입력합니다.  
+`윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
@@ -715,7 +715,7 @@ docker logs -f agora-cl-validator
 
 ### 10.1. 새로운 터미널 접속하기
 
-윈도우즈 CMD 창에 다음과 같이 입력합니다.
+`윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
