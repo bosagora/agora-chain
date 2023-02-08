@@ -3,42 +3,43 @@
 이 문서는 [NHN 클라우드](https://www.nhncloud.com)의 Ubuntu 서버에 노드를 설치하는 방법이 포함되어 있습니다.
 
 ## 1. NHN 클라우드에 가입하기
-NHN 클라우드에 가입하는 방법은 유튜브 동영상 [YOUTUBE 1 NHN Cloud 시작하기](https://youtu.be/zkh3VPCfc1E) 에 자세하게 설명되어 있습니다. 
+
+NHN 클라우드에 가입하는 방법은 유튜브 동영상 [YOUTUBE 1 NHN Cloud 시작하기](https://youtu.be/zkh3VPCfc1E) 에 자세하게 설명되어 있습니다.
 
 ## 2. NHN 클라우드에 조직 및 프로젝트 생성하기
 
-NHN 클라우드를 사용하기 위해서는 먼저 조직과 프로젝트를 생성하여야 합니다.  
+NHN 클라우드를 사용하기 위해서는 먼저 조직과 프로젝트를 생성하여야 합니다.
 조직과 프로젝트를 생성하는 방법은 유튜브 동영상 [YOUTUBE 2 NHN Cloud Console 시작하기](https://youtu.be/PphP9zBrHeI) 에 자세하게 설명되어 있습니다.
 
 ## 3. 서버 (인스턴스) 생성하기
 
 NHN 클라우드에는 4개의 리전에서 서비스 되고 있습니다. 여기서는 비용이 좀 더 저렴한 미국(캘리포니아) 리전을 선택하겠습니다.  
-인스턴스를 생성하는 방법은 유튜브 동영상 [YOUTUBE 3 클라우드로 서버 구축하기](https://youtu.be/Ig-DjAj7xcY) 에 자세하게 설명되어 있습니다. 
+인스턴스를 생성하는 방법은 유튜브 동영상 [YOUTUBE 3 클라우드로 서버 구축하기](https://youtu.be/Ig-DjAj7xcY) 에 자세하게 설명되어 있습니다.
 
 - 조직과 프로젝트를 선택하고 인스턴스 화면으로 이동합니다.
-- 리전을 `미국(캘리포니아)` 로 선택합니다.  
+- 리전을 `미국(캘리포니아)` 로 선택합니다.
 - `인스턴스 생성` 버턴을 클릭합니다.
-- `이미지` 항목에 `Ubuntu Server 20.04 LTS` 를 선택합니다.  
+- `이미지` 항목에 `Ubuntu Server 20.04 LTS` 를 선택합니다.
 - `인스턴스 이름` 항목에 `my-bosagora-validator` 를 입력합니다.
 - `인스턴스 타입 선택` 버턴을 클릭하여 `Standard / m2 / m2.c2m4 / 2 / 4GB` 를 선택합니다.
 - `키페어 생성` 버턴을 클릭하고, 키페어의 이름을 `my-bosagora-key` 로 입력합니다. 그리고 `다운로드` 버턴을 클릭하여 로컬컴퓨터에 저장합니다.
+- `블록 스토리지 타입` 을 `SSD` 로 선택합니다.
+- `블록 스토리지 크기` 를 `100GB` 로 선택합니다.
 - `플로팅 IP` 항목에서 `설정 변경` 버턴을 클릭하여 `사용` 을 선택합니다.
 - `보안 그룹항목` 에서 `설정 변경` 버턴을 클릭하여 숨겨진 화면을 확장합니다.
   - `보안 그룹 생성` 버턴을 클릭합니다.
   - `이름 항목` 에 `bosagora` 를 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `22`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `30303`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 UDP`, 포트에는 `30303`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `13000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 UDP`, 포트에는 `12000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-  -  하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `3000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
-- `블록 스토리지 타입` 을 `SSD` 로 선택합니다.
-- `블록 스토리지 크기` 를 `100GB` 로 선택합니다.
-- `확인` 버턴을 클릭합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `22`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `30303`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 UDP`, 포트에는 `30303`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `13000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 UDP`, 포트에는 `12000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+  - 하단의 `+` 버턴을 클릭합니다. 방향에는 `수신`, IP 프로토콜에는 `사용자 정의 TCP`, 포트에는 `3000`, `CIDR`, `0.0.0.0/0` 을 입력합니다.
+- `인스턴스 생성` 버턴을 클릭합니다.
 
 ## 3. 서버에 접속하기
 
-다양한 OS 에서 서버에 접속하는 방법은 유튜브 동영상 [YOUTUBE 7 인스턴스 접속하기](https://youtu.be/Ig-DjAj7xcY) 에 자세하게 설명되어 있습니다.
+다양한 OS 에서 서버에 접속하는 방법은 유튜브 동영상 [YOUTUBE 7 인스턴스 접속하기](https://youtu.be/Ig-DjAj7xcY) 에 자세하게 설명되어 있습니다.  
 여기에서는 윈도우즈 10 이상에서 접속하는 방법을 설명해 드리겠습니다.
 
 ### 3.1. 윈도우즈에서 SSH 클라이언트 설치하기
@@ -48,17 +49,21 @@ OpenSSH 구성 요소를 설치하려면 다음을 수행합니다.
 `설정` 을 열고 `앱` > `앱 및 기능` 을 선택한 다음, `선택적 기능` 을 선택합니다.  
 목록을 검색하여 `OpenSSH` 가 이미 설치되어 있는지 확인합니다. 그렇지 않은 경우 페이지 맨 위에서 `기능 추가` 를 선택한 후 다음을 수행합니다.  
 `OpenSSH 클라이언트` 를 찾은 다음, 설치 를 클릭합니다.  
- 
-설정이 완료되고 `앱` > `앱 및 기능 및 선택적 기능` 으로 돌아가면 `OpenSSH` 가 나열됩니다.  
+
+설정이 완료되고 `앱` > `앱 및 기능 및 선택적 기능` 으로 돌아가면 `OpenSSH` 가 나열됩니다.
 
 ### 3.2. 서버에 접속 키페어의 권한 설정하기
 
-서버에 접속하기 위해서는 인스턴스를 생성할 때 받은 키페어가 필요합니다. 
-그리고 그 키페어의 권한 설정이 필요하다. 아래 명령어를 사용하여 권한을 설정합니다. 
+서버에 접속하기 위해서는 인스턴스를 생성할 때 받은 키페어가 필요합니다.  
+이 키페이어를 C:\bosagora 라는 폴더를 생성한 후 그 곳으로 옮겨 놓습니다. 
+그리고 그 키페어의 권한 설정이 필요합니다. 아래 명령어를 사용하여 권한을 설정합니다.  
+
 - `윈도우즈 명령어 실행창` 을 실행합니다.
 - 아래 명령을 키페어가 있는 폴더에서 순서대로 입력합니다.
 
 ```shell
+cd c:\bosagora
+
 icacls my-bosagora-key.pem /reset
 icacls my-bosagora-key.pem /grant:r "%username%:r"
 icacls my-bosagora-key.pem /inheritance:r
@@ -70,24 +75,28 @@ Instance 화면으로 이동합니다. 접속할 인스턴스를 선택합니다
 아래와 같은 접속명령어가 있습니다. 이것을 복사한 후 `윈도우즈 명령어 실행창` 에서 실행합니다.
 
 ```shell
+cd c:\bosagora
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
 ```
 
 ## 4. 도커 설치하기
 
-아래 명령어를 실행하여 도커를 설치합니다.  
+아래 명령어를 실행하여 도커를 설치합니다.
 
-사용 가능한 패키지들을 업데이트 합니다.  
+사용 가능한 패키지들을 업데이트 합니다.
+
 ```shell
 sudo apt update
 ```
 
 도커를 설치합니다.
+
 ```shell
 sudo apt install docker.io -y
 ```
 
-도커컴포즈를 설치합니다.  
+도커컴포즈를 설치합니다.
+
 ```shell
 sudo apt install docker-compose -y
 ```
@@ -137,11 +146,11 @@ cd agora-chain-mainnet
 `윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
+cd c:\bosagora
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
 ```
 
-그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.  
-
+그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.
 
 ### 6.2. agora-el-node 를 시작하기
 
@@ -280,10 +289,11 @@ INFO [01-17|05:08:33.160] Imported new chain segment               blocks=1    t
 `윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
+cd c:\bosagora
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
 ```
 
-그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.  
+그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.
 
 ### 7.2. agora-cl-node 를 실행하여 이전에 생성된 블록을 모두 받기
 
@@ -397,10 +407,11 @@ accept
 `윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
+cd c:\bosagora
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
 ```
 
-그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.  
+그러면 비밀번호를 입력하고 합니다. 여기에 서버의 접속비밀번호를 입력하면 접속이 완료됩니다.
 
 ```shell
 cd agora-chain-mainnet
@@ -427,13 +438,13 @@ keystore-m_12381_3600_0_0_0-##########.json
 서버로 파일을 전송하는 방법은 다양합니다.  
 여기서는 내컴퓨터의 파일의 내용을 복사한 후, 서버에 파일을 생성하여 붙여넣는 방법을 사용해 보겠습니다.  
 
-아래 명령어를 사용하여 폴더 root 아래에 mykeys 라는 이름의 폴더를 생성합니다.  
+아래 명령어를 사용하여 폴더 root 아래에 mykeys 라는 이름의 폴더를 생성합니다.
 
 ```shell
 mkdir root/mykeys
 ```
 
-아래 명령어를 사용하여 폴더 root/mykeys 아래에 파일 key1.json을 생성하고 편집기를 실행합니다.  
+아래 명령어를 사용하여 폴더 root/mykeys 아래에 파일 key1.json을 생성하고 편집기를 실행합니다.
 
 ```shell
 nano root/mykeys/key1.json
@@ -503,13 +514,13 @@ Password requirements: at least 8 characters
 New wallet password: 
 ```
 
-최초 실행시에는 wallet 이 존재하기 않았기 때문에 wallet 을 생성하기 위한 비밀번호를 입력합니다.  
+최초 실행시에는 wallet 이 존재하기 않았기 때문에 wallet 을 생성하기 위한 비밀번호를 입력합니다.
 
 ```log
 Confirm password: 
 ```
 
-위와 같은 내용이 출력됩니다. 이 때 다시 한번 더 똑같이 비밀번호를 입력합니다.  
+위와 같은 내용이 출력됩니다. 이 때 다시 한번 더 똑같이 비밀번호를 입력합니다.
 
 ```log
 [2023-01-17 08:48:26]  INFO accounts: Successfully created new wallet wallet-path=/root/wallet
@@ -517,7 +528,7 @@ Confirm password:
 Enter the password for your imported accounts: 
 ```
 
-위와 같은 내용은 출력되면 이제 임포트할 검증자키의 비밀번호를 입력하면 됩니다.  
+위와 같은 내용은 출력되면 이제 임포트할 검증자키의 비밀번호를 입력하면 됩니다.
 
 ```log
 Importing accounts, this may take a while...
@@ -673,7 +684,7 @@ Adding optimizations for validator slashing protection 100% [===================
 아래 명령어를 실행하면 3개의 프로세스가 백그라운드로 실행됩니다.  
 
 ```shell
-./agora.sh docker-compose up                                                                                       
+./agora.sh docker-compose up                                                                                     
 ```
 
 그러면 다음과 같은 로그가 출력됩니다.
@@ -718,6 +729,7 @@ docker logs -f agora-cl-validator
 `윈도우즈 명령어 실행창` 창에 다음과 같이 입력하고 실행합니다.
 
 ```shell
+cd c:\bosagora
 ssh -i my-bosagora-key.pem ubuntu@your instance IP
 ```
 
@@ -761,18 +773,20 @@ http://[서버의 IP]:3000
 
 서버의 IP는 서버정보에서 찾을 수 있습니다.  
 
-최초 로그인 아이디는 admin 이고, 비밀번호는 admin 입니다.  
+최초 로그인 아이디는 `admin` 이고, 비밀번호는 `admin` 입니다.  
 로그인 하면 비밀번호를 변경하는 화면이 나옵니다. 이때 새로운 비밀번호를 입력하면 비밀번호가 변경됩니다.  
 
 ### 10.4. Grafana 데이타소스 추가하기
 
-좌측 메뉴에서 하단의 기어모양의 아이콘을 클릭하면 메뉴창이 나타납니다. 메뉴창에서 `Data sources` 를 선택합니다.  
-그러면 Data source 를 추가할 수 있는 화면으로 전환됩니다.  
-화면 중앙의 `Add data source` 버턴을 클릭합니다.  
-`Prometheus` 를 선택합니다.  
-`URL` 항목에 `http://prometheus:9090` 을 입력합니다.  
-`Scrape interval` 항목에 `60s` 을 입력합니다.  
-화면 하단의 `Save & test` 버턴을 클릭합니다.  
+좌측 메뉴에서 하단의 기어모양의 아이콘을 클릭하면 메뉴창이 나타납니다. 
+- 메뉴창에서 `Data sources` 를 선택합니다.  
+- 그러면 Data source 를 추가할 수 있는 화면으로 전환됩니다.  
+- 화면 중앙의 `Add data source` 버턴을 클릭합니다.  
+- `Prometheus` 를 선택합니다.  
+- `URL` 항목에 `http://prometheus:9090` 을 입력합니다.  
+- `Scrape interval` 항목에 `60s` 을 입력합니다.  
+- 화면 하단의 `Save & test` 버턴을 클릭합니다.  
+
 모든 과정이 잘 설정되었면 `Data source is working` 라는 팝업메세지가 표시됩니다.  
 
 ### 10.5. Grafana Dashboard 추가하기
@@ -780,7 +794,7 @@ http://[서버의 IP]:3000
 왼쪽 메뉴의 위에서 네번째 아이콘을 클릭하면 `Dashboards` 리는 메뉴가 나타납니다. 메뉴창에서 `+ import` 를 선택합니다.  
 아래 URL 의 내용을 복사합니다.  
 
-https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json  
+https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json
 
 복사한 내용을 `Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.  
 그러면 새로운 Dashboard 가 추가되고 화면에 나타납니다.  
