@@ -52,6 +52,16 @@ if "%~1"=="el-node" (
         --datadir=/root/chain/el ^
         --syncmode=full --metrics --metrics.addr=0.0.0.0 --metrics.port=6060
 
+     ) else if "%~2"=="run" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        --name el-node-attach --rm ^
+        bosagora/agora-el-node:v1.0.1 ^
+        --config=/root/config/el/config.toml ^
+        --datadir=/root/chain/el ^
+        attach /root/chain/el/geth.ipc
+
     ) else (
 
         echo FLAGS are the flags or arguments passed to the PROCESS.
