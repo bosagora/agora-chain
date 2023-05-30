@@ -18,6 +18,8 @@ services:
       --metrics
       --metrics.addr=0.0.0.0
       --metrics.port=6060
+    networks:
+      - bosagora_network
     logging:
       driver: "json-file"
       options:
@@ -43,6 +45,10 @@ services:
       --p2p-host-ip=${P2P_HOST_IP}
       --monitoring-port=8080
       --disable-peer-scorer=true
+      --checkpoint-sync-url=http://node1-2-cl:3500
+      --genesis-beacon-api-url=http://node1-2-cl:3500
+    networks:
+      - bosagora_network
     depends_on:
       - agora-el-node
     logging:
@@ -70,6 +76,8 @@ services:
       --proposer-settings-file=/root/config/cl/proposer_config.json
       --wallet-password-file=/root/config/cl/password.txt
       --monitoring-port=8081
+    networks:
+      - bosagora_network
     depends_on:
       - agora-el-node
       - agora-cl-node
@@ -85,6 +93,8 @@ services:
     ports:
       - "9100:9100"
     restart: always
+    networks:
+      - bosagora_network
     logging:
       driver: "json-file"
       options:
@@ -104,6 +114,8 @@ services:
     command:
       --web.enable-lifecycle
       --config.file=/etc/prometheus/config.yml
+    networks:
+      - bosagora_network
     logging:
       driver: "json-file"
       options:
@@ -120,6 +132,8 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+    networks:
+      - bosagora_network
     restart: always
     logging:
       driver: "json-file"
@@ -130,3 +144,9 @@ services:
 volumes:
   prometheus_data:
   grafana_data:
+
+networks:
+  bosagora_network:
+    driver: bridge
+    external: true
+    internal: true

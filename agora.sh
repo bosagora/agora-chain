@@ -55,6 +55,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v $(pwd)/root:/root \
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
+        --net=bosagora_network \
         --name el-node --rm \
         bosagora/agora-el-node:agora_v1.11.6-b360ab \
         --config=/root/config/el/config.toml \
@@ -65,6 +66,7 @@ if [ "$1" = "el-node" ]; then
 
         docker run -it \
         -v $(pwd)/root:/root \
+        --net=bosagora_network \
         --name el-node-attach --rm \
         bosagora/agora-el-node:agora_v1.11.6-b360ab \
         --config=/root/config/el/config.toml \
@@ -93,14 +95,15 @@ elif [ "$1" = "cl-node" ]; then
         docker run -it \
         -v $(pwd)/root/:/root \
         -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
+        --net=bosagora_network \
         --name cl-node --rm \
         bosagora/agora-cl-node:agora_v4.0.4-badcf13 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --p2p-host-ip=$(curl -s https://ifconfig.me/ip) \
         --monitoring-port=8080 \
-        --checkpoint-sync-url=https://mainnet-sync.bosagora.org \
-        --genesis-beacon-api-url=https://mainnet-sync.bosagora.org
+        --checkpoint-sync-url=http://node1-2-cl:3500 \
+        --genesis-beacon-api-url=http://node1-2-cl:3500
 
     else
 
@@ -202,14 +205,14 @@ elif [ "$1" = "validator" ]; then
 
             docker run -it \
             -v $(pwd)/root/:/root \
-            --network=host \
-            --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
-            accounts voluntary-exit \
-            --accept-terms-of-use \
-            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --net=bosagora_network \
+            --name cl-ctl --rm \
+            bosagora/agora-cl-ctl:agora_v4.0.4-badcf13 \
+            validator exit \
             --wallet-dir=/root/wallet \
-            --beacon-rpc-provider=127.0.0.1:4000
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --beacon-rpc-provider=node1-2-cl:4000 \
+            --accept-terms-of-use
 
         elif [ "$3" = "backup" ]; then
 
@@ -225,6 +228,35 @@ elif [ "$1" = "validator" ]; then
             --backup-dir=/root/backup-wallet
 
             sudo chown $USER root/backup-wallet -R
+
+        elif [ "$3" = "generate-bls-to-execution-change" ]; then
+
+            sudo rm -rf $(pwd)/root/bls_to_execution_changes
+            mkdir -p $(pwd)/root/bls_to_execution_changes
+
+            docker run -it \
+            -v $(pwd)/root/:/root \
+            --name deposit-ctl --rm \
+            bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+            --language=english \
+            generate-bls-to-execution-change \
+            --bls_to_execution_changes_folder=/root/bls_to_execution_changes
+
+        elif [ "$3" = "withdraw" ]; then
+
+            docker run -it \
+            -v $(pwd)/root/:/root \
+            --net=bosagora_network \
+            --name cl-ctl --rm \
+            bosagora/agora-cl-ctl:agora_v4.0.4-badcf13 \
+            validator withdraw \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --config-file=/root/config/cl/config.yaml \
+            --beacon-node-host=http://node1-2-cl:3500 \
+            --accept-terms-of-use \
+            --confirm \
+            --path=/root/bls_to_execution_changes
+
         else
 
             color "31" "FLAGS '$3' is not found!"
