@@ -232,7 +232,12 @@ elif [ "$1" = "validator" ]; then
 
         elif [ "$3" = "generate-bls-to-execution-change" ]; then
 
-            sudo rm -rf $(pwd)/root/bls_to_execution_changes
+            if [ "$system" == "linux" ]; then
+                sudo rm -rf $(pwd)/root/bls_to_execution_changes
+            else
+                rm -rf $(pwd)/root/bls_to_execution_changes
+            fi
+
             mkdir -p $(pwd)/root/bls_to_execution_changes
 
             docker run -it \
