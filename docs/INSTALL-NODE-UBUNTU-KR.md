@@ -265,8 +265,8 @@ cd agora-chain-mainnet
 위 명령어를 실행하면 아래와 같은 로그들이 생성됩니다.
 
 ```log
-Unable to find image 'bosagora/agora-cl-node:v1.0.3' locally
-v1.0.3: Pulling from bosagora/agora-cl-node
+Unable to find image 'bosagora/agora-cl-node:agora_v4.0.4-badcf13' locally
+agora_v4.0.4-badcf13: Pulling from bosagora/agora-cl-node
 b49b96595fd4: Already exists 
 9411f38bb959: Already exists 
 39621572cdf6: Already exists 
@@ -274,7 +274,7 @@ c5a366754cd7: Already exists
 7c3f66696336: Pull complete 
 3c2cba919283: Pull complete 
 Digest: sha256:a5bdb94a63d4f5071316f54121976fdf7e03c1f7dfd077e5dd197c7d2d357365
-Status: Downloaded newer image for bosagora/agora-cl-node:v1.0.3
+Status: Downloaded newer image for bosagora/agora-cl-node:agora_v4.0.4-badcf13
 
 Terms of Use
 
@@ -436,8 +436,8 @@ ctrl+o를 눌러 저장합니다. 그러면 파일이름이 보여주고 저장�
 ```
 
 ```log
-Unable to find image 'bosagora/agora-cl-validator:v1.0.3' locally
-v1.0.3: Pulling from bosagora/agora-cl-validator
+Unable to find image 'bosagora/agora-cl-validator:agora_v4.0.4-badcf13' locally
+agora_v4.0.4-badcf13: Pulling from bosagora/agora-cl-validator
 b49b96595fd4: Already exists 
 9411f38bb959: Already exists 
 39621572cdf6: Already exists 
@@ -445,7 +445,7 @@ c5a366754cd7: Already exists
 e4f0a6926093: Pull complete 
 3c2cba919283: Pull complete 
 Digest: sha256:997571c68b44aded52c10915fa9b0b96fca3391d71f5bfcf7ab6b6635b189976
-Status: Downloaded newer image for bosagora/agora-cl-validator:v1.0.3
+Status: Downloaded newer image for bosagora/agora-cl-validator:agora_v4.0.4-badcf13
 
 Terms of Use
 
