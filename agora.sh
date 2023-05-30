@@ -212,7 +212,8 @@ elif [ "$1" = "validator" ]; then
             --wallet-dir=/root/wallet \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --beacon-rpc-provider=node1-2-cl:4000 \
-            --accept-terms-of-use
+            --accept-terms-of-use \
+            --wallet-password-file=/root/config/cl/password.txt
 
         elif [ "$3" = "backup" ]; then
 
