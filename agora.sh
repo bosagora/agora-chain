@@ -154,6 +154,7 @@ elif [ "$1" = "validator" ]; then
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --datadir=/root/chain/cl/ \
+        --accept-terms-of-use \
         --wallet-dir=/root/wallet \
         --proposer-settings-file=/root/config/cl/proposer_config.json \
         --wallet-password-file=/root/config/cl/password.txt \
@@ -219,6 +220,7 @@ elif [ "$1" = "validator" ]; then
 
             docker run -it \
             -v $(pwd)/root/:/root \
+            --network=host \
             --name cl-validator --rm \
             bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
             accounts backup \
