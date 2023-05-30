@@ -5,19 +5,19 @@
 - [Install Docker Engine](#install-docker-engine)
 
 - [For Linux or MacOS users](#for-linux-or-macos-users)
-  - [Install](#install-for-linux-or-macos)
-  - [Upgrade](#upgrade-for-linux-or-macos)
-  - [Execution Layer](#execution-layer-for-linux-or-macos)
-  - [Consensus Layer](#consensus-layer-for-linux-or-macos)
-  - [Using docker-compose](#using-docker-compose-for-linux-or-macos)
+    - [Install](#install-for-linux-or-macos)
+    - [Upgrade](#upgrade-for-linux-or-macos)
+    - [Execution Layer](#execution-layer-for-linux-or-macos)
+    - [Consensus Layer](#consensus-layer-for-linux-or-macos)
+    - [Using docker-compose](#using-docker-compose-for-linux-or-macos)
 
 
 - [For Windows users](#for-windows-users)
-  - [Install](#install-for-windows)
-  - [Upgrade](#upgrade-for-windows)
-  - [Execution Layer](#execution-layer-for-windows)
-  - [Consensus Layer](#consensus-layer-for-windows)
-  - [Using docker-compose](#using-docker-compose-for-windows)
+    - [Install](#install-for-windows)
+    - [Upgrade](#upgrade-for-windows)
+    - [Execution Layer](#execution-layer-for-windows)
+    - [Consensus Layer](#consensus-layer-for-windows)
+    - [Using docker-compose](#using-docker-compose-for-windows)
 
 
 - [AWS 의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-KR.md)
@@ -25,12 +25,16 @@
 - [Installing the BOSagora's node on Ubuntu on AWS](docs/INSTALL-NODE-UBUNTU-EN.md)
 
 ## Abort
+
 [Agora-el](https://github.com/bosagora/agora-el) is an execution client that has an EVM.  
-Agora-el was forked from Ethereum's execution client, [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum) version 1.10.23.  
+Agora-el was forked from Ethereum's execution client, [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum)
+version 1.10.23.  
 We implemented the function of issuing commons budget in Agora-el.
 
-[Agora-cl](https://github.com/bosagora/agora-cl) is a consensus client with a focus on usability, security, and reliability.  
-Agora-cl was forked from Ethereum's consensus client, [prysmaticlabs/prysm](https://github.com/prysmaticlabs/prysm) version 3.1.1.  
+[Agora-cl](https://github.com/bosagora/agora-cl) is a consensus client with a focus on usability, security, and
+reliability.  
+Agora-cl was forked from Ethereum's consensus client, [prysmaticlabs/prysm](https://github.com/prysmaticlabs/prysm)
+version 3.1.1.  
 We modified the block confirmation rewards in Agora-cl.
 
 ## Install Docker Engine
@@ -69,9 +73,7 @@ Run execution node
 ./agora.sh el-node run
 ```
 
-
 ### Consensus Layer for Linux or MacOS
-
 
 Run consensus node
 
@@ -138,16 +140,19 @@ nano ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 nano ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 ./agora.sh docker-compose up
 ```
 
 6. Stop docker-compose
+
 ```shell
 ./agora.sh docker-compose down
 ```
@@ -179,22 +184,24 @@ nano ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 nano ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 ./agora.sh docker-compose-monitoring up
 ```
 
 6. Stop docker-compose
+
 ```shell
 ./agora.sh docker-compose-monitoring down
 ```
 
 ## For Windows users
-
 
 ### Install for Windows
 
@@ -224,7 +231,6 @@ Run execution node
 ```shell
 agora.bat el-node run
 ```
-
 
 ### Consensus Layer for Windows
 
@@ -293,16 +299,19 @@ notepad ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 notepad ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 agora.bat docker-compose up
 ```
 
 6. Stop docker-compose
+
 ```shell
 agora.bat docker-compose down
 ```
@@ -340,11 +349,13 @@ notepad ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 agora.bat docker-compose-monitoring up
 ```
 
 6. Stop docker-compose
+
 ```shell
 agora.bat docker-compose-monitoring down
 ```
