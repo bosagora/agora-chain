@@ -1,13 +1,17 @@
-# Extends the mainnet preset
+# Extends the localhost preset
 PRESET_BASE: 'mainnet'
 
-CONFIG_NAME: 'agora-mainnet'
-
+# Free-form short name of the network that this configuration applies to - known
+# canonical network names include:
+# * 'mainnet' - there can be only one
+# * 'prater' - testnet
+# Must match the regex: [a-z0-9\-]
+CONFIG_NAME: 'agora-localhost'
 
 # Transition
 # ---------------------------------------------------------------
 # TBD, 2**256-2**10 is a placeholder
-TERMINAL_TOTAL_DIFFICULTY: 2411764
+TERMINAL_TOTAL_DIFFICULTY: 250
 # By default, don't use these params
 TERMINAL_BLOCK_HASH: 0x0000000000000000000000000000000000000000000000000000000000000000
 TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 18446744073709551615
@@ -15,14 +19,13 @@ TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 18446744073709551615
 # Genesis
 # ---------------------------------------------------------------
 # `2**14` (= 16,384)
-MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 1024
-#  (GMT): 2023 January 10 Tuesday AM 1:00:00
-MIN_GENESIS_TIME: 1673312400
+MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 32
+# [customized] 2022년 9월 4일 일요일 오후 9:00:00 GMT+09:00
+MIN_GENESIS_TIME: 1685326234
 # [customized] Initial fork version
-GENESIS_FORK_VERSION: 0x2F1A0000
-# 604800 seconds (7 days)
-GENESIS_DELAY: 604800
-
+GENESIS_FORK_VERSION: 0x2F1C0000
+# [customized]300 seconds (5 min)
+GENESIS_DELAY: 60
 
 # Forking
 # ---------------------------------------------------------------
@@ -31,33 +34,28 @@ GENESIS_DELAY: 604800
 #  - Temporarily set to max uint64 value: 2**64 - 1
 
 # Altair
-ALTAIR_FORK_VERSION: 0x2F1A0100
-ALTAIR_FORK_EPOCH: 2
+ALTAIR_FORK_VERSION: 0x2F1C0100
+ALTAIR_FORK_EPOCH: 1
 # Bellatrix
-BELLATRIX_FORK_VERSION: 0x2F1A0200
-BELLATRIX_FORK_EPOCH: 6300
+BELLATRIX_FORK_VERSION: 0x2F1C0200
+BELLATRIX_FORK_EPOCH: 2
 # Capella
-CAPELLA_FORK_VERSION: 0x2F1A0300
-CAPELLA_FORK_EPOCH: 18446744073709551615
-# Sharding
-SHARDING_FORK_VERSION: 0x2F1A0400
-SHARDING_FORK_EPOCH: 18446744073709551615
-
-
+CAPELLA_FORK_VERSION: 0x2F1C0300
+CAPELLA_FORK_EPOCH: 6
 
 
 # Time parameters
 # ---------------------------------------------------------------
 # 12 seconds
-SECONDS_PER_SLOT: 12
+SECONDS_PER_SLOT: 5
 # 14 (estimate from Eth1 mainnet)
-SECONDS_PER_ETH1_BLOCK: 14
+SECONDS_PER_ETH1_BLOCK: 5
 # 2**8 (= 256) epochs ~27 hours
 MIN_VALIDATOR_WITHDRAWABILITY_DELAY: 256
 # 2**8 (= 256) epochs ~27 hours
 SHARD_COMMITTEE_PERIOD: 256
 # 2**11 (= 2,048) Eth1 blocks ~8 hours
-ETH1_FOLLOW_DISTANCE: 2048
+ETH1_FOLLOW_DISTANCE: 2
 
 
 # Validator cycle
@@ -78,13 +76,16 @@ CHURN_LIMIT_QUOTIENT: 65536
 # ---------------------------------------------------------------
 # 70%
 PROPOSER_SCORE_BOOST: 70
+REORG_WEIGHT_THRESHOLD: 20
+REORG_MAX_EPOCHS_SINCE_FINALIZATION: 2
+INTERVALS_PER_SLOT: 3
 
 # Deposit contract
 # ---------------------------------------------------------------
 # [customized]
-DEPOSIT_CHAIN_ID: 2151
-DEPOSIT_NETWORK_ID: 2151
-DEPOSIT_CONTRACT_ADDRESS: 0xC26Dd0f6e94afE288a2dd5D300F4dDaA0D93D9CB
+DEPOSIT_CHAIN_ID: 1337
+DEPOSIT_NETWORK_ID: 1337
+DEPOSIT_CONTRACT_ADDRESS: 0x4Ca91738C7cD24895467c6d550D96BE8dC4b33AA
 
 
 # Mainnet preset - Altair
@@ -171,8 +172,8 @@ SLOTS_PER_EPOCH: 32
 MIN_SEED_LOOKAHEAD: 1
 # 2**2 (= 4) epochs 25.6 minutes
 MAX_SEED_LOOKAHEAD: 4
-# [customized] 2**5 (= 32) epochs ~3.4 hours
-EPOCHS_PER_ETH1_VOTING_PERIOD: 32
+# [customized] 2**6 (= 64) epochs ~6.8 hours
+EPOCHS_PER_ETH1_VOTING_PERIOD: 64
 # 2**13 (= 8,192) slots ~27 hours
 SLOTS_PER_HISTORICAL_ROOT: 8192
 # 2**2 (= 4) epochs 25.6 minutes
@@ -219,3 +220,9 @@ MAX_ATTESTATIONS: 128
 MAX_DEPOSITS: 16
 # 2**4 (= 16)
 MAX_VOLUNTARY_EXITS: 16
+# 2**4 (= 16)
+MAX_WITHDRAWALS_PER_PAYLOAD: 16
+# 2**4 (= 16)
+MAX_BLS_TO_EXECUTION_CHANGES: 16
+# 2**14 (= 16384)
+MAX_VALIDATORS_PER_WITHDRAWALS_SWEEP: 16384
