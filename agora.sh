@@ -45,7 +45,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v $(pwd)/root:/root \
         --name el-node --rm \
-        bosagora/agora-el-node:agora_v1.11.6-b360ab \
+        bosagora/agora-el-node:agora_v1.12.0-66e599 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
@@ -57,7 +57,7 @@ if [ "$1" = "el-node" ]; then
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
         --net=bosagora_network \
         --name el-node --rm \
-        bosagora/agora-el-node:agora_v1.11.6-b360ab \
+        bosagora/agora-el-node:agora_v1.12.0-66e599 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         --syncmode=full --metrics --metrics.addr=0.0.0.0 --metrics.port=6060
@@ -68,7 +68,7 @@ if [ "$1" = "el-node" ]; then
         -v $(pwd)/root:/root \
         --net=bosagora_network \
         --name el-node-attach --rm \
-        bosagora/agora-el-node:agora_v1.11.6-b360ab \
+        bosagora/agora-el-node:agora_v1.12.0-66e599 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         attach /root/chain/el/geth.ipc
@@ -97,7 +97,7 @@ elif [ "$1" = "cl-node" ]; then
         -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
         --net=bosagora_network \
         --name cl-node --rm \
-        bosagora/agora-cl-node:agora_v4.0.4-badcf13 \
+        bosagora/agora-cl-node:agora_v4.0.5-ceb45d \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --p2p-host-ip=$(curl -s https://ifconfig.me/ip) \
@@ -137,7 +137,7 @@ elif [ "$1" = "validator" ]; then
         docker run -it \
         -v $(pwd)/root/:/root \
         --name cl-validator --rm \
-        bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+        bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
         accounts import \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --keys-dir=/root/$3 \
@@ -150,7 +150,7 @@ elif [ "$1" = "validator" ]; then
         -p 8081:8081 \
         --network="host" \
         --name cl-validator --rm \
-        bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+        bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --datadir=/root/chain/cl/ \
@@ -183,7 +183,7 @@ elif [ "$1" = "validator" ]; then
             docker run -it \
             -v $(pwd)/root/:/root \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             accounts import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -196,7 +196,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --network=host \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             accounts list \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -208,7 +208,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --net=bosagora_network \
             --name cl-ctl --rm \
-            bosagora/agora-cl-ctl:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
             validator exit \
             --wallet-dir=/root/wallet \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -222,7 +222,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --network=host \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             accounts backup \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -256,7 +256,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --net=bosagora_network \
             --name cl-ctl --rm \
-            bosagora/agora-cl-ctl:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
             validator withdraw \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --config-file=/root/config/cl/config.yaml \
@@ -282,7 +282,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --network=host \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             slashing-protection-history export \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -297,7 +297,7 @@ elif [ "$1" = "validator" ]; then
             -v $(pwd)/root/:/root \
             --network=host \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             slashing-protection-history import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -328,7 +328,7 @@ elif [ "$1" = "validator" ]; then
             docker run -it \
             -v $(pwd)/root/:/root \
             --name cl-validator --rm \
-            bosagora/agora-cl-validator:agora_v4.0.4-badcf13 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
             wallet create \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \

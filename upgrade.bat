@@ -28,7 +28,7 @@ if not exist %~1 (
 goto :end
 
 :download_file
-curl https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/%~1 -f -s -S -L -o %~1
+curl https://raw.githubusercontent.com/bosagora/agora-chain/devnet/%~1 -f -s -S -L -o %~1
 goto :end
 
 :end
