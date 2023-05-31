@@ -56,7 +56,7 @@ cd agora-chain-mainnet
 ### Upgrade for Linux or MacOS
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/devnet/upgrade.sh)"
 ```
 
 ### Execution Layer for Linux or MacOS
@@ -206,15 +206,15 @@ nano ./root/config/cl/proposer_config.json
 ### Install for Windows
 
 ```shell
-curl -f -s -S -L -o mainnet.zip https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip
-tar -xf mainnet.zip
-cd agora-chain-mainnet
+curl -f -s -S -L -o devnet.zip https://github.com/bosagora/agora-chain/archive/refs/heads/devnet.zip
+tar -xf devnet.zip
+cd agora-chain-devnet
 ```
 
 ### Upgrade for Windows
 
 ```shell
-curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.bat
+curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/devnet/upgrade.bat
 upgrade.bat
 ```
 
