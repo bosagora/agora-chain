@@ -22,3 +22,7 @@ scrape_configs:
   - job_name: 'agora-cl-validator'
     static_configs:
       - targets: [ 'agora-cl-validator:8081' ]
+
+  - job_name: 'validator-balance'
+    static_configs:
+      - targets: [ 'validator-balance:7000' ]
