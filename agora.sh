@@ -248,7 +248,8 @@ elif [ "$1" = "validator" ]; then
             bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
             --language=english \
             generate-bls-to-execution-change \
-            --bls_to_execution_changes_folder=/root/bls_to_execution_changes
+            --bls_to_execution_changes_folder=/root/bls_to_execution_changes \
+            --chain=devnet
 
         elif [ "$3" = "withdraw" ]; then
 
