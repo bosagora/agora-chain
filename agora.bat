@@ -213,7 +213,8 @@ if "%~1"=="el-node" (
             bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
             --language=english ^
             generate-bls-to-execution-change ^
-            --bls_to_execution_changes_folder=/root/bls_to_execution_changes
+            --bls_to_execution_changes_folder=/root/bls_to_execution_changes ^
+            --chain=devnet
 
         ) else if "%~3"=="withdraw" (
 
