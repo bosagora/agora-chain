@@ -87,6 +87,25 @@ services:
         max-file: "5"
         max-size: "100m"
 
+  validator-balance:
+    image: bosagora/validator-balance:v1.0.0-5498e4
+    container_name: validator-balance
+    ports:
+      - '7000:7000'
+    restart: always
+    environment:
+      HOST_IP: 0.0.0.0
+      HOST_PORT: 7000
+      AGORA_SCAN_URL: http://agora-scan-explorer:3333
+      AGORA_CL_NODE_URL: http://agora-cl-node:3500
+      AGORA_CL_VALIDATOR_METRICS_URL: http://agora-cl-validator:8081
+    networks:
+      - bosagora_network
+    depends_on:
+      - agora-el-node
+      - agora-cl-node
+      - agora-cl-validator
+
   node_exporter:
     container_name: node_exporter
     image: quay.io/prometheus/node-exporter:latest
@@ -116,6 +135,11 @@ services:
       --config.file=/etc/prometheus/config.yml
     networks:
       - bosagora_network
+    depends_on:
+      - agora-el-node
+      - agora-cl-node
+      - agora-cl-validator
+      - validator-balance
     logging:
       driver: "json-file"
       options:

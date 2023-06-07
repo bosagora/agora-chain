@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 26,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -99,11 +99,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "interval": "",
           "legendFormat": "",
@@ -114,8 +113,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -181,11 +179,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "instant": false,
           "interval": "",
@@ -197,8 +194,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Sum of all validator balances.",
       "fieldConfig": {
         "defaults": {
@@ -215,7 +211,7 @@
               }
             ]
           },
-          "unit": "BOA"
+          "unit": "locale"
         },
         "overrides": []
       },
@@ -240,13 +236,12 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"})",
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "vbal",
@@ -257,8 +252,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Total BOA return on the initial effective stake of active local validators.",
       "fieldConfig": {
         "defaults": {
@@ -291,7 +285,7 @@
               }
             ]
           },
-          "unit": "BOA"
+          "unit": "locale"
         },
         "overrides": []
       },
@@ -323,12 +317,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"})-(count(validator_balance{job=\"agora-cl-validator\"} > 20000 and validator_statuses{job=\"agora-cl-validator\"} == 3)*40000)",
+          "datasource": {},
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"})-(count(validator_total_balance{job=\"validator-balance\"} > 20000 and validator_statuses{job=\"validator-balance\"} == 3)*40000)",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -339,8 +332,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Total percentage return on the initial effective stake of active local validators. Excess deposits will be reflected as earnings.",
       "fieldConfig": {
         "defaults": {
@@ -403,12 +395,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "(sum(validator_balance{job=\"agora-cl-validator\"}) - (count(validator_balance{job=\"agora-cl-validator\"} > 20000 and validator_statuses{job=\"agora-cl-validator\"} == 3)*40000))/(count(validator_balance{job=\"agora-cl-validator\"} > 20000 and validator_statuses{job=\"agora-cl-validator\"} == 3)*40000)  ",
+          "datasource": {},
+          "expr": "(sum(validator_total_balance{job=\"validator-balance\"}) - (count(validator_total_balance{job=\"validator-balance\"} > 20000 and validator_statuses{job=\"validator-balance\"} == 3)*40000))/(count(validator_total_balance{job=\"validator-balance\"} > 20000 and validator_statuses{job=\"validator-balance\"} == 3)*40000)  ",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -419,8 +410,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The number of peers",
       "fieldConfig": {
         "defaults": {
@@ -473,11 +463,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "exemplar": false,
           "expr": "p2p_peer_count{state=\"Connected\",job=\"agora-cl-node\"}",
@@ -490,8 +479,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "p2p_peers{job=\"agora-el-node\"}",
           "hide": false,
@@ -505,8 +493,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The percentage of BOA balances expected to attest that are actually attesting.",
       "fieldConfig": {
         "defaults": {
@@ -561,11 +548,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "(beacon_prev_epoch_target_gwei{job=\"agora-cl-node\"} / beacon_prev_epoch_active_gwei{job=\"agora-cl-node\"} )",
           "interval": "",
           "legendFormat": "",
@@ -576,8 +562,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "A metric expressing the distance between the current finalized epoch and the expected finalized epoch based on the genesis time. 100% means the expected and current finalized epochs are the same. The metric reaches 0% when the finalized epoch is 25 epochs behind the expected epoch.",
       "fieldConfig": {
         "defaults": {
@@ -631,11 +616,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "clamp_min((1-(4*((floor(beacon_clock_time_slot{job=\"agora-cl-node\"}/32) - beacon_finalized_epoch{job=\"agora-cl-node\"} - 2)/100))),0)",
           "interval": "",
           "legendFormat": "",
@@ -650,8 +634,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The percentage of BOA balances expected to attest that are actually attesting.",
       "fieldConfig": {
         "defaults": {
@@ -685,7 +668,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -695,8 +678,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "(beacon_prev_epoch_target_gwei{job=\"agora-cl-node\"} / beacon_prev_epoch_active_gwei{job=\"agora-cl-node\"} )",
           "interval": "",
           "legendFormat": "participation rate",
@@ -746,8 +728,7 @@
       }
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Busy state of all CPU cores together",
       "fieldConfig": {
         "defaults": {
@@ -808,11 +789,10 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "(((count(count(node_cpu_seconds_total{job=\"node-exporter\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',job=\"node-exporter\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{job=\"node-exporter\"}) by (cpu)) ",
           "hide": false,
@@ -827,8 +807,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Busy state of all CPU cores together (15 min average)",
       "fieldConfig": {
         "defaults": {
@@ -889,11 +868,10 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "avg(node_load15{job=\"node-exporter\"}) /  count(count(node_cpu_seconds_total{job=\"node-exporter\"}) by (cpu)) * 100 ",
           "hide": false,
@@ -907,8 +885,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Non available RAM memory",
       "fieldConfig": {
         "defaults": {
@@ -961,11 +938,10 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "((node_memory_MemTotal_bytes{job=\"node-exporter\"} - node_memory_MemFree_bytes{job=\"node-exporter\"}) / (node_memory_MemTotal_bytes{job=\"node-exporter\"} )) * 100 ",
           "format": "time_series",
@@ -976,8 +952,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "100 - ((node_memory_MemAvailable_bytes{job=\"node-exporter\"} * 100) / node_memory_MemTotal_bytes{job=\"node-exporter\"})",
           "format": "time_series",
           "hide": false,
@@ -990,8 +965,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Basic network info",
       "fieldConfig": {
         "defaults": {
@@ -1033,11 +1007,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "rate(node_network_receive_bytes_total{job=\"node-exporter\", device=\"eth0\"}[$__rate_interval])*8 ",
           "format": "time_series",
@@ -1049,8 +1022,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "rate(node_network_transmit_bytes_total{job=\"node-exporter\", device=\"eth0\"}[$__rate_interval])*8",
           "format": "time_series",
@@ -1066,8 +1038,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Current slot and head slot",
       "fieldConfig": {
         "defaults": {
@@ -1106,11 +1077,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "chain_head_block{job=\"agora-el-node\"}",
           "instant": true,
@@ -1119,8 +1089,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "chain_head_receipt{job=\"agora-el-node\"}",
           "instant": true,
@@ -1133,8 +1102,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Current, justified, and finalized epochs. In this order, these three values should be sequentially decreasing.",
       "fieldConfig": {
         "defaults": {
@@ -1175,11 +1143,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "floor(beacon_clock_time_slot{job=\"agora-cl-node\"} / 32)",
           "instant": true,
           "interval": "",
@@ -1187,8 +1154,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "beacon_current_justified_epoch{job=\"agora-cl-node\"}",
           "instant": true,
           "interval": "",
@@ -1196,8 +1162,7 @@
           "refId": "C"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "beacon_finalized_epoch {job=\"agora-cl-node\"} ",
           "format": "time_series",
           "instant": true,
@@ -1210,8 +1175,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Current slot and head slot",
       "fieldConfig": {
         "defaults": {
@@ -1250,11 +1214,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "beacon_slot{job=\"agora-cl-node\"}",
           "instant": true,
           "interval": "",
@@ -1262,8 +1225,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "beacon_head_slot{job=\"agora-cl-node\"}",
           "instant": true,
           "interval": "",
@@ -1275,8 +1237,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1345,11 +1306,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "interval": "",
           "legendFormat": "",
@@ -1360,8 +1320,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1426,11 +1385,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "interval": "",
           "legendFormat": "",
@@ -1441,8 +1399,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Increase in all local validator balances over the last hour",
       "fieldConfig": {
         "defaults": {
@@ -1505,12 +1462,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 1h != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) + (40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 1h > 20000))",
+          "datasource": {},
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 1h != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) + (40000 * count(validator_total_balance{job=\"validator-balance\"} offset 1h > 20000))",
           "instant": false,
           "interval": "",
           "intervalFactor": 3,
@@ -1522,8 +1478,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Increase in all local validator balances over the last day",
       "fieldConfig": {
         "defaults": {
@@ -1586,12 +1541,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 1d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) + (40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 1d > 20000))",
+          "datasource": {},
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 1d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) + (40000 * count(validator_total_balance{job=\"validator-balance\"} offset 1d > 20000))",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -1602,8 +1556,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Increase in all local validator balances over the last week",
       "fieldConfig": {
         "defaults": {
@@ -1666,12 +1619,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 7d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) + (40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 7d > 20000))",
+          "datasource": {},
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 7d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) + (40000 * count(validator_total_balance{job=\"validator-balance\"} offset 7d > 20000))",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -1682,8 +1634,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Increase in all local validator balances over the last month",
       "fieldConfig": {
         "defaults": {
@@ -1746,12 +1697,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 30d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) + (40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 30d > 20000))",
+          "datasource": {},
+          "expr": "sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 30d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) + (40000 * count(validator_total_balance{job=\"validator-balance\"} offset 30d > 20000))",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -1762,8 +1712,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Counts of active, slashed and exited validators.",
       "fieldConfig": {
         "defaults": {
@@ -1805,11 +1754,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Active\",job=\"agora-cl-node\"} ",
           "instant": true,
           "interval": "",
@@ -1817,8 +1765,7 @@
           "refId": "C"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Slashed\",job=\"agora-cl-node\"} ",
           "instant": true,
           "interval": "",
@@ -1826,8 +1773,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Exited\",job=\"agora-cl-node\"} ",
           "instant": true,
           "interval": "",
@@ -1845,8 +1791,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Number of pending and existing validators over time. Pending validators are shown as positive values, while exiting validators are shown as negative values.",
       "fieldConfig": {
         "defaults": {
@@ -1883,7 +1828,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1906,32 +1851,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Pending\",job=\"agora-cl-node\"}",
           "interval": "",
           "legendFormat": "pending",
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Exiting\",job=\"agora-cl-node\"}",
           "interval": "",
           "legendFormat": "exiting",
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Slashing\",job=\"agora-cl-node\"}",
           "interval": "",
           "legendFormat": "slashing",
           "refId": "C"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{job=\"agora-cl-node\", state=\"Active\"}",
           "interval": "",
           "legendFormat": "active validators",
@@ -1970,8 +1911,7 @@
       }
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Estimated length of time until all pending and exiting validators have cleared the queues.",
       "fieldConfig": {
         "defaults": {
@@ -2011,11 +1951,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "((validator_count{state=\"Pending\",job=\"agora-cl-node\"}/6)*6.4)",
           "instant": true,
           "interval": "",
@@ -2023,8 +1962,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "((validator_count{state=\"Exiting\",job=\"agora-cl-node\"}/6)*6.4)",
           "instant": true,
           "interval": "",
@@ -2036,8 +1974,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Percentage increase in all local validator balances over the last hour",
       "fieldConfig": {
         "defaults": {
@@ -2100,12 +2037,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "((sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 1h != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) +\t(40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 1h > 20000)))/(40000 * avg_over_time(count(validator_balance{job=\"agora-cl-validator\"} > 20000)[1h:]))) * 365 * 24",
+          "datasource": {},
+          "expr": "((sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 1h != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) +\t(40000 * count(validator_total_balance{job=\"validator-balance\"} offset 1h > 20000)))/(40000 * avg_over_time(count(validator_total_balance{job=\"validator-balance\"} > 20000)[1h:]))) * 365 * 24",
           "hide": false,
           "interval": "",
           "legendFormat": "annualized hourly return",
@@ -2116,8 +2052,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Percentage increase in all local validator balances over the last day",
       "fieldConfig": {
         "defaults": {
@@ -2180,13 +2115,12 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
-          "expr": "((sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 1d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) +\t(40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 1d > 20000)))/(40000 * avg_over_time(count(validator_balance{job=\"agora-cl-validator\"} > 20000)[1d:]))) * 365",
+          "expr": "((sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 1d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) +\t(40000 * count(validator_total_balance{job=\"validator-balance\"} offset 1d > 20000)))/(40000 * avg_over_time(count(validator_total_balance{job=\"validator-balance\"} > 20000)[1d:]))) * 365",
           "hide": false,
           "interval": "",
           "legendFormat": "annualized daily return",
@@ -2198,8 +2132,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Percentage increase in all local validator balances over the last week",
       "fieldConfig": {
         "defaults": {
@@ -2262,12 +2195,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "((sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 7d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) +\t(40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 7d > 20000)))/(40000 * avg_over_time(count(validator_balance{job=\"agora-cl-validator\"} > 20000)[7d:]))) * (365/7)",
+          "datasource": {},
+          "expr": "((sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 7d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) +\t(40000 * count(validator_total_balance{job=\"validator-balance\"} offset 7d > 20000)))/(40000 * avg_over_time(count(validator_total_balance{job=\"validator-balance\"} > 20000)[7d:]))) * (365/7)",
           "hide": false,
           "interval": "",
           "legendFormat": "annualized weekly return",
@@ -2278,8 +2210,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Percentage increase in all local validator balances over the last month",
       "fieldConfig": {
         "defaults": {
@@ -2342,12 +2273,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "((sum(validator_balance{job=\"agora-cl-validator\"}) - sum(validator_balance{job=\"agora-cl-validator\"} offset 30d != 0) - (40000 * count(validator_balance{job=\"agora-cl-validator\"} > 20000)) +\t(40000 * count(validator_balance{job=\"agora-cl-validator\"} offset 30d > 20000)))/(40000 * avg_over_time(count(validator_balance{job=\"agora-cl-validator\"} > 20000)[30d:]))) * (365/30)",
+          "datasource": {},
+          "expr": "((sum(validator_total_balance{job=\"validator-balance\"}) - sum(validator_total_balance{job=\"validator-balance\"} offset 30d != 0) - (40000 * count(validator_total_balance{job=\"validator-balance\"} > 20000)) +\t(40000 * count(validator_total_balance{job=\"validator-balance\"} offset 30d > 20000)))/(40000 * avg_over_time(count(validator_total_balance{job=\"validator-balance\"} > 20000)[30d:]))) * (365/30)",
           "hide": false,
           "interval": "",
           "legendFormat": "annualized monthly return",
@@ -2358,8 +2288,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Average validator balance across the network",
       "fieldConfig": {
         "defaults": {
@@ -2421,11 +2350,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validators_total_balance{state=\"Active\",job=\"agora-cl-node\"} / validator_count{state=\"Active\",job=\"agora-cl-node\"} / 1000000000",
           "interval": "",
           "legendFormat": "eth",
@@ -2436,8 +2364,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Current number of pending and exiting validators",
       "fieldConfig": {
         "defaults": {
@@ -2475,11 +2402,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Pending\",job=\"agora-cl-node\"}",
           "instant": true,
           "interval": "",
@@ -2487,8 +2413,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "validator_count{state=\"Exiting\",job=\"agora-cl-node\"}",
           "instant": true,
           "interval": "",
@@ -2501,8 +2426,7 @@
     },
     {
       "columns": [],
-      "datasource": {
-      },
+      "datasource": {},
       "description": "validator stats by public key over the lifetime of the validator process ",
       "fontSize": "100%",
       "gridPos": {
@@ -2787,9 +2711,8 @@
       ],
       "targets": [
         {
-          "datasource": {
-          },
-          "expr": "label_replace(max by(pubkey) (validator_statuses{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\")  ",
+          "datasource": {},
+          "expr": "label_replace(max by(pubkey) (validator_statuses{job=\"validator-balance\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\")  ",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -2797,9 +2720,8 @@
           "refId": "J"
         },
         {
-          "datasource": {
-          },
-          "expr": "label_replace(max by(pubkey) (validator_balance{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\") ",
+          "datasource": {},
+          "expr": "label_replace(max by(pubkey) (validator_total_balance{job=\"validator-balance\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\") ",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -2807,8 +2729,7 @@
           "refId": "F"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_successful_proposals{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\")  ",
           "format": "table",
           "instant": true,
@@ -2817,8 +2738,7 @@
           "refId": "E"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_successful_attestations{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\")  ",
           "format": "table",
           "instant": true,
@@ -2827,8 +2747,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_successful_aggregations{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\") ",
           "format": "table",
           "instant": true,
@@ -2837,8 +2756,7 @@
           "refId": "C"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_failed_attestations{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\") ",
           "format": "table",
           "instant": true,
@@ -2847,8 +2765,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_failed_aggregations{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\") ",
           "format": "table",
           "instant": true,
@@ -2857,8 +2774,7 @@
           "refId": "D"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "label_replace(max by(pubkey) (validator_inactivity_score{job=\"agora-cl-validator\"}), \"pubkey_short\", \"$1\", \"pubkey\", \"(.{10}).*\")  ",
           "format": "table",
           "instant": true,
@@ -2872,8 +2788,7 @@
       "type": "table-old"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2942,11 +2857,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "interval": "",
           "legendFormat": "",
@@ -2961,8 +2875,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The number of peers to which the Agora execution chain is connected",
       "fieldConfig": {
         "defaults": {
@@ -2996,7 +2909,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3006,8 +2919,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "p2p_peers{job=\"agora-el-node\"}",
           "interval": "",
@@ -3064,8 +2976,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The number of peers to which the Agora consensus chain is connected",
       "fieldConfig": {
         "defaults": {
@@ -3099,7 +3010,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3109,8 +3020,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "p2p_peer_count{state=\"Connected\",job=\"agora-cl-node\"}",
           "interval": "",
           "legendFormat": "peers",
@@ -3159,8 +3069,7 @@
       }
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "The length of time the agora consensus chain and validator processes have been running.",
       "fieldConfig": {
         "defaults": {
@@ -3225,11 +3134,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "(time()-process_start_time_seconds{job=\"agora-cl-node\"})/3600",
           "instant": true,
@@ -3238,8 +3146,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "(time()-process_start_time_seconds{job=\"agora-cl-validator\"})/3600",
           "instant": true,
           "interval": "",
@@ -3251,8 +3158,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -3299,11 +3205,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "beacon_clock_time_slot-beacon_head_slot",
           "instant": true,
@@ -3316,8 +3221,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Average number of log messages received per hour over the selected time range",
       "fieldConfig": {
         "defaults": {
@@ -3371,11 +3275,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "sum(rate(log_entries_total{job=\"agora-cl-node\", level=\"error\"}[$__range]))*3600",
           "instant": false,
           "interval": "",
@@ -3383,8 +3286,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "sum(rate(log_entries_total{job=\"agora-cl-node\", level=\"warning\"}[$__range]))*3600",
           "instant": false,
           "interval": "",
@@ -3396,8 +3298,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Average number of log messages received per hour over the selected time range",
       "fieldConfig": {
         "defaults": {
@@ -3452,11 +3353,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum(rate(log_entries_total{job=\"agora-cl-validator\", level=\"error\"}[$__range]))*3600",
           "instant": false,
@@ -3465,8 +3365,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "sum(rate(log_entries_total{job=\"agora-cl-validator\", level=\"warning\"}[$__range]))*3600",
           "interval": "",
           "legendFormat": "warnings",
@@ -3477,8 +3376,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3547,11 +3445,10 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "1",
           "interval": "",
           "legendFormat": "",
@@ -3562,8 +3459,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Basic CPU info",
       "fieldConfig": {
         "defaults": {
@@ -3750,8 +3646,7 @@
       "pluginVersion": "9.2.0",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"system\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node-exporter\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3763,8 +3658,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"user\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node-exporter\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3776,8 +3670,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"iowait\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node-exporter\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3788,8 +3681,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{job=\"node-exporter\", mode=~\".*irq\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node-exporter\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3800,8 +3692,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{instance=\"$node\",job=\"$job\", mode!='idle',mode!='user',mode!='system',mode!='iowait',mode!='irq',mode!='softirq'}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"$node\",job=\"$job\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3812,8 +3703,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{instance=\"$node\",job=\"$job\", mode=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"$node\",job=\"$job\"}[$__rate_interval])))",
           "format": "time_series",
@@ -3828,8 +3718,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Basic memory usage",
       "fieldConfig": {
         "defaults": {
@@ -4278,8 +4167,7 @@
       "pluginVersion": "9.2.0",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "node_memory_MemTotal_bytes",
           "format": "time_series",
@@ -4291,8 +4179,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "node_memory_MemTotal_bytes - node_memory_MemFree_bytes  - (node_memory_Cached_bytes + node_memory_Buffers_bytes + node_memory_SReclaimable_bytes)",
           "format": "time_series",
@@ -4304,8 +4191,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "node_memory_Cached_bytes + node_memory_Buffers_bytes + node_memory_SReclaimable_bytes",
           "format": "time_series",
@@ -4316,8 +4202,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "node_memory_MemFree_bytes",
           "format": "time_series",
@@ -4328,8 +4213,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "(node_memory_SwapTotal_bytes - node_memory_SwapFree_bytes)",
           "format": "time_series",
@@ -4344,8 +4228,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4501,8 +4384,7 @@
       "pluginVersion": "9.2.0",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "rate(node_network_receive_bytes_total{job=\"node-exporter\"}[$__rate_interval])*8 ",
           "format": "time_series",
@@ -4513,8 +4395,7 @@
           "step": 240
         },
         {
-          "datasource": {
-          },
+          "datasource": {},
           "expr": "rate(node_network_transmit_bytes_total{job=\"node-exporter\"}[$__rate_interval])*8",
           "format": "time_series",
           "intervalFactor": 1,
@@ -4527,8 +4408,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-      },
+      "datasource": {},
       "description": "Disk space used of all filesystems mounted",
       "fieldConfig": {
         "defaults": {
@@ -4609,8 +4489,7 @@
       "pluginVersion": "9.2.0",
       "targets": [
         {
-          "datasource": {
-          },
+          "datasource": {},
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{device!~'rootfs'} * 100) / node_filesystem_size_bytes{device!~'rootfs'})",
           "format": "time_series",
@@ -4626,7 +4505,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 37,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -4652,6 +4531,6 @@
   "timezone": "",
   "title": "Agora Chain Dashboard",
   "uid": "AGORA20230114",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
