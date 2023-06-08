@@ -110,7 +110,30 @@ Run validator
 Voluntary exit of the validator
 
 ```shell
-./agora.sh validator accounts voluntary-exit
+./agora.sh validator voluntary-exit
+```
+
+Generate the SignedBLSToExecutionChange data to enable withdrawals
+
+```shell
+./agora.sh validator generate-bls-to-execution-change <SignedBLSToExecutionChange data folder>
+```
+The default data folder is `./root/bls_to_execution_changes`
+
+The data folder in the command below is `./root/bls2exec`
+```shell
+./agora.sh validator generate-bls-to-execution-change bls2exec
+```
+
+Send the SignedBLSToExecutionChange data to enable withdrawals
+```shell
+./agora.sh validator withdraw <SignedBLSToExecutionChange data folder>
+```
+The default data folder is `./root/bls_to_execution_changes`
+
+The data folder in the command below is `./root/bls2exec`
+```shell
+./agora.sh validator withdraw bls2exec
 ```
 
 ### Using docker-compose for Linux or MacOS
@@ -269,7 +292,30 @@ agora.bat validator run
 Voluntary exit of the validator
 
 ```shell
-agora.bat validator accounts voluntary-exit
+agora.bat validator voluntary-exit
+```
+
+Generate the SignedBLSToExecutionChange data to enable withdrawals
+
+```shell
+agora.bat validator generate-bls-to-execution-change <SignedBLSToExecutionChange data folder>
+```
+The default data folder is `./root/bls_to_execution_changes`
+
+The data folder in the command below is `./root/bls2exec`
+```shell
+agora.bat validator generate-bls-to-execution-change bls2exec
+```
+
+Send the SignedBLSToExecutionChange data to enable withdrawals
+```shell
+agora.bat validator withdraw <SignedBLSToExecutionChange data folder>
+```
+The default data folder is `./root/bls_to_execution_changes`
+
+The data folder in the command below is `./root/bls2exec`
+```shell
+agora.bat validator withdraw bls2exec
 ```
 
 ### Using docker-compose for Windows
