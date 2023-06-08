@@ -173,20 +173,6 @@ if "%~1"=="el-node" (
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet
 
-        ) else if "%~3"=="voluntary-exit" (
-
-            docker run -it ^
-            -v %cd%\root\:/root ^
-            --net=bosagora_network ^
-            --name cl-ctl --rm ^
-            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d ^
-            validator exit ^
-            --wallet-dir=/root/wallet ^
-            --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --beacon-rpc-provider=node1-2-cl:4000 ^
-            --accept-terms-of-use ^
-            --wallet-password-file=/root/config/cl/password.txt
-
         ) else if "%~3"=="backup" (
 
             docker run -it ^
@@ -201,36 +187,6 @@ if "%~1"=="el-node" (
             --wallet-password-file=/root/config/cl/password.txt ^
             --backup-dir=/root/backup-wallet
 
-        ) else if "%~3"=="generate-bls-to-execution-change" (
-
-            if exist .\root\bls_to_execution_changes (
-              RD /S /Q .\root\bls_to_execution_changes
-            )
-
-            docker run -it ^
-            -v %cd%\root\:/root ^
-            --name deposit-ctl --rm ^
-            bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
-            --language=english ^
-            generate-bls-to-execution-change ^
-            --bls_to_execution_changes_folder=/root/bls_to_execution_changes ^
-            --chain=devnet
-
-        ) else if "%~3"=="withdraw" (
-
-            docker run -it ^
-            -v %cd%\root\:/root ^
-            --net=bosagora_network ^
-            --name cl-ctl --rm ^
-            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d ^
-            validator withdraw ^
-            --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --config-file=/root/config/cl/config.yaml ^
-            --beacon-node-host=http://node1-2-cl:3500 ^
-            --accept-terms-of-use ^
-            --confirm ^
-            --path=/root/bls_to_execution_changes
-
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
@@ -239,6 +195,62 @@ if "%~1"=="el-node" (
             exit /B 1
 
         )
+
+    ) else if "%~2"=="voluntary-exit" (
+
+        docker run -it ^
+        -v %cd%\root\:/root ^
+        --net=bosagora_network ^
+        --name cl-ctl --rm ^
+        bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d ^
+        validator exit ^
+        --wallet-dir=/root/wallet ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --beacon-rpc-provider=node1-2-cl:4000 ^
+        --accept-terms-of-use ^
+        --wallet-password-file=/root/config/cl/password.txt
+
+    ) else if "%~2"=="generate-bls-to-execution-change" (
+
+        if "%~3"=="" (
+            SET BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+        ) else (
+            SET BLS2EXEC_DATA_FOLDER="%~3"
+        )
+
+        if exist .\root\%BLS2EXEC_DATA_FOLDER% (
+          RD /S /Q .\root\%BLS2EXEC_DATA_FOLDER%
+        )
+
+        docker run -it ^
+        -v %cd%\root\:/root ^
+        --name deposit-ctl --rm ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        --language=english ^
+        generate-bls-to-execution-change ^
+        --bls_to_execution_changes_folder=/root/%BLS2EXEC_DATA_FOLDER% ^
+        --chain=devnet
+
+    ) else if "%~2"=="withdraw" (
+
+        if "%~3"=="" (
+            SET BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+        ) else (
+            SET BLS2EXEC_DATA_FOLDER="%~3"
+        )
+
+        docker run -it ^
+        -v %cd%\root\:/root ^
+        --net=bosagora_network ^
+        --name cl-ctl --rm ^
+        bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d ^
+        validator withdraw ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --config-file=/root/config/cl/config.yaml ^
+        --beacon-node-host=http://node1-2-cl:3500 ^
+        --accept-terms-of-use ^
+        --confirm ^
+        --path=/root/%BLS2EXEC_DATA_FOLDER%
 
     ) else if "%~2"=="slashing-protection-history" (
 

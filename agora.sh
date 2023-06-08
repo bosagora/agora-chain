@@ -202,20 +202,6 @@ elif [ "$1" = "validator" ]; then
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --wallet-dir=/root/wallet
 
-        elif [ "$3" = "voluntary-exit" ]; then
-
-            docker run -it \
-            -v $(pwd)/root/:/root \
-            --net=bosagora_network \
-            --name cl-ctl --rm \
-            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
-            validator exit \
-            --wallet-dir=/root/wallet \
-            --chain-config-file=/root/config/cl/chain-config.yaml \
-            --beacon-rpc-provider=node1-2-cl:4000 \
-            --accept-terms-of-use \
-            --wallet-password-file=/root/config/cl/password.txt
-
         elif [ "$3" = "backup" ]; then
 
             docker run -it \
@@ -232,40 +218,6 @@ elif [ "$1" = "validator" ]; then
 
             sudo chown $USER root/backup-wallet -R
 
-        elif [ "$3" = "generate-bls-to-execution-change" ]; then
-
-            if [ "$system" == "linux" ]; then
-                sudo rm -rf $(pwd)/root/bls_to_execution_changes
-            else
-                rm -rf $(pwd)/root/bls_to_execution_changes
-            fi
-
-            mkdir -p $(pwd)/root/bls_to_execution_changes
-
-            docker run -it \
-            -v $(pwd)/root/:/root \
-            --name deposit-ctl --rm \
-            bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
-            --language=english \
-            generate-bls-to-execution-change \
-            --bls_to_execution_changes_folder=/root/bls_to_execution_changes \
-            --chain=devnet
-
-        elif [ "$3" = "withdraw" ]; then
-
-            docker run -it \
-            -v $(pwd)/root/:/root \
-            --net=bosagora_network \
-            --name cl-ctl --rm \
-            bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
-            validator withdraw \
-            --chain-config-file=/root/config/cl/chain-config.yaml \
-            --config-file=/root/config/cl/config.yaml \
-            --beacon-node-host=http://node1-2-cl:3500 \
-            --accept-terms-of-use \
-            --confirm \
-            --path=/root/bls_to_execution_changes
-
         else
 
             color "31" "FLAGS '$3' is not found!"
@@ -274,6 +226,66 @@ elif [ "$1" = "validator" ]; then
             exit 1
 
         fi
+
+    elif [ "$2" = "voluntary-exit" ]; then
+
+        docker run -it \
+        -v $(pwd)/root/:/root \
+        --net=bosagora_network \
+        --name cl-ctl --rm \
+        bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
+        validator exit \
+        --wallet-dir=/root/wallet \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --beacon-rpc-provider=node1-2-cl:4000 \
+        --accept-terms-of-use \
+        --wallet-password-file=/root/config/cl/password.txt
+
+    elif [ "$2" = "generate-bls-to-execution-change" ]; then
+
+        if [ "$#" -lt 3 ]; then
+            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+        else
+            BLS2EXEC_DATA_FOLDER="$3"
+        fi
+
+        if [ "$system" == "linux" ]; then
+            sudo rm -rf $(pwd)/root/"$BLS2EXEC_DATA_FOLDER"
+        else
+            rm -rf $(pwd)/root/"$BLS2EXEC_DATA_FOLDER"
+        fi
+
+        mkdir -p $(pwd)/root/"$BLS2EXEC_DATA_FOLDER"
+
+        docker run -it \
+        -v $(pwd)/root/:/root \
+        --name deposit-ctl --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        generate-bls-to-execution-change \
+        --bls_to_execution_changes_folder=/root/"$BLS2EXEC_DATA_FOLDER" \
+        --chain=devnet
+
+    elif [ "$2" = "withdraw" ]; then
+
+        if [ "$#" -lt 3 ]; then
+            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+        else
+            BLS2EXEC_DATA_FOLDER="$3"
+        fi
+
+        docker run -it \
+        -v $(pwd)/root/:/root \
+        --net=bosagora_network \
+        --name cl-ctl --rm \
+        bosagora/agora-cl-ctl:agora_v4.0.5-ceb45d \
+        validator withdraw \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --config-file=/root/config/cl/config.yaml \
+        --beacon-node-host=http://node1-2-cl:3500 \
+        --accept-terms-of-use \
+        --confirm \
+        --path=/root/"$BLS2EXEC_DATA_FOLDER"
 
     elif [ "$2" = "slashing-protection-history" ]; then
 
