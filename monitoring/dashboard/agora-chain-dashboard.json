@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -4504,7 +4504,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "10s",
+  "refresh": "1m",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -4531,6 +4531,6 @@
   "timezone": "",
   "title": "Agora Chain Dashboard",
   "uid": "AGORA20230114",
-  "version": 3,
+  "version": 2,
   "weekStart": ""
 }
