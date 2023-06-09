@@ -2,6 +2,10 @@
 
 echo "agora.sh version 2.0.0"
 
+MAINNET="mainnet"
+TESTNET="testnet"
+DEVNET="devnet"
+
 function color() {
     # Usage: color "31;5" "string"
     # Some valid values for color:
@@ -13,27 +17,50 @@ function color() {
 
 current_path="$(pwd)"
 script_path=`dirname $0`
-echo $script_path
+network=""
 
-network="mainnet"
+function getNetwork() {
 
-if [ "$network" = "mainnet" ]; then
+  network="$(cat -s $(pwd)/$script_path/.network)"
 
-  network_path="$(pwd)/$script_path/networks/mainnet"
-  cd "$network_path"
-  ./agora.sh "$@"
-  cd "$current_path"
+  if [ "$network" != "$MAINNET" ] && [ "$network" != "$TESTNET" ] && [ "$network" != "$DEVNET" ]
+  then
 
-elif [ "$network" = "testnet" ]; then
+    network="$MAINNET"
+    rm -f "$(pwd)"/$script_path/.network && echo "$network" >> "$(pwd)"/$script_path/.network
 
-  network_path="$(pwd)/$script_path/networks/testnet"
-  cd "$network_path"
-  ./agora.sh "$@"
-  cd "$current_path"
+  fi
 
-elif [ "$network" = "devnet" ]; then
+}
 
-  network_path="$(pwd)/$script_path/networks/devnet"
+getNetwork
+
+if [ "$1" = "network" ]
+then
+
+  if [ "$2" = "$MAINNET" ] || [ "$2" = "$TESTNET" ] || [ "$2" = "$DEVNET" ]
+  then
+
+    rm -f "$(pwd)"/$script_path/.network && echo "$2" >> "$(pwd)"/$script_path/.network
+
+    getNetwork
+
+    echo "Current network is $network"
+
+  else
+
+    echo "Current network is $network"
+
+  fi
+
+  exit
+
+fi
+
+if [ "$network" = "$MAINNET" ] || [ "$network" = "$TESTNET" ] || [ "$network" = "$DEVNET" ]
+then
+
+  network_path="$(pwd)/$script_path/networks/$network"
   cd "$network_path"
   ./agora.sh "$@"
   cd "$current_path"
