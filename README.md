@@ -43,11 +43,32 @@ https://docs.docker.com/engine/install/
 
 ### Install for Linux or MacOS
 
-```shell
-wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
-unzip mainnet.zip
-cd agora-chain-mainnet
-```
+- Install
+  
+  ```shell
+  wget https://github.com/bosagora/agora-chain/archive/refs/heads/v0.x.x.zip -O agora-chain.zip
+  unzip agora-chain.zip
+  mv -f agora-chain-0.x.x agora-chain
+  cd agora-chain
+  ```
+  
+- Change to BOSagora main network
+
+  ```shell
+  ./agora.sh network mainnet
+  ```
+
+- Change to BOSagora test network
+
+  ```shell
+  ./agora.sh network testnet
+  ```
+
+- Change to BOSagora development network
+
+  ```shell
+  ./agora.sh network devnet
+  ```
 
 ### Upgrade for Linux or MacOS
 
