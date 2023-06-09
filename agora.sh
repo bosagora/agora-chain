@@ -16,18 +16,18 @@ function color() {
 }
 
 current_path="$(pwd)"
-script_path=`dirname $0`
+script_path="$(dirname "$0")"
 network=""
 
 function getNetwork() {
 
-  network="$(cat -s $(pwd)/$script_path/.network)"
+  network="$(cat -s "$(pwd)/$script_path/.network")"
 
   if [ "$network" != "$MAINNET" ] && [ "$network" != "$TESTNET" ] && [ "$network" != "$DEVNET" ]
   then
 
     network="$MAINNET"
-    rm -f "$(pwd)"/$script_path/.network && echo "$network" >> "$(pwd)"/$script_path/.network
+    rm -f "$(pwd)/$script_path/.network" && echo "$network" >> "$(pwd)/$script_path/.network"
 
   fi
 
@@ -41,7 +41,7 @@ then
   if [ "$2" = "$MAINNET" ] || [ "$2" = "$TESTNET" ] || [ "$2" = "$DEVNET" ]
   then
 
-    rm -f "$(pwd)"/$script_path/.network && echo "$2" >> "$(pwd)"/$script_path/.network
+    rm -f "$(pwd)/$script_path/.network" && echo "$2" >> "$(pwd)/$script_path/.network"
 
     getNetwork
 
