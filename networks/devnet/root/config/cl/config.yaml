@@ -1,0 +1,10 @@
+bootstrap-node:
+  - enr:-LG4QCkIV0jKyOAzjNyETaD0gfntje3fpDg6HiIDsDTqj4FDROCna_hEsuLt2pK248L7NN2QJtBjdEz9qy8lepb88kqGAYfM9_4ch2F0dG5ldHOIAAAAAAAAAACEZXRoMpCAwONDLxwAAP__________gmlkgnY0gmlwhKzIAAyJc2VjcDI1NmsxoQMTpBSbzkZqJlPv3liorc_c3CzWIBJfLNIpJctzFVcOv4N1ZHCCD6A
+
+contract-deployment-block: 8
+rpc-host: 0.0.0.0
+monitoring-host: 0.0.0.0
+grpc-gateway-host: 0.0.0.0
+datadir: /agora-chain/root/chain/cl/
+execution-endpoint: /agora-chain/root/chain/el/geth.ipc
+
