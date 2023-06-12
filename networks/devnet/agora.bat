@@ -88,8 +88,8 @@ if "%~1"=="el-node" (
         --config-file=/root/config/cl/config.yaml ^
         --p2p-host-ip=%P2P_HOST_IP% ^
         --monitoring-port=8080 ^
-        --checkpoint-sync-url=https://mainnet-sync.bosagora.org ^
-        --genesis-beacon-api-url=https://mainnet-sync.bosagora.org
+        --checkpoint-sync-url=http://node1-2-cl:3500 ^
+        --genesis-beacon-api-url=http://node1-2-cl:3500
 
     ) else (
 
