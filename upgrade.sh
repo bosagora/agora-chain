@@ -107,6 +107,8 @@ then
       cp -f root/config/cl/password.txt networks/mainnet/root/config/cl/password.txt
       cp -f root/config/cl/proposer_config.json networks/mainnet/root/config/cl/proposer_config.json
       mv -f root .root
+      rm docker-compose.yml
+      rm docker-compose-monitoring.yml
   elif find . | grep -q "2019" "$FILENAME"
   then
       cp -rf root/chain networks/testnet/root/
@@ -114,6 +116,8 @@ then
       cp -f root/config/cl/password.txt networks/testnet/root/config/cl/password.txt
       cp -f root/config/cl/proposer_config.json networks/testnet/root/config/cl/proposer_config.json
       mv -f root .root
+      rm docker-compose.yml
+      rm docker-compose-monitoring.yml
   elif find . | grep -q "1337" "$FILENAME"
   then
       cp -rf root/chain networks/devnet/root/
@@ -121,6 +125,8 @@ then
       cp -f root/config/cl/password.txt networks/devnet/root/config/cl/password.txt
       cp -f root/config/cl/proposer_config.json networks/devnet/root/config/cl/proposer_config.json
       mv -f root .root
+      rm docker-compose.yml
+      rm docker-compose-monitoring.yml
   fi
 
   echo "Completed migration ..."
