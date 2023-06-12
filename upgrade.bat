@@ -71,75 +71,77 @@ call :downloadFile networks/devnet/docker-compose-monitoring.yml
 call :downloadFile agora.bat
 call :downloadFile agora.sh
 
-echo Stops BOSagora nodes ...
+call :stopNodes
+call :moveStorage
 
+echo Completed upgrade...
+
+goto :end
+
+
+:stopNodes
+
+echo Stops BOSagora nodes ...
 set RUN_MAIN_NET=0
 for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "mainnet"') do set RUN_MAIN_NET=%%i
 if not "%RUN_MAIN_NET%" == "0" (
   call agora.bat docker-compose down
 )
-
 set RUN_TEST_NET=0
 for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "testnet"') do set RUN_TEST_NET=%%i
 if not "%RUN_TEST_NET%" == "0" (
   call agora.bat docker-compose down
 )
-
 set RUN_DEV_NET=0
 for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "devnet"') do set RUN_DEV_NET=%%i
 if not "%RUN_DEV_NET%" == "0" (
   call agora.bat docker-compose down
 )
+goto :end
 
+:moveStorage
 set FILENAME=root\config\el\genesis.json
-
-if exist %FILENAME%
-(
-
+if exist "%FILENAME%" (
   echo Starts migration ...
-
   set CHAIN_ID_MAIN_NET=0
   for /f "tokens=1 delims=:" %%i in ('findstr /n 2151 %FILENAME%') do set CHAIN_ID_MAIN_NET=%%i
-  echo %CHAIN_ID_DEV_NET%
   if not "%CHAIN_ID_DEV_NET%" == "0" (
-  (
-    xcopy root\chain\*.* networks\mainnet\root\ /s /c /y /i /h
-    xcopy root\wallet\*.* networks\mainnet\root\ /s /c /y /i /h
+    xcopy root\chain\*.* networks\mainnet\root\chain\ /s /c /y /i /h /q
+    xcopy root\wallet\*.* networks\mainnet\root\chain\ /s /c /y /i /h /q
     copy root\config\cl\password.txt networks\mainnet\root\config\cl\password.txt /y
     copy root\config\cl\proposer_config.json networks\mainnet\root\config\cl\proposer_config.json /y
-    remame root .root
+    del /q docker-compose.yml
+    del /q docker-compose-monitoring.yml
+    rename root .root
   ) else (
     set CHAIN_ID_TEST_NET=0
     for /f "tokens=1 delims=:" %%i in ('findstr /n 2019 %FILENAME%') do set CHAIN_ID_TEST_NET=%%i
     echo %CHAIN_ID_TEST_NET%
     if not "%CHAIN_ID_TEST_NET%" == "0" (
-    (
-      xcopy root\chain\*.* networks\testnet\root\ /s /c /y /i /h
-      xcopy root\wallet\*.* networks\testnet\root\ /s /c /y /i /h
+      xcopy root\chain\*.* networks\testnet\root\chain\  /s /c /y /i /h /q
+      xcopy root\wallet\*.* networks\testnet\root\chain\  /s /c /y /i /h /q
       copy root\config\cl\password.txt networks\testnet\root\config\cl\password.txt /y
       copy root\config\cl\proposer_config.json networks\testnet\root\config\cl\proposer_config.json /y
-      remame root .root
+      rename root .root
+      del /q docker-compose.yml
+      del /q docker-compose-monitoring.yml
     ) else (
       set CHAIN_ID_DEV_NET=0
       for /f "tokens=1 delims=:" %%i in ('findstr /n 1337 %FILENAME%') do set CHAIN_ID_DEV_NET=%%i
       echo %CHAIN_ID_DEV_NET%
       if not "%CHAIN_ID_DEV_NET%" == "0" (
-      (
-        xcopy root\chain\*.* networks\devnet\root\ /s /c /y /i /h
-        xcopy root\wallet\*.* networks\devnet\root\ /s /c /y /i /h
+        xcopy root\chain\*.* networks\devnet\root\chain\  /s /c /y /i /h /q
+        xcopy root\wallet\*.* networks\devnet\root\chain\  /s /c /y /i /h /q
         copy root\config\cl\password.txt networks\devnet\root\config\cl\password.txt /y
         copy root\config\cl\proposer_config.json networks\devnet\root\config\cl\proposer_config.json /y
-        remame root .root
+        rename root .root
+        del /q docker-compose.yml
+        del /q docker-compose-monitoring.yml
       )
     )
   )
-
   echo Completed migration ...
-
 )
-
-echo Completed upgrade...
-
 goto :end
 
 :createFolder

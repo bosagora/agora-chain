@@ -275,7 +275,7 @@ nano ./root/config/cl/proposer_config.json
   ```shell
   mkdir agora-chain
   cd agora-chain
-  curl -f -s -S -L -o agora.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.bat
+  curl -S -L -o agora.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.bat
   call agora.bat
   ```
 
@@ -300,7 +300,7 @@ nano ./root/config/cl/proposer_config.json
 ### Upgrade for Windows
 
 ```shell
-curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
+curl -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
 upgrade.bat
 ```
 
