@@ -161,7 +161,7 @@ goto :end
 
 :createFolder
 if not exist %~1 (
-    mkdir %~1
+  mkdir %~1
 )
 goto :end
 
