@@ -21,14 +21,20 @@ network=""
 
 function getNetwork() {
 
-  network="$(cat -s "$(pwd)/$script_path/.network")"
-
-  if [ "$network" != "$MAINNET" ] && [ "$network" != "$TESTNET" ] && [ "$network" != "$DEVNET" ]
+  if [ ! -f ".network" ]
   then
-
     network="$MAINNET"
     rm -f "$(pwd)/$script_path/.network" && echo "$network" >> "$(pwd)/$script_path/.network"
+  else
+    network="$(cat -s "$(pwd)/$script_path/.network")"
 
+    if [ "$network" != "$MAINNET" ] && [ "$network" != "$TESTNET" ] && [ "$network" != "$DEVNET" ]
+    then
+
+      network="$MAINNET"
+      rm -f "$(pwd)/$script_path/.network" && echo "$network" >> "$(pwd)/$script_path/.network"
+
+    fi
   fi
 
 }

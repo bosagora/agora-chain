@@ -51,13 +51,17 @@ cd %current_path%
 goto :end
 
 :getNetwork
-for /F "delims=" %%x in (.network) do (
-  if "%%x" equ "%MAINNET%" (
-    set network=%MAINNET%
-  ) else if "%%x" equ "%TESTNET%" (
-    set network=%TESTNET%
-  ) else if "%%x" equ "%DEVNET%" (
-    set network=%DEVNET%
+if not exist ".network" (
+  set network=%MAINNET%
+) else (
+  for /F "delims=" %%x in (.network) do (
+    if "%%x" equ "%MAINNET%" (
+      set network=%MAINNET%
+    ) else if "%%x" equ "%TESTNET%" (
+      set network=%TESTNET%
+    ) else if "%%x" equ "%DEVNET%" (
+      set network=%DEVNET%
+    )
   )
 )
 if "%network%" == "" (
