@@ -246,6 +246,8 @@ if "%~1"=="el-node" (
           RD /S /Q %cd%\..\..\%BLS2EXEC_DATA_FOLDER%
         )
 
+        mkdir %cd%\..\..\%BLS2EXEC_DATA_FOLDER%
+
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
