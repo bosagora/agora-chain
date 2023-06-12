@@ -46,10 +46,9 @@ https://docs.docker.com/engine/install/
 - Install
   
   ```shell
-  wget https://github.com/bosagora/agora-chain/archive/refs/heads/v0.x.x.zip -O agora-chain.zip
-  unzip agora-chain.zip
-  mv -f agora-chain-0.x.x agora-chain
+  mkdir agora-chain
   cd agora-chain
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.sh)"
   ```
   
 - Change to BOSagora main network
@@ -274,10 +273,10 @@ nano ./root/config/cl/proposer_config.json
 - Install
 
   ```shell
-  curl -f -s -S -L -o agora-chain.zip https://github.com/bosagora/agora-chain/archive/refs/heads/v0.x.x.zip
-  tar -xf agora-chain.zip
-  mv -f agora-chain-0.x.x agora-chain
+  mkdir agora-chain
   cd agora-chain
+  curl -f -s -S -L -o agora.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.bat
+  call agora.bat
   ```
 
 - Change to BOSagora main network
