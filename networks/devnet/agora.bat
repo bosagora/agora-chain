@@ -10,7 +10,7 @@ REM Complain if invalid arguments were provided.
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator upgrade docker-compose docker-compose-monitoring) do (
+for %%a in (el-node cl-node validator docker-compose docker-compose-monitoring) do (
     if %1 equ %%a (
         goto validprocess
     )
@@ -25,84 +25,7 @@ echo.
 exit /B 1
 :validprocess
 
-if not exist "root" (
-    call :create_folder root
-    call :create_folder root\config
-    call :create_folder root\config\cl
-    call :create_folder root\config\el
-    call :download_file root/config/cl/chain-config.yaml
-    call :download_file root/config/cl/config.yaml
-    call :download_file root/config/el/config.toml
-    call :download_file root/config/el/genesis.json
-    call :download_file agora.bat
-    call :download_file agora.sh
-    call :download_file docker-compose.yml
-    call :download_file docker-compose-monitoring.yml
-)
-
-if not exist "monitoring" (
-    call :create_folder monitoring
-    call :create_folder monitoring\dashboard
-    call :create_folder monitoring\prometheus
-    call :download_file monitoring/dashboard/agora-chain-dashboard.json
-    call :download_file monitoring/prometheus/config.yml
-)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if "%~1"=="upgrade" (
-
-    curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/devnet/upgrade.bat
-    call upgrade.bat
-
-) else if "%~1"=="el-node" (
+if "%~1"=="el-node" (
 
     if "%~2"=="init" (
 
@@ -485,16 +408,3 @@ if "%~1"=="upgrade" (
     exit /B 1
 
 )
-goto :end
-
-:create_folder
-if not exist %~1 (
-    mkdir %~1
-)
-goto :end
-
-:download_file
-curl https://raw.githubusercontent.com/bosagora/agora-chain/devnet/%~1 -f -s -S -L -o %~1
-goto :end
-
-:end

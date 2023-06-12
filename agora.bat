@@ -96,7 +96,12 @@ if not exist "networks" (
 
 call :getNetwork
 
-if "%~1" == "network" (
+if "%~1"=="upgrade" (
+
+  curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
+  call upgrade.bat
+
+) else if "%~1" == "network" (
   if "%~2" == "%MAINNET%" (
     set network=%~2
     echo %~2>%script_path%.network
