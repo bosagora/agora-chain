@@ -140,7 +140,14 @@ fi
 
 getNetwork
 
-if [ "$1" = "network" ]
+if [ "$1" = "upgrade" ]
+then
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.sh)"
+
+  exit
+
+elif [ "$1" = "network" ]
 then
 
   if [ "$2" = "$MAINNET" ] || [ "$2" = "$TESTNET" ] || [ "$2" = "$DEVNET" ]

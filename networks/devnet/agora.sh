@@ -11,14 +11,6 @@ function color() {
     printf '\033[%sm%s\033[0m\n' "$@"
 }
 
-function create_folder() {
-    mkdir -p "$@"
-}
-
-function download_file() {
-    wget https://raw.githubusercontent.com/bosagora/agora-chain/devnet/"$*" -q -O "$*"
-}
-
 if [ "$#" -lt 1 ]; then
     color "31" "Usage: ./agora.sh PROCESS FLAGS."
     color "31" "PROCESS can be el-node, cl-node, validator, upgrade, docker-compose, docker-compose-monitoring"
@@ -35,73 +27,7 @@ cygwin*) system="windows" ;;
 esac
 readonly system
 
-if [ ! -d "root" ]
-then
-    create_folder root
-    create_folder root/config
-    create_folder root/config/cl
-    create_folder root/config/el
-    download_file root/config/cl/chain-config.yaml
-    download_file root/config/cl/config.yaml
-    download_file root/config/el/config.toml
-    download_file root/config/el/genesis.json
-    download_file agora.bat
-    download_file agora.sh
-    download_file docker-compose.yml
-    download_file docker-compose-monitoring.yml
-
-    chmod 755 agora.sh
-fi
-
-if [ ! -d "monitoring" ]
-then
-    create_folder monitoring
-    create_folder monitoring/dashboard
-    create_folder monitoring/prometheus
-    download_file monitoring/dashboard/agora-chain-dashboard.json
-    download_file monitoring/prometheus/config.yml
-fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if [ "$1" = "upgrade" ]; then
-
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/devnet/upgrade.sh)"
-
-elif [ "$1" = "el-node" ]; then
+if [ "$1" = "el-node" ]; then
     if [ "$#" -lt 2 ]; then
         color "31" "Usage: ./agora.sh el-node FLAGS."
         color "31" "FLAGS can be init, run"
@@ -560,7 +486,7 @@ else
 
     color "31" "Process '$1' is not found!"
     color "31" "Usage: ./agora.sh PROCESS FLAGS."
-    color "31" "PROCESS can be el-node, cl-node, validator, upgrade, docker-compose, docker-compose-monitoring"
+    color "31" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring"
     exit 1
 
 fi
