@@ -11,7 +11,7 @@ CONFIG_NAME: 'agora-localhost'
 # Transition
 # ---------------------------------------------------------------
 # TBD, 2**256-2**10 is a placeholder
-TERMINAL_TOTAL_DIFFICULTY: 250
+TERMINAL_TOTAL_DIFFICULTY: 160
 # By default, don't use these params
 TERMINAL_BLOCK_HASH: 0x0000000000000000000000000000000000000000000000000000000000000000
 TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 18446744073709551615
@@ -21,7 +21,7 @@ TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 18446744073709551615
 # `2**14` (= 16,384)
 MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 32
 # [customized] 2022년 9월 4일 일요일 오후 9:00:00 GMT+09:00
-MIN_GENESIS_TIME: 1685326234
+MIN_GENESIS_TIME: 1686480518
 # [customized] Initial fork version
 GENESIS_FORK_VERSION: 0x2F1C0000
 # [customized]300 seconds (5 min)
@@ -47,9 +47,9 @@ CAPELLA_FORK_EPOCH: 6
 # Time parameters
 # ---------------------------------------------------------------
 # 12 seconds
-SECONDS_PER_SLOT: 5
+SECONDS_PER_SLOT: 12
 # 14 (estimate from Eth1 mainnet)
-SECONDS_PER_ETH1_BLOCK: 5
+SECONDS_PER_ETH1_BLOCK: 14
 # 2**8 (= 256) epochs ~27 hours
 MIN_VALIDATOR_WITHDRAWABILITY_DELAY: 256
 # 2**8 (= 256) epochs ~27 hours

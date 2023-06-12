@@ -25,7 +25,6 @@ echo.
 exit /B 1
 :validprocess
 
-
 if "%~1"=="el-node" (
 
     if "%~2"=="init" (
@@ -37,6 +36,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         --name el-node --rm  ^
+        --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1  ^
         --datadir=/root/chain/el  ^
         init /root/config/el/genesis.json
@@ -47,16 +47,18 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
         --name el-node --rm  ^
+        --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
         --syncmode=full --metrics --metrics.addr=0.0.0.0 --metrics.port=6060
 
-     ) else if "%~2"=="run" (
+     ) else if "%~2"=="attach" (
 
         docker run -it ^
         -v %cd%\root:/root ^
         --name el-node-attach --rm ^
+        --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1 ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
@@ -77,9 +79,10 @@ if "%~1"=="el-node" (
     if "%~2"=="run" (
 
         docker run -it ^
-        -v %cd%\root\:/root ^
+        -v %cd%\root:/root ^
         -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp ^
         --name cl-node --rm ^
+        --platform linux/amd64 ^
         bosagora/agora-cl-node:v1.0.3 ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml ^
@@ -110,12 +113,14 @@ if "%~1"=="el-node" (
         ) else (
 
             docker run -it ^
-            -v %cd%\root\:/root ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
             --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             accounts import ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --keys-dir=/root/%~3 ^
+            --keys-dir=/agora-chain/%~3 ^
             --wallet-dir=/root/wallet
 
         )
@@ -123,10 +128,11 @@ if "%~1"=="el-node" (
     ) else if "%~2"=="run" (
 
         docker run -it ^
-          -v %cd%\root\:/root ^
+          -v %cd%\root:/root ^
           -p 8081:8081 ^
-          --network="host" ^
+          --network host ^
           --name cl-validator --rm ^
+          --platform linux/amd64 ^
           bosagora/agora-cl-validator:v1.0.3 ^
           --chain-config-file=/root/config/cl/chain-config.yaml ^
           --config-file=/root/config/cl/config.yaml ^
@@ -150,90 +156,132 @@ if "%~1"=="el-node" (
             ) else (
 
                 docker run -it ^
-                -v %cd%\root\:/root ^
+                -v %cd%\root:/root ^
+                -v %cd%\..\..\:/agora-chain ^
                 --name cl-validator --rm ^
+                --platform linux/amd64 ^
                 bosagora/agora-cl-validator:v1.0.3 ^
                 accounts import ^
                 --accept-terms-of-use ^
                 --chain-config-file=/root/config/cl/chain-config.yaml ^
-                --keys-dir=/root/%~4 ^
+                --keys-dir=/agora-chain/%~4 ^
                 --wallet-dir=/root/wallet
 
             )
 
-         ) else if "%~3"=="list" (
+        ) else if "%~3"=="list" (
 
             docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
+            -v %cd%\root:/root ^
+            --network host ^
             --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             accounts list ^
             --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet
 
-         ) else if "%~3"=="voluntary-exit" (
+        ) else if "%~3"=="backup" (
+
+            if "%~4"=="" (
+                SET DATA_FOLDER="backup-wallet"
+                ECHO "Default backup folder is %DATA_FOLDER%"
+            ) else (
+                SET DATA_FOLDER="%~4"
+            )
+
+            if exist %cd%\..\..\%DATA_FOLDER% (
+              RD /S /Q %cd%\..\..\%DATA_FOLDER%
+            )
 
             docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
+            --network host ^
             --name cl-validator --rm ^
-            bosagora/agora-cl-validator:v1.0.3 ^
-            accounts voluntary-exit ^
-            --accept-terms-of-use ^
-            --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --wallet-dir=/root/wallet ^
-            --beacon-rpc-provider=127.0.0.1:4000
-
-         ) else if "%~3"=="backup" (
-
-            docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
-            --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             accounts backup ^
             --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet ^
             --wallet-password-file=/root/config/cl/password.txt ^
-            --backup-dir=/root/backup-wallet
+            --backup-dir=/agora-chain/%DATA_FOLDER%
 
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
             echo [31mUsage: ./agora.bat validator accounts FLAGS.[0m
-            echo [31mFLAGS can be import, list, voluntary-exit, backup [0m
+            echo [31mFLAGS can be import, list, backup [0m
             exit /B 1
 
         )
+
+    ) else if "%~2"=="exit" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        --network host ^
+        --name cl-validator --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-validator:v1.0.3 ^
+        accounts voluntary-exit ^
+        --wallet-dir=/root/wallet ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --beacon-rpc-provider=127.0.0.1:4000 ^
+        --accept-terms-of-use ^
+        --wallet-password-file=/root/config/cl/password.txt
 
     ) else if "%~2"=="slashing-protection-history" (
 
         if "%~3"=="export" (
 
+            if "%~4"=="" (
+                SET DATA_FOLDER="slashing-protection-export"
+                ECHO "Default slashing protection history folder is %DATA_FOLDER%"
+            ) else (
+                SET DATA_FOLDER="%~4"
+            )
+
+            if exist %cd%\..\..\%DATA_FOLDER% (
+              RD /S /Q %cd%\..\..\%DATA_FOLDER%
+            )
+
             docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
+            --network host ^
             --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             slashing-protection-history export ^
+            --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --datadir=/root/chain/cl/ ^
-            --slashing-protection-export-dir=/root/slashing-protection-export
+            --slashing-protection-export-dir=/agora-chain/%DATA_FOLDER%
 
          ) else if "%~3"=="import" (
 
+            if "%~4"=="" (
+                SET DATA_FOLDER="slashing-protection-export"
+                ECHO "Default slashing protection history folder is %DATA_FOLDER%"
+            ) else (
+                SET DATA_FOLDER="%~4"
+            )
+
             docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
+            --network host ^
             --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             slashing-protection-history import ^
+            --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --datadir=/root/chain/cl/ ^
-            --slashing-protection-json-file=/root/slashing-protection-export/slashing_protection.json
+            --slashing-protection-json-file=/agora-chain/%DATA_FOLDER%/slashing_protection.json
 
         ) else (
 
@@ -249,11 +297,13 @@ if "%~1"=="el-node" (
         if "%~3"=="create" (
 
             docker run -it ^
-            -v %cd%\root\:/root ^
-            --network=host ^
+            -v %cd%\root:/root ^
+            --network host ^
             --name cl-validator --rm ^
+            --platform linux/amd64 ^
             bosagora/agora-cl-validator:v1.0.3 ^
             wallet create ^
+            --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet
 

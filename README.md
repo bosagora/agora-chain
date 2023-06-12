@@ -73,64 +73,111 @@ https://docs.docker.com/engine/install/
 ### Upgrade for Linux or MacOS
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.sh)"
 ```
 
 ### Execution Layer for Linux or MacOS
 
-Init execution node
+- Init execution node
 
-```shell
-./agora.sh el-node init
-```
+  ```shell
+  ./agora.sh el-node init
+  ```
 
-Run execution node
+- Run execution node
 
-```shell
-./agora.sh el-node run
-```
-
+  ```shell
+  ./agora.sh el-node run
+  ```
 
 ### Consensus Layer for Linux or MacOS
 
+- Run consensus node
 
-Run consensus node
+  ```shell
+  ./agora.sh cl-node run
+  ```
 
-```shell
-./agora.sh cl-node run
-```
+### Validator accounts for Linux or MacOS
 
-### Validator for Linux or MacOS
+- Import your key stores
 
-Import your key stores
+  ```shell
+  ./agora.sh validator import <your key stores folder>
+  ```
+  
+  or
 
-```shell
-./agora.sh validator import <your key stores folder>
-```
+  ```shell
+  ./agora.sh validator accounts import <your key stores folder>
+  ```
 
-or
 
-```shell
-./agora.sh validator accounts import <your key stores folder>
-```
+- List your key stores in your wallet
 
-List your key stores in your wallet
+  ```shell
+  ./agora.sh validator accounts list
+  ```
 
-```shell
-./agora.sh validator accounts list
-```
 
-Run validator
+- Backup your key stores in your wallet
 
-```shell
-./agora.sh validator run
-```
+  ```shell
+  ./agora.sh validator accounts backup <folder>
+  ```
+  `<folder>` is where the backup key is stored. The default folder is `./backup-wallet`
 
-Voluntary exit of the validator
+### Validator execution for Linux or MacOS
 
-```shell
-./agora.sh validator accounts voluntary-exit
-```
+- Run validator
+
+  ```shell
+  ./agora.sh validator run
+  ```
+
+### Validator exit for Linux or MacOS
+
+- Voluntary exit of the validator
+
+  ```shell
+  ./agora.sh validator exit
+  ```
+
+### Validator withdrawals for Linux or MacOS
+
+- Generate the SignedBLSToExecutionChange data to enable withdrawals
+
+  ```shell
+  ./agora.sh validator generate-bls-to-execution-change <folder>
+  ```
+  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+
+
+- Send the SignedBLSToExecutionChange data to enable withdrawals
+
+  ```shell
+  ./agora.sh validator withdraw <folder>
+  ```
+  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+
+
+### Validator export & import slashing protection history for Linux or MacOS
+
+- export
+
+  ```shell
+  ./agora.sh validator slashing-protection-history export <folder>
+  ```
+  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+
+
+- import
+
+  ```shell
+  ./agora.sh validator slashing-protection-history import <folder>
+  ```
+  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+
 
 ### Using docker-compose for Linux or MacOS
 
@@ -159,16 +206,19 @@ nano ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 nano ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 ./agora.sh docker-compose up
 ```
 
 6. Stop docker-compose
+
 ```shell
 ./agora.sh docker-compose down
 ```
@@ -200,92 +250,163 @@ nano ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 nano ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 ./agora.sh docker-compose-monitoring up
 ```
 
 6. Stop docker-compose
+
 ```shell
 ./agora.sh docker-compose-monitoring down
 ```
 
 ## For Windows users
 
-
 ### Install for Windows
 
-```shell
-curl -f -s -S -L -o mainnet.zip https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip
-tar -xf mainnet.zip
-cd agora-chain-mainnet
-```
+- Install
+
+  ```shell
+  curl -f -s -S -L -o agora-chain.zip https://github.com/bosagora/agora-chain/archive/refs/heads/v0.x.x.zip
+  tar -xf agora-chain.zip
+  mv -f agora-chain-0.x.x agora-chain
+  cd agora-chain
+  ```
+
+- Change to BOSagora main network
+
+  ```shell
+  agora.bat network mainnet
+  ```
+
+- Change to BOSagora test network
+
+  ```shell
+  agora.bat network testnet
+  ```
+
+- Change to BOSagora development network
+
+  ```shell
+  agora.bat network devnet
+  ```
 
 ### Upgrade for Windows
 
 ```shell
-curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/upgrade.bat
+curl -f -s -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
 upgrade.bat
 ```
 
 ### Execution Layer for Windows
 
-Init execution node
+- Init execution node
 
-```shell
-agora.bat el-node init
-```
+  ```shell
+  agora.bat el-node init
+  ```
 
-Run execution node
-
-```shell
-agora.bat el-node run
-```
-
+- Run execution node
+  
+  ```shell
+  agora.bat el-node run
+  ```
 
 ### Consensus Layer for Windows
 
-Run consensus node
-
-```shell
-agora.bat cl-node run
-```
+- Run consensus node
+  
+  ```shell
+  agora.bat cl-node run
+  ```
 
 ### Validator for Windows
 
-Import your key stores
+- Import your key stores
+  
+  ```shell
+  agora.bat validator import <your key stores folder>
+  ```
+  
+  or
+  
+  ```shell
+  agora.bat validator accounts import <your key stores folder>
+  ```
 
-```shell
-agora.bat validator import <your key stores folder>
-```
 
-or
+- List your key stores in your wallet
+  
+  ```shell
+  agora.bat validator accounts list
+  ```
 
-```shell
-agora.bat validator accounts import <your key stores folder>
-```
 
-List your key stores in your wallet
+- Backup your key stores in your wallet
 
-```shell
-agora.bat validator accounts list
-```
+  ```shell
+  agora.bat validator accounts backup <folder>
+  ```
+  `<folder>` is where the backup key is stored. The default folder is `./backup-wallet`
 
-Run validator
+### Validator execution for Windows
 
-```shell
-agora.bat validator run
-```
+- Run validator
+  
+  ```shell
+  agora.bat validator run
+  ```
 
-Voluntary exit of the validator
+### Validator exit for Windows
 
-```shell
-agora.bat validator accounts voluntary-exit
-```
+- Voluntary exit of the validator
+  
+  ```shell
+  agora.bat validator exit
+  ```
+
+### Validator withdrawals for Windows
+
+- Generate the SignedBLSToExecutionChange data to enable withdrawals
+
+  ```shell
+  agora.bat validator generate-bls-to-execution-change <folder>
+  ```
+  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+
+
+- Send the SignedBLSToExecutionChange data to enable withdrawals
+
+  ```shell
+  agora.bat validator withdraw <folder>
+  ```
+  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+  
+
+### Validator export & import slashing protection history for Windows
+
+- export
+
+  ```shell
+  ./agora.bat validator slashing-protection-history export <folder>
+  ```
+  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+
+
+- import
+
+  ```shell
+  ./agora.bat validator slashing-protection-history import <folder>
+  ```
+  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+
 
 ### Using docker-compose for Windows
 
@@ -314,16 +435,19 @@ notepad ./root/config/cl/password.txt
 ```
 
 4. Edit transaction fee receiving address
+
 ```shell
 notepad ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 agora.bat docker-compose up
 ```
 
 6. Stop docker-compose
+
 ```shell
 agora.bat docker-compose down
 ```
@@ -361,11 +485,13 @@ notepad ./root/config/cl/proposer_config.json
 ```
 
 5. Run docker-compose
+
 ```shell
 agora.bat docker-compose-monitoring up
 ```
 
 6. Stop docker-compose
+
 ```shell
 agora.bat docker-compose-monitoring down
 ```

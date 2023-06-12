@@ -13,7 +13,7 @@ function color() {
 
 if [ "$#" -lt 1 ]; then
     color "31" "Usage: ./agora.sh PROCESS FLAGS."
-    color "31" "PROCESS can be el-node, cl-node, validator, docker-compose"
+    color "31" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring"
     exit 1
 fi
 
@@ -43,8 +43,9 @@ if [ "$1" = "el-node" ]; then
         fi
 
         docker run -it \
-        -v $(pwd)/root:/root \
+        -v "$(pwd)"/root:/root \
         --name el-node --rm \
+        --platform linux/amd64 \
         bosagora/agora-el-node:v1.0.1 \
         --datadir=/root/chain/el \
         init \
@@ -53,9 +54,10 @@ if [ "$1" = "el-node" ]; then
     elif [ "$2" = "run" ]; then
 
         docker run -it \
-        -v $(pwd)/root:/root \
+        -v "$(pwd)"/root:/root \
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
         --name el-node --rm \
+        --platform linux/amd64 \
         bosagora/agora-el-node:v1.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
@@ -64,8 +66,9 @@ if [ "$1" = "el-node" ]; then
     elif [ "$2" = "attach" ]; then
 
         docker run -it \
-        -v $(pwd)/root:/root \
+        -v "$(pwd)"/root:/root \
         --name el-node-attach --rm \
+        --platform linux/amd64 \
         bosagora/agora-el-node:v1.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
@@ -75,7 +78,7 @@ if [ "$1" = "el-node" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh el-node FLAGS."
-        color "31" "FLAGS can be init, run"
+        color "31" "FLAGS can be init, run, attach"
         exit 1
 
     fi
@@ -91,13 +94,14 @@ elif [ "$1" = "cl-node" ]; then
     if [ "$2" = "run" ]; then
 
         docker run -it \
-        -v $(pwd)/root/:/root \
+        -v "$(pwd)"/root:/root \
         -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
         --name cl-node --rm \
+        --platform linux/amd64 \
         bosagora/agora-cl-node:v1.0.3 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
-        --p2p-host-ip=$(curl -s https://ifconfig.me/ip) \
+        --p2p-host-ip="$(curl -s https://ifconfig.me/ip)" \
         --monitoring-port=8080 \
         --checkpoint-sync-url=https://mainnet-sync.bosagora.org \
         --genesis-beacon-api-url=https://mainnet-sync.bosagora.org
@@ -126,31 +130,35 @@ elif [ "$1" = "validator" ]; then
         if [ "$#" -lt 3 ]; then
 
             color "31" "Usage: ./agora.sh validator import keys-dir."
-            color "31" "keys-dir is the path to a directory where keystores to be imported are stored"
+            color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
             exit 1
 
         fi
 
         docker run -it \
-        -v $(pwd)/root/:/root \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
         --name cl-validator --rm \
+        --platform linux/amd64 \
         bosagora/agora-cl-validator:v1.0.3 \
         accounts import \
         --chain-config-file=/root/config/cl/chain-config.yaml \
-        --keys-dir=/root/$3 \
+        --keys-dir=/agora-chain/"$3" \
         --wallet-dir=/root/wallet
 
     elif [ "$2" = "run" ]; then
 
         docker run -it \
-        -v $(pwd)/root/:/root \
+        -v "$(pwd)"/root:/root \
         -p 8081:8081 \
-        --network="host" \
+        --network host \
         --name cl-validator --rm \
+        --platform linux/amd64 \
         bosagora/agora-cl-validator:v1.0.3 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --datadir=/root/chain/cl/ \
+        --accept-terms-of-use \
         --wallet-dir=/root/wallet \
         --proposer-settings-file=/root/config/cl/proposer_config.json \
         --wallet-password-file=/root/config/cl/password.txt \
@@ -171,98 +179,152 @@ elif [ "$1" = "validator" ]; then
             if [ "$#" -lt 4 ]; then
 
                 color "31" "Usage: ./agora.sh validator accounts import keys-dir."
-                color "31" "keys-dir is the path to a directory where keystores to be imported are stored"
+                color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
                 exit 1
 
             fi
 
             docker run -it \
-            -v $(pwd)/root/:/root \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             accounts import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
-            --keys-dir=/root/$4 \
+            --keys-dir=/agora-chain/"$4" \
             --wallet-dir=/root/wallet
 
         elif [ "$3" = "list" ]; then
 
             docker run -it \
-            -v $(pwd)/root/:/root \
-            --network=host \
+            -v "$(pwd)"/root:/root \
+            --network host \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             accounts list \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --wallet-dir=/root/wallet
 
-        elif [ "$3" = "voluntary-exit" ]; then
-
-            docker run -it \
-            -v $(pwd)/root/:/root \
-            --network=host \
-            --name cl-validator --rm \
-            bosagora/agora-cl-validator:v1.0.3 \
-            accounts voluntary-exit \
-            --accept-terms-of-use \
-            --chain-config-file=/root/config/cl/chain-config.yaml \
-            --wallet-dir=/root/wallet \
-            --beacon-rpc-provider=127.0.0.1:4000
-
         elif [ "$3" = "backup" ]; then
 
+            if [ "$#" -lt 4 ]; then
+                DATA_FOLDER="backup-wallet"
+                echo "Default backup folder is $DATA_FOLDER"
+            else
+                DATA_FOLDER="$4"
+            fi
+
+            if [ "$system" == "linux" ]; then
+                sudo rm -rf "$DATA_FOLDER"
+            else
+                rm -rf "$DATA_FOLDER"
+            fi
+
             docker run -it \
-            -v $(pwd)/root/:/root \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --network host \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             accounts backup \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --wallet-dir=/root/wallet \
             --wallet-password-file=/root/config/cl/password.txt \
-            --backup-dir=/root/backup-wallet
+            --backup-dir=/agora-chain/"$DATA_FOLDER"
 
-            sudo chown $USER root/backup-wallet -R
+            if [ "$system" == "linux" ]; then
+                sudo chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+            else
+                chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+            fi
+
         else
 
             color "31" "FLAGS '$3' is not found!"
             color "31" "Usage: ./agora.sh validator accounts FLAGS."
-            color "31" "FLAGS can be import, list, voluntary-exit, backup"
+            color "31" "FLAGS can be import, list, backup"
             exit 1
 
         fi
+
+    elif [ "$2" = "exit" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        --net host \
+        --name cl-validator --rm \
+       --platform linux/amd64 \
+        bosagora/agora-cl-validator:v1.0.3 \
+        accounts voluntary-exit \
+        --accept-terms-of-use \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --wallet-dir=/root/wallet \
+        --beacon-rpc-provider=127.0.0.1:4000 \
+        --wallet-password-file=/root/config/cl/password.txt
 
     elif [ "$2" = "slashing-protection-history" ]; then
 
         if [ "$3" = "export" ]; then
 
+            if [ "$#" -lt 4 ]; then
+                DATA_FOLDER="slashing-protection-export"
+                echo "Default slashing protection history folder is $DATA_FOLDER"
+            else
+                DATA_FOLDER="$4"
+            fi
+
+            if [ "$system" == "linux" ]; then
+                sudo rm -rf "$DATA_FOLDER"
+            else
+                rm -rf "$DATA_FOLDER"
+            fi
+
             docker run -it \
-            -v $(pwd)/root/:/root \
-            --network=host \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --network host \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             slashing-protection-history export \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --datadir=/root/chain/cl/ \
-            --slashing-protection-export-dir=/root/slashing-protection-export
+            --slashing-protection-export-dir=/agora-chain/"$DATA_FOLDER"
 
-            sudo chown $USER root/slashing-protection-export -R
+            if [ "$system" == "linux" ]; then
+                sudo chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+            else
+                chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+            fi
 
         elif [ "$3" = "import" ]; then
 
+            if [ "$#" -lt 4 ]; then
+                DATA_FOLDER="slashing-protection-export"
+                echo "Default slashing protection history folder is $DATA_FOLDER"
+            else
+                DATA_FOLDER="$4"
+            fi
+
             docker run -it \
-            -v $(pwd)/root/:/root \
-            --network=host \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --network host \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             slashing-protection-history import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --datadir=/root/chain/cl/ \
-            --slashing-protection-json-file=/root/slashing-protection-export/slashing_protection.json
+            --slashing-protection-json-file=/agora-chain/"$DATA_FOLDER"/slashing_protection.json
 
         else
 
@@ -286,8 +348,9 @@ elif [ "$1" = "validator" ]; then
         if [ "$3" = "create" ]; then
 
             docker run -it \
-            -v $(pwd)/root/:/root \
+            -v "$(pwd)"/root:/root \
             --name cl-validator --rm \
+            --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             wallet create \
             --accept-terms-of-use \
@@ -307,7 +370,7 @@ elif [ "$1" = "validator" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be run, import, accounts wallet"
+        color "31" "FLAGS can be run, import, accounts exit, slashing-protection-history, wallet"
         exit 1
 
     fi
