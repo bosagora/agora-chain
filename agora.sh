@@ -138,6 +138,71 @@ then
 
 fi
 
+if [ "$#" -lt 1 ]; then
+    color "31;5" "Usage: ./agora.sh PROCESS FLAGS."
+    color "31;5" "PROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring"
+    color "37;1" ""
+    color "33;5" "./agora.sh el-node ( init, run )"
+    color "34;5" "    el-node init"
+    color "37;1" "       - Initialize agora-el. At this point, all existing block data is deleted."
+    color "34;5" "    el-node run"
+    color "37;1" "       - Run agora-el."
+    color "37;1" ""
+    color "33;5" "./agora.sh cl-node ( run )"
+    color "34;5" "    cl-node run"
+    color "37;1" "       - Run agora-cl."
+    color "37;1" ""
+    color "33;5" "./agora.sh validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )"
+    color "37;1" ""
+    color "33;5" "./agora.sh validator accounts ( import, list, backup )"
+    color "34;5" "    validator accounts import <validator keys folder>"
+    color "37;1" "       - Add the validator's keys to the local wallet."
+    color "34;5" "    validator accounts list"
+    color "37;1" "       - Show the validator's keys stored in the local wallet."
+    color "34;5" "    validator accounts backup <validator keys folder>"
+    color "37;1" "       - Back up the validator's keys stored in the local wallet."
+    color "37;1" ""
+    color "34;5" "    validator exit"
+    color "37;1" "       - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys."
+    color "34;5" "    validator generate-bls-to-execution-change <data folder>"
+    color "37;1" "       - Generates the data required to register the address to which the validator's amount will be withdrawn."
+    color "37;1" "       - Currently, only devnet is supported. Other networks will be supported later."
+    color "34;5" "    validator withdraw <data folder>"
+    color "37;1" "       - Send pre-created withdrawal address registration data to the network."
+    color "37;1" "       - Currently, only devnet is supported. Other networks will be supported later."
+    color "37;1" ""
+    color "33;1" "./agora.sh validator slashing-protection-history ( export, import ) "
+    color "34;5" "    validator slashing-protection-history export <data folder>"
+    color "37;1" "       - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped."
+    color "37;1" "       - One validator must validate only once per block. Otherwise, the validator may be slashed."
+    color "37;1" "           - If a validator runs on multiple servers, that validator may violate the above condition."
+    color "37;1" "           - If a validator's server is changed to another server, the validator may violate the above condition."
+    color "37;1" "           - To avoid this, you need to transfer the block verification information that the validators has performed so far."
+    color "34;5" "    validator slashing-protection-history import <data folder>"
+    color "37;1" "       - Register block verification information performed by validators."
+    color "37;1" ""
+    color "33;5" "./agora.sh docker-compose ( up, down )"
+    color "34;5" "    docker-compose up"
+    color "37;1" "       - Run agora-el, agora-cl, validator."
+    color "34;5" "    docker-compose down"
+    color "37;1" "       - Stop agora-el, agora-cl, validator."
+    color "37;1" ""
+    color "33;5" "./agora.sh docker-compose-monitoring ( up, down )"
+    color "34;5" "    docker-compose-monitoring up"
+    color "37;1" "        - Run agora-el, agora-cl, validator, and containers required for monitoring."
+    color "34;5" "    docker-compose-monitoring down"
+    color "37;1" "       - Stop agora-el, agora-cl, validator, and containers required for monitoring."
+    color "37;1" ""
+    color "33;5" "./agora.sh start"
+    color "37;1" "       - Run agora-el, agora-cl, validator, and containers required for monitoring."
+    color "37;1" "       - It's the same as './agora.sh docker-compose-monitoring up'"
+    color "37;1" ""
+    color "33;5" "./agora.sh stop"
+    color "37;1" "       - Stop agora-el, agora-cl, validator, and containers required for monitoring."
+    color "37;1" "       - It's the same as './agora.sh docker-compose-monitoring down'"
+    exit 1
+fi
+
 getNetwork
 
 if [ "$1" = "upgrade" ]
@@ -169,6 +234,7 @@ then
 
 fi
 
+echo "The selected network is '%network%'"
 if [ "$network" = "$MAINNET" ] || [ "$network" = "$TESTNET" ] || [ "$network" = "$DEVNET" ]
 then
 

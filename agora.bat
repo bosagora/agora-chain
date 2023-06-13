@@ -94,6 +94,10 @@ if not exist "networks" (
 
 )
 
+if "%~1"=="" (
+  goto printHelp
+)
+
 call :getNetwork
 
 if "%~1"=="upgrade" (
@@ -120,6 +124,7 @@ if "%~1"=="upgrade" (
   goto :end
 )
 
+echo The selected network is '%network%'
 if %network% == %MAINNET% (
   call :runScript %*
 ) else if %network% == %TESTNET% (
@@ -169,4 +174,66 @@ goto :end
 curl https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/%~1 -f -s -S -L -o %~1
 goto :end
 
-:end
+:printHelp
+echo [31mUsage: agora.bat PROCESS FLAGS.[0m
+echo [31mPROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring.[0m
+echo.
+echo [33magora.bat el-node ( init, run )[0m
+echo [34m    el-node init[0m
+echo        - Initialize agora-el. At this point, all existing block data is deleted.
+echo [34m    el-node run[0m
+echo        - Run agora-el.
+echo.
+echo [33magora.bat cl-node ( run )[0m
+echo [34m    cl-node run[0m
+echo        - Run agora-cl.
+echo.
+echo [33magora.bat validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )[0m
+echo.
+echo [33magora.bat validator accounts ( import, list, backup  )[0m
+echo [34m    validator accounts import ^<validator keys folder^>[0m
+echo        - Add the validator's keys to the local wallet.
+echo [34m    validator accounts list[0m
+echo        - Show the validator's keys stored in the local wallet.
+echo [34m    validator accounts backup ^<validator keys folder^>[0m
+echo        - Back up the validator's keys stored in the local wallet.
+echo.
+echo [34m    validator exit[0m
+echo        - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
+echo [34m    validator generate-bls-to-execution-change ^<data folder^>[0m
+echo        - Generates the data required to register the address to which the validator's amount will be withdrawn.
+echo        - Currently, only devnet is supported. Other networks will be supported later.
+echo [34m    validator withdraw ^<data folder^>[0m
+echo        - Send pre-created withdrawal address registration data to the network.
+echo        - Currently, only devnet is supported. Other networks will be supported later.
+echo.
+echo [33magora.bat validator slashing-protection-history ( export, import )[0m
+echo [34m    validator slashing-protection-history export ^<data folder^>[0m
+echo        - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped.
+echo        - One validator must validate only once per block. Otherwise, the validator may be slashed.
+echo            - If a validator runs on multiple servers, that validator may violate the above condition.
+echo            - If a validator's server is changed to another server, the validator may violate the above condition.
+echo            - To avoid this, you need to transfer the block verification information that the validators has performed so far.
+echo [34m    validator slashing-protection-history import ^<data folder^>[0m
+echo        - Register block verification information performed by validators.
+echo.
+echo [33magora.bat docker-compose ( up, down )[0m
+echo [34m    docker-compose up[0m
+echo        - Run agora-el, agora-cl, validator.
+echo [34m    docker-compose down[0m
+echo        - Stop agora-el, agora-cl, validator.
+echo.
+echo [33magora.bat docker-compose-monitoring ( up, down )[0m
+echo [34m    docker-compose-monitoring up[0m
+echo        - Run agora-el, agora-cl, validator, and containers required for monitoring.
+echo [34m    docker-compose-monitoring down[0m
+echo        - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+echo.
+echo [33magora.bat start[0m
+echo        - Run agora-el, agora-cl, validator, and containers required for monitoring.
+echo        - It's the same as 'agora.bat docker-compose-monitoring up'"
+echo.
+echo [33magora.bat stop[0m
+echo        - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+echo        - It's the same as 'agora.bat docker-compose-monitoring down'
+exit /B 1
