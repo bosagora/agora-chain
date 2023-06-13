@@ -178,6 +178,10 @@ goto :end
 echo [31mUsage: agora.bat PROCESS FLAGS.[0m
 echo [31mPROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring.[0m
 echo.
+echo [33magora.bat network ^< network to change ^>[0m
+echo        - ^< network to change ^> is one of mainnet, testnet, and devnet, and the default is mainnet.
+echo        - If ^< network to change ^> is not specified, it shows the currently set up network.
+echo.
 echo [33magora.bat el-node ( init, run )[0m
 echo [34m    el-node init[0m
 echo        - Initialize agora-el. At this point, all existing block data is deleted.
@@ -236,4 +240,7 @@ echo.
 echo [33magora.bat stop[0m
 echo        - Stop agora-el, agora-cl, validator, and containers required for monitoring.
 echo        - It's the same as 'agora.bat docker-compose-monitoring down'
+echo.
+echo [33magora.bat upgrade[0m
+echo        - The latest version is installed, at which point the user data is preserved.
 exit /B 1
