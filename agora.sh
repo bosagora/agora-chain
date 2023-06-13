@@ -234,7 +234,7 @@ then
 
 fi
 
-echo "The selected network is '%network%'"
+echo "The selected network is '$network'"
 if [ "$network" = "$MAINNET" ] || [ "$network" = "$TESTNET" ] || [ "$network" = "$DEVNET" ]
 then
 

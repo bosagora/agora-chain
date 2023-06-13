@@ -6,7 +6,7 @@ SET P2P_HOST_IP=%%F
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator docker-compose docker-compose-monitoring) do (
+for %%a in (el-node cl-node validator docker-compose docker-compose-monitoring start stop) do (
     if %1 equ %%a (
         goto validprocess
     )
@@ -354,6 +354,14 @@ if "%~1"=="el-node" (
         echo [31mFLAGS can be up down[0m
 
     )
+
+) else if "%~1"=="start" (
+
+    docker-compose -f docker-compose-monitoring.yml up -d
+
+) else if "%~1"=="stop" (
+
+    docker-compose -f docker-compose-monitoring.yml down
 
 ) else (
 
