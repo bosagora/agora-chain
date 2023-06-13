@@ -142,6 +142,10 @@ if [ "$#" -lt 1 ]; then
     color "31;5" "Usage: ./agora.sh PROCESS FLAGS."
     color "31;5" "PROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring"
     color "37;1" ""
+    color "33;5" "./agora.sh network <network to change>"
+    color "37;1" "       - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet."
+    color "37;1" "       - If <network to change> is not specified, it shows the currently set up network."
+    color "37;1" ""
     color "33;5" "./agora.sh el-node ( init, run )"
     color "34;5" "    el-node init"
     color "37;1" "       - Initialize agora-el. At this point, all existing block data is deleted."
@@ -200,6 +204,9 @@ if [ "$#" -lt 1 ]; then
     color "33;5" "./agora.sh stop"
     color "37;1" "       - Stop agora-el, agora-cl, validator, and containers required for monitoring."
     color "37;1" "       - It's the same as './agora.sh docker-compose-monitoring down'"
+    color "37;1" ""
+    color "33;5" "./agora.sh upgrade"
+    color "37;1" "       - The latest version is installed, at which point the user data is preserved."
     exit 1
 fi
 
