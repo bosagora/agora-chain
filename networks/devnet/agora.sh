@@ -128,11 +128,11 @@ elif [ "$1" = "validator" ]; then
     if [ "$2" = "import" ]; then
 
         if [ "$#" -lt 3 ]; then
-
-            color "31" "Usage: ./agora.sh validator import keys-dir."
-            color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
-            exit 1
-
+            DATA_FOLDER="validator_keys"
+            echo "Default keys folder is $DATA_FOLDER"
+        else
+            DATA_FOLDER="$3"
+            echo "Keys folder is $DATA_FOLDER"
         fi
 
         docker run -it \
@@ -143,7 +143,7 @@ elif [ "$1" = "validator" ]; then
         bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
         accounts import \
         --chain-config-file=/root/config/cl/chain-config.yaml \
-        --keys-dir=/agora-chain/"$3" \
+        --keys-dir=/agora-chain/"$DATA_FOLDER" \
         --wallet-dir=/root/wallet
 
     elif [ "$2" = "run" ]; then
@@ -177,11 +177,11 @@ elif [ "$1" = "validator" ]; then
         if [ "$3" = "import" ]; then
 
             if [ "$#" -lt 4 ]; then
-
-                color "31" "Usage: ./agora.sh validator accounts import keys-dir."
-                color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
-                exit 1
-
+                DATA_FOLDER="validator_keys"
+                echo "Default keys folder is $DATA_FOLDER"
+            else
+                DATA_FOLDER="$4"
+                echo "Keys folder is $DATA_FOLDER"
             fi
 
             docker run -it \
@@ -193,7 +193,7 @@ elif [ "$1" = "validator" ]; then
             accounts import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
-            --keys-dir=/agora-chain/"$4" \
+            --keys-dir=/agora-chain/"$DATA_FOLDER" \
             --wallet-dir=/root/wallet
 
         elif [ "$3" = "list" ]; then
@@ -216,6 +216,7 @@ elif [ "$1" = "validator" ]; then
                 echo "Default backup folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Backup folder is $DATA_FOLDER"
             fi
 
             if [ "$system" == "linux" ]; then
@@ -275,6 +276,7 @@ elif [ "$1" = "validator" ]; then
             echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
         else
             BLS2EXEC_DATA_FOLDER="$3"
+            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
         fi
 
         if [ "$system" == "linux" ]; then
@@ -305,8 +307,10 @@ elif [ "$1" = "validator" ]; then
 
         if [ "$#" -lt 3 ]; then
             BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+            echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
         else
             BLS2EXEC_DATA_FOLDER="$3"
+            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
         fi
 
         docker run -it \
@@ -333,6 +337,7 @@ elif [ "$1" = "validator" ]; then
                 echo "Default slashing protection history folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Slashing protection history folder is $DATA_FOLDER"
             fi
 
             if [ "$system" == "linux" ]; then
@@ -367,6 +372,7 @@ elif [ "$1" = "validator" ]; then
                 echo "Default slashing protection history folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Slashing protection history folder is $DATA_FOLDER"
             fi
 
             docker run -it \
