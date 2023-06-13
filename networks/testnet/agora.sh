@@ -436,6 +436,16 @@ elif [ "$1" = "docker-compose-monitoring" ]; then
 
     fi
 
+elif [ "$1" = "start" ]; then
+
+    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    docker-compose -f docker-compose-monitoring.yml up -d
+
+elif [ "$1" = "stop" ]; then
+
+    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    docker-compose -f docker-compose-monitoring.yml down
+
 else
 
     color "31" "Process '$1' is not found!"
