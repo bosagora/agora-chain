@@ -128,11 +128,11 @@ elif [ "$1" = "validator" ]; then
     if [ "$2" = "import" ]; then
 
         if [ "$#" -lt 3 ]; then
-
-            color "31" "Usage: ./agora.sh validator import keys-dir."
-            color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
-            exit 1
-
+            DATA_FOLDER="validator_keys"
+            echo "Default keys folder is $DATA_FOLDER"
+        else
+            DATA_FOLDER="$3"
+            echo "Keys folder is $DATA_FOLDER"
         fi
 
         docker run -it \
@@ -143,7 +143,7 @@ elif [ "$1" = "validator" ]; then
         bosagora/agora-cl-validator:v1.0.3 \
         accounts import \
         --chain-config-file=/root/config/cl/chain-config.yaml \
-        --keys-dir=/agora-chain/"$3" \
+        --keys-dir=/agora-chain/"$DATA_FOLDER" \
         --wallet-dir=/root/wallet
 
     elif [ "$2" = "run" ]; then
@@ -177,11 +177,11 @@ elif [ "$1" = "validator" ]; then
         if [ "$3" = "import" ]; then
 
             if [ "$#" -lt 4 ]; then
-
-                color "31" "Usage: ./agora.sh validator accounts import keys-dir."
-                color "31" "keys-dir is the path to a directory where key stores to be imported are stored"
-                exit 1
-
+                DATA_FOLDER="validator_keys"
+                echo "Default keys folder is $DATA_FOLDER"
+            else
+                DATA_FOLDER="$4"
+                echo "Keys folder is $DATA_FOLDER"
             fi
 
             docker run -it \
@@ -193,7 +193,7 @@ elif [ "$1" = "validator" ]; then
             accounts import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
-            --keys-dir=/agora-chain/"$4" \
+            --keys-dir=/agora-chain/"$DATA_FOLDER" \
             --wallet-dir=/root/wallet
 
         elif [ "$3" = "list" ]; then
@@ -216,12 +216,13 @@ elif [ "$1" = "validator" ]; then
                 echo "Default backup folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Backup folder is $DATA_FOLDER"
             fi
 
             if [ "$system" == "linux" ]; then
-                sudo rm -rf "$DATA_FOLDER"
+                sudo rm -rf "$(pwd)/../../$DATA_FOLDER"
             else
-                rm -rf "$DATA_FOLDER"
+                rm -rf "$(pwd)/../../$DATA_FOLDER"
             fi
 
             docker run -it \
@@ -239,9 +240,9 @@ elif [ "$1" = "validator" ]; then
             --backup-dir=/agora-chain/"$DATA_FOLDER"
 
             if [ "$system" == "linux" ]; then
-                sudo chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+                sudo chown -R "$USER" "$(pwd)/../../$DATA_FOLDER"
             else
-                chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+                chown -R "$USER" "$(pwd)/../../$DATA_FOLDER"
             fi
 
         else
@@ -277,12 +278,13 @@ elif [ "$1" = "validator" ]; then
                 echo "Default slashing protection history folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Slashing protection history folder is $DATA_FOLDER"
             fi
 
             if [ "$system" == "linux" ]; then
-                sudo rm -rf "$DATA_FOLDER"
+                sudo rm -rf "$(pwd)/../../$DATA_FOLDER"
             else
-                rm -rf "$DATA_FOLDER"
+                rm -rf "$(pwd)/../../$DATA_FOLDER"
             fi
 
             docker run -it \
@@ -299,9 +301,9 @@ elif [ "$1" = "validator" ]; then
             --slashing-protection-export-dir=/agora-chain/"$DATA_FOLDER"
 
             if [ "$system" == "linux" ]; then
-                sudo chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+                sudo chown -R "$USER" "$(pwd)/../../$DATA_FOLDER"
             else
-                chown -R "$USER" /agora-chain/"$DATA_FOLDER"
+                chown -R "$USER" "$(pwd)/../../$DATA_FOLDER"
             fi
 
         elif [ "$3" = "import" ]; then
@@ -311,6 +313,7 @@ elif [ "$1" = "validator" ]; then
                 echo "Default slashing protection history folder is $DATA_FOLDER"
             else
                 DATA_FOLDER="$4"
+                echo "Slashing protection history folder is $DATA_FOLDER"
             fi
 
             docker run -it \

@@ -3,10 +3,6 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`curl -s https://ifconfig.me/ip`) DO (
 SET P2P_HOST_IP=%%F
 )
 
-SetLocal EnableDelayedExpansion & REM All variables are set local to this run & expanded at execution time rather than at parse time (tip: echo !output!)
-
-REM Complain if invalid arguments were provided.
-
 if "%~1"=="" (
   goto printError
 )
@@ -24,6 +20,8 @@ echo FLAGS are the flags or arguments passed to the PROCESS.
 echo.
 exit /B 1
 :validprocess
+
+SetLocal EnableDelayedExpansion
 
 if "%~1"=="el-node" (
 
@@ -70,7 +68,6 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat el-node FLAGS.[0m
         echo [31mFLAGS can be init, run[0m
-        exit /B 1
 
     )
 
@@ -105,25 +102,23 @@ if "%~1"=="el-node" (
     if "%~2"=="import" (
 
         if "%~3"=="" (
-
-            echo [31mUsage: ./agora.bat validator import keys-dir.[0m
-            echo [31mkeys-dir is the path to a directory where keystores to be imported are stored[0m
-            exit /B 1
-
+            SET DATA_FOLDER=validator_keys
+            ECHO Default keys folder is !DATA_FOLDER!
         ) else (
-
-            docker run -it ^
-            -v %cd%\root:/root ^
-            -v %cd%\..\..\:/agora-chain ^
-            --name cl-validator --rm ^
-            --platform linux/amd64 ^
-            bosagora/agora-cl-validator:v1.0.3 ^
-            accounts import ^
-            --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --keys-dir=/agora-chain/%~3 ^
-            --wallet-dir=/root/wallet
-
+            SET DATA_FOLDER=%~3
+            ECHO Keys folder is !DATA_FOLDER!
         )
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --name cl-validator --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-validator:v1.0.3 ^
+        accounts import ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --keys-dir=/agora-chain/!DATA_FOLDER! ^
+        --wallet-dir=/root/wallet
 
     ) else if "%~2"=="run" (
 
@@ -148,26 +143,24 @@ if "%~1"=="el-node" (
         if "%~3"=="import" (
 
             if "%~4"=="" (
-
-                echo [31mUsage: ./agora.bat validator accounts import keys-dir.[0m
-                echo [31mkeys-dir is the path to a directory where keystores to be imported are stored[0m
-                exit /B 1
-
+                SET DATA_FOLDER=validator_keys
+                ECHO Default keys folder is !DATA_FOLDER!
             ) else (
-
-                docker run -it ^
-                -v %cd%\root:/root ^
-                -v %cd%\..\..\:/agora-chain ^
-                --name cl-validator --rm ^
-                --platform linux/amd64 ^
-                bosagora/agora-cl-validator:v1.0.3 ^
-                accounts import ^
-                --accept-terms-of-use ^
-                --chain-config-file=/root/config/cl/chain-config.yaml ^
-                --keys-dir=/agora-chain/%~4 ^
-                --wallet-dir=/root/wallet
-
+                SET DATA_FOLDER=%~4
+                ECHO Keys folder is !DATA_FOLDER!
             )
+
+            docker run -it ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
+            --name cl-validator --rm ^
+            --platform linux/amd64 ^
+            bosagora/agora-cl-validator:v1.0.3 ^
+            accounts import ^
+            --accept-terms-of-use ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
+            --keys-dir=/agora-chain/!DATA_FOLDER! ^
+            --wallet-dir=/root/wallet
 
         ) else if "%~3"=="list" (
 
@@ -185,14 +178,15 @@ if "%~1"=="el-node" (
         ) else if "%~3"=="backup" (
 
             if "%~4"=="" (
-                SET DATA_FOLDER="backup-wallet"
-                ECHO "Default backup folder is %DATA_FOLDER%"
+                SET DATA_FOLDER=backup-wallet
+                ECHO Default backup folder is !DATA_FOLDER!
             ) else (
-                SET DATA_FOLDER="%~4"
+                SET DATA_FOLDER=%~4
+                ECHO Backup folder is !DATA_FOLDER!
             )
 
-            if exist %cd%\..\..\%DATA_FOLDER% (
-              RD /S /Q %cd%\..\..\%DATA_FOLDER%
+            if exist %cd%\..\..\!DATA_FOLDER! (
+              RD /S /Q %cd%\..\..\!DATA_FOLDER!
             )
 
             docker run -it ^
@@ -207,15 +201,13 @@ if "%~1"=="el-node" (
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet ^
             --wallet-password-file=/root/config/cl/password.txt ^
-            --backup-dir=/agora-chain/%DATA_FOLDER%
+            --backup-dir=/agora-chain/!DATA_FOLDER!
 
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
             echo [31mUsage: ./agora.bat validator accounts FLAGS.[0m
             echo [31mFLAGS can be import, list, backup [0m
-            exit /B 1
-
         )
 
     ) else if "%~2"=="exit" (
@@ -238,14 +230,15 @@ if "%~1"=="el-node" (
         if "%~3"=="export" (
 
             if "%~4"=="" (
-                SET DATA_FOLDER="slashing-protection-export"
-                ECHO "Default slashing protection history folder is %DATA_FOLDER%"
+                SET DATA_FOLDER=slashing-protection-export
+                ECHO Default slashing protection history folder is !DATA_FOLDER!
             ) else (
-                SET DATA_FOLDER="%~4"
+                SET DATA_FOLDER=%~4
+                ECHO Slashing protection history folder is !DATA_FOLDER!
             )
 
-            if exist %cd%\..\..\%DATA_FOLDER% (
-              RD /S /Q %cd%\..\..\%DATA_FOLDER%
+            if exist %cd%\..\..\!DATA_FOLDER! (
+              RD /S /Q %cd%\..\..\!DATA_FOLDER!
             )
 
             docker run -it ^
@@ -259,15 +252,16 @@ if "%~1"=="el-node" (
             --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --datadir=/root/chain/cl/ ^
-            --slashing-protection-export-dir=/agora-chain/%DATA_FOLDER%
+            --slashing-protection-export-dir=/agora-chain/!DATA_FOLDER!
 
          ) else if "%~3"=="import" (
 
             if "%~4"=="" (
-                SET DATA_FOLDER="slashing-protection-export"
-                ECHO "Default slashing protection history folder is %DATA_FOLDER%"
+                SET DATA_FOLDER=slashing-protection-export
+                ECHO Default slashing protection history folder is !DATA_FOLDER!
             ) else (
-                SET DATA_FOLDER="%~4"
+                SET DATA_FOLDER=%~4
+                ECHO Slashing protection history folder is !DATA_FOLDER!
             )
 
             docker run -it ^
@@ -281,14 +275,13 @@ if "%~1"=="el-node" (
             --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --datadir=/root/chain/cl/ ^
-            --slashing-protection-json-file=/agora-chain/%DATA_FOLDER%/slashing_protection.json
+            --slashing-protection-json-file=/agora-chain/!DATA_FOLDER!/slashing_protection.json
 
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
             echo [31mUsage: ./agora.bat validator slashing-protection-history FLAGS.[0m
             echo [31mFLAGS can be import, export [0m
-            exit /B 1
 
         )
 
@@ -359,7 +352,6 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat docker-compose-monitoring FLAGS.[0m
         echo [31mFLAGS can be up down[0m
-        exit /B 1
 
     )
 
@@ -368,6 +360,7 @@ if "%~1"=="el-node" (
     echo [31mProcess '%~1' is not found![0m
     echo [31mUsage: ./agora.bat PROCESS FLAGS.[0m
     echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring[0m
-    exit /B 1
 
 )
+
+EndLocal

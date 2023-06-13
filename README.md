@@ -110,7 +110,7 @@ https://docs.docker.com/engine/install/
   ```shell
   ./agora.sh validator accounts import <your key stores folder>
   ```
-
+  `<your key stores folder>` is where the validator keys are stored. The default folder is `./validator_keys`
 
 - List your key stores in your wallet
 
@@ -339,6 +339,8 @@ upgrade.bat
   ```shell
   agora.bat validator accounts import <your key stores folder>
   ```
+
+  `<your key stores folder>` is where the validator keys are stored. The default folder is `./validator_keys`
 
 
 - List your key stores in your wallet
