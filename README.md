@@ -102,15 +102,15 @@ https://docs.docker.com/engine/install/
 - Import your key stores
 
   ```shell
-  ./agora.sh validator import <your key stores folder>
+  ./agora.sh validator import &lt;your key stores folder&gt;
   ```
   
   or
 
   ```shell
-  ./agora.sh validator accounts import <your key stores folder>
+  ./agora.sh validator accounts import &lt;your key stores folder&gt;
   ```
-  `<your key stores folder>` is where the validator keys are stored. The default folder is `./validator_keys`
+  `&lt;your key stores folder&gt;` is where the validator keys are stored. The default folder is `./validator_keys`
 
 - List your key stores in your wallet
 
@@ -122,9 +122,9 @@ https://docs.docker.com/engine/install/
 - Backup your key stores in your wallet
 
   ```shell
-  ./agora.sh validator accounts backup <folder>
+  ./agora.sh validator accounts backup &lt;folder&gt;
   ```
-  `<folder>` is where the backup key is stored. The default folder is `./backup-wallet`
+  `&lt;folder&gt;` is where the backup key is stored. The default folder is `./backup-wallet`
 
 ### Validator execution for Linux or MacOS
 
@@ -147,17 +147,17 @@ https://docs.docker.com/engine/install/
 - Generate the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  ./agora.sh validator generate-bls-to-execution-change <folder>
+  ./agora.sh validator generate-bls-to-execution-change &lt;folder&gt;
   ```
-  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+  `&lt;folder&gt;` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
 
 
 - Send the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  ./agora.sh validator withdraw <folder>
+  ./agora.sh validator withdraw &lt;folder&gt;
   ```
-  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+  `&lt;folder&gt;` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
 
 
 ### Validator export & import slashing protection history for Linux or MacOS
@@ -165,17 +165,17 @@ https://docs.docker.com/engine/install/
 - export
 
   ```shell
-  ./agora.sh validator slashing-protection-history export <folder>
+  ./agora.sh validator slashing-protection-history export &lt;folder&gt;
   ```
-  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+  `&lt;folder&gt;` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
 
 
 - import
 
   ```shell
-  ./agora.sh validator slashing-protection-history import <folder>
+  ./agora.sh validator slashing-protection-history import &lt;folder&gt;
   ```
-  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+  `&lt;folder&gt;` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
 
 
 ### Using docker-compose for Linux or MacOS
@@ -189,13 +189,13 @@ https://docs.docker.com/engine/install/
 2. Import your key stores
 
 ```shell
-./agora.sh validator import <your key stores folder>
+./agora.sh validator import &lt;your key stores folder&gt;
 ```
 
 or
 
 ```shell
-./agora.sh validator accounts import <your key stores folder>
+./agora.sh validator accounts import &lt;your key stores folder&gt;
 ```
 
 3. Edit wallet password
@@ -233,13 +233,13 @@ nano ./root/config/cl/proposer_config.json
 2. Import your key stores
 
 ```shell
-./agora.sh validator import <your key stores folder>
+./agora.sh validator import &lt;your key stores folder&gt;
 ```
 
 or
 
 ```shell
-./agora.sh validator accounts import <your key stores folder>
+./agora.sh validator accounts import &lt;your key stores folder&gt;
 ```
 
 3. Edit wallet password
@@ -331,16 +331,16 @@ upgrade.bat
 - Import your key stores
   
   ```shell
-  agora.bat validator import <your key stores folder>
+  agora.bat validator import &lt;your key stores folder&gt;
   ```
   
   or
   
   ```shell
-  agora.bat validator accounts import <your key stores folder>
+  agora.bat validator accounts import &lt;your key stores folder&gt;
   ```
 
-  `<your key stores folder>` is where the validator keys are stored. The default folder is `./validator_keys`
+  `&lt;your key stores folder&gt;` is where the validator keys are stored. The default folder is `./validator_keys`
 
 
 - List your key stores in your wallet
@@ -353,9 +353,9 @@ upgrade.bat
 - Backup your key stores in your wallet
 
   ```shell
-  agora.bat validator accounts backup <folder>
+  agora.bat validator accounts backup &lt;folder&gt;
   ```
-  `<folder>` is where the backup key is stored. The default folder is `./backup-wallet`
+  `&lt;folder&gt;` is where the backup key is stored. The default folder is `./backup-wallet`
 
 ### Validator execution for Windows
 
@@ -378,17 +378,17 @@ upgrade.bat
 - Generate the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  agora.bat validator generate-bls-to-execution-change <folder>
+  agora.bat validator generate-bls-to-execution-change &lt;folder&gt;
   ```
-  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+  `&lt;folder&gt;` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
 
 
 - Send the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  agora.bat validator withdraw <folder>
+  agora.bat validator withdraw &lt;folder&gt;
   ```
-  `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
+  `&lt;folder&gt;` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
   
 
 ### Validator export & import slashing protection history for Windows
@@ -396,17 +396,17 @@ upgrade.bat
 - export
 
   ```shell
-  ./agora.bat validator slashing-protection-history export <folder>
+  ./agora.bat validator slashing-protection-history export &lt;folder&gt;
   ```
-  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+  `&lt;folder&gt;` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
 
 
 - import
 
   ```shell
-  ./agora.bat validator slashing-protection-history import <folder>
+  ./agora.bat validator slashing-protection-history import &lt;folder&gt;
   ```
-  `<folder>` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
+  `&lt;folder&gt;` is where the slashing protection history data is stored. The default folder is `./slashing-protection-export`
 
 
 ### Using docker-compose for Windows
@@ -420,13 +420,13 @@ agora.bat el-node init
 2. Import your key stores
 
 ```shell
-agora.bat validator import <your key stores folder>
+agora.bat validator import &lt;your key stores folder&gt;
 ```
 
 or
 
 ```shell
-agora.bat validator accounts import <your key stores folder>
+agora.bat validator accounts import &lt;your key stores folder&gt;
 ```
 
 3. Edit wallet password
@@ -464,13 +464,13 @@ agora.bat el-node init
 2. Import your key stores
 
 ```shell
-agora.bat validator import <your key stores folder>
+agora.bat validator import &lt;your key stores folder&gt;
 ```
 
 or
 
 ```shell
-agora.bat validator accounts import <your key stores folder>
+agora.bat validator accounts import &lt;your key stores folder&gt;
 ```
 
 3. Edit wallet password
