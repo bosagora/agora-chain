@@ -140,7 +140,7 @@ fi
 
 if [ "$#" -lt 1 ]; then
     color "31;5" "Usage: ./agora.sh PROCESS FLAGS."
-    color "31;5" "PROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring"
+    color "31;5" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade"
     color "37;1" ""
     color "33;5" "./agora.sh network <network to change>"
     color "37;1" "       - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet."

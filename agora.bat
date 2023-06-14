@@ -176,7 +176,7 @@ goto :end
 
 :printHelp
 echo [31mUsage: agora.bat PROCESS FLAGS.[0m
-echo [31mPROCESS can be el-node, cl-node, validator, wallet, docker-compose, docker-compose-monitoring.[0m
+echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade.[0m
 echo.
 echo [33magora.bat network ^< network to change ^>[0m
 echo        - ^< network to change ^> is one of mainnet, testnet, and devnet, and the default is mainnet.
@@ -244,3 +244,5 @@ echo.
 echo [33magora.bat upgrade[0m
 echo        - The latest version is installed, at which point the user data is preserved.
 exit /B 1
+
+:end

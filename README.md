@@ -69,6 +69,81 @@ https://docs.docker.com/engine/install/
   ./agora.sh network devnet
   ```
 
+- Available commands and descriptions of agora.sh
+
+  ```txt
+  ./agora.sh 
+  agora.sh version 2.0.0
+  Usage: ./agora.sh PROCESS FLAGS.
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  
+  ./agora.sh network <network to change>
+         - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet.
+         - If <network to change> is not specified, it shows the currently set up network.
+  
+  ./agora.sh el-node ( init, run )
+      el-node init
+         - Initialize agora-el. At this point, all existing block data is deleted.
+      el-node run
+         - Run agora-el.
+  
+  ./agora.sh cl-node ( run )
+      cl-node run
+         - Run agora-cl.
+  
+  ./agora.sh validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
+  
+  ./agora.sh validator accounts ( import, list, backup )
+      validator accounts import <validator keys folder>
+         - Add the validator's keys to the local wallet.
+      validator accounts list
+         - Show the validator's keys stored in the local wallet.
+      validator accounts backup <validator keys folder>
+         - Back up the validator's keys stored in the local wallet.
+  
+      validator exit
+         - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
+      validator generate-bls-to-execution-change <data folder>
+         - Generates the data required to register the address to which the validator's amount will be withdrawn.
+         - Currently, only devnet is supported. Other networks will be supported later.
+      validator withdraw <data folder>
+         - Send pre-created withdrawal address registration data to the network.
+         - Currently, only devnet is supported. Other networks will be supported later.
+  
+  ./agora.sh validator slashing-protection-history ( export, import ) 
+      validator slashing-protection-history export <data folder>
+         - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped.
+         - One validator must validate only once per block. Otherwise, the validator may be slashed.
+             - If a validator runs on multiple servers, that validator may violate the above condition.
+             - If a validator's server is changed to another server, the validator may violate the above condition.
+             - To avoid this, you need to transfer the block verification information that the validators has performed so far.
+      validator slashing-protection-history import <data folder>
+         - Register block verification information performed by validators.
+  
+  ./agora.sh docker-compose ( up, down )
+      docker-compose up
+         - Run agora-el, agora-cl, validator.
+      docker-compose down
+         - Stop agora-el, agora-cl, validator.
+  
+  ./agora.sh docker-compose-monitoring ( up, down )
+      docker-compose-monitoring up
+          - Run agora-el, agora-cl, validator, and containers required for monitoring.
+      docker-compose-monitoring down
+         - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+  
+  ./agora.sh start
+         - Run agora-el, agora-cl, validator, and containers required for monitoring.
+         - It's the same as './agora.sh docker-compose-monitoring up'
+  
+  ./agora.sh stop
+         - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+         - It's the same as './agora.sh docker-compose-monitoring down'
+  
+  ./agora.sh upgrade
+         - The latest version is installed, at which point the user data is preserved.
+  ```
+
 ### Upgrade for Linux or MacOS
 
 ```shell
@@ -259,11 +334,19 @@ nano ./root/config/cl/proposer_config.json
 ```shell
 ./agora.sh docker-compose-monitoring up
 ```
+or
+```shell
+./agora.sh start
+```
 
 6. Stop docker-compose
 
 ```shell
 ./agora.sh docker-compose-monitoring down
+```
+or
+```shell
+./agora.sh stop
 ```
 
 ## For Windows users
@@ -295,6 +378,81 @@ nano ./root/config/cl/proposer_config.json
 
   ```shell
   agora.bat network devnet
+  ```
+
+- Available commands and descriptions of agora.bat
+
+  ```txt
+  agora.bat
+  agora.bat version 2.0.0
+  Usage: agora.bat PROCESS FLAGS.
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  
+  agora.bat network <network to change>
+         - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet.
+         - If <network to change> is not specified, it shows the currently set up network.
+  
+  agora.bat el-node ( init, run )
+      el-node init
+         - Initialize agora-el. At this point, all existing block data is deleted.
+      el-node run
+         - Run agora-el.
+  
+  agora.bat cl-node ( run )
+      cl-node run
+         - Run agora-cl.
+  
+  agora.bat validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
+  
+  agora.bat validator accounts ( import, list, backup )
+      validator accounts import <validator keys folder>
+         - Add the validator's keys to the local wallet.
+      validator accounts list
+         - Show the validator's keys stored in the local wallet.
+      validator accounts backup <validator keys folder>
+         - Back up the validator's keys stored in the local wallet.
+  
+      validator exit
+         - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
+      validator generate-bls-to-execution-change <data folder>
+         - Generates the data required to register the address to which the validator's amount will be withdrawn.
+         - Currently, only devnet is supported. Other networks will be supported later.
+      validator withdraw <data folder>
+         - Send pre-created withdrawal address registration data to the network.
+         - Currently, only devnet is supported. Other networks will be supported later.
+  
+  agora.bat validator slashing-protection-history ( export, import ) 
+      validator slashing-protection-history export <data folder>
+         - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped.
+         - One validator must validate only once per block. Otherwise, the validator may be slashed.
+             - If a validator runs on multiple servers, that validator may violate the above condition.
+             - If a validator's server is changed to another server, the validator may violate the above condition.
+             - To avoid this, you need to transfer the block verification information that the validators has performed so far.
+      validator slashing-protection-history import <data folder>
+         - Register block verification information performed by validators.
+  
+  agora.bat docker-compose ( up, down )
+      docker-compose up
+         - Run agora-el, agora-cl, validator.
+      docker-compose down
+         - Stop agora-el, agora-cl, validator.
+  
+  agora.bat docker-compose-monitoring ( up, down )
+      docker-compose-monitoring up
+          - Run agora-el, agora-cl, validator, and containers required for monitoring.
+      docker-compose-monitoring down
+         - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+  
+  agora.bat start
+         - Run agora-el, agora-cl, validator, and containers required for monitoring.
+         - It's the same as 'agora.bat docker-compose-monitoring up'
+  
+  agora.bat stop
+         - Stop agora-el, agora-cl, validator, and containers required for monitoring.
+         - It's the same as 'agora.bat docker-compose-monitoring down'
+  
+  agora.bat upgrade
+         - The latest version is installed, at which point the user data is preserved.
   ```
 
 ### Upgrade for Windows
@@ -490,11 +648,19 @@ notepad ./root/config/cl/proposer_config.json
 ```shell
 agora.bat docker-compose-monitoring up
 ```
+or
+```shell
+agora.bat start
+```
 
 6. Stop docker-compose
 
 ```shell
 agora.bat docker-compose-monitoring down
+```
+or
+```shell
+agora.bat stop
 ```
 
 ## Additional Information
