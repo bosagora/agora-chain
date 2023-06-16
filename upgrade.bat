@@ -113,6 +113,7 @@ if exist "%FILENAME%" (
     del /q docker-compose.yml
     del /q docker-compose-monitoring.yml
     rename root .root
+    call agora.bat mainnet
   ) else (
     set CHAIN_ID_TEST_NET=0
     for /f "tokens=1 delims=:" %%i in ('findstr /n 2019 %FILENAME%') do set CHAIN_ID_TEST_NET=%%i
@@ -125,6 +126,7 @@ if exist "%FILENAME%" (
       rename root .root
       del /q docker-compose.yml
       del /q docker-compose-monitoring.yml
+      call agora.bat testnet
     ) else (
       set CHAIN_ID_DEV_NET=0
       for /f "tokens=1 delims=:" %%i in ('findstr /n 1337 %FILENAME%') do set CHAIN_ID_DEV_NET=%%i
@@ -137,6 +139,7 @@ if exist "%FILENAME%" (
         rename root .root
         del /q docker-compose.yml
         del /q docker-compose-monitoring.yml
+        call agora.bat devnet
       )
     )
   )
