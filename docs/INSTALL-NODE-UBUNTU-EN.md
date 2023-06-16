@@ -73,27 +73,9 @@ Connect to the EC2 instance.
 Run the command below to download the installation file.  
 
 ```shell
-wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
-```
-
-To decompress, you must first run the command below to install 'unzip'.  
-
-```shell
-sudo apt install unzip
-```
-
-Run the command below to decompress.
-
-```shell
-unzip mainnet.zip
-```
-
-When unzipped, the folder 'agora-chain-mainnet' is created and files are created below.
-
-Run the command below to navigate to the installed folder.
-
-```shell
+mkdir agora-chain-mainnet
 cd agora-chain-mainnet
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.sh)"
 ```
 
 ## 6. Running 'agora-el-node'

@@ -70,30 +70,12 @@ sudo chown ubuntu:docker /var/run/docker.sock
 
 EC2의 인스턴스에 터미널로 접속합니다.
 
-아래 명령어를 실행하여 설치파일을 다운로드 합니다.
+아래 명령어를 실행하여 프로그램과 설정파일들을 설치합니다.
 
 ```shell
-wget https://github.com/bosagora/agora-chain/archive/refs/heads/mainnet.zip -O mainnet.zip
-```
-
-압축을 해제하기 위해서 먼저 아래 명령어를 실행하여 `unzip` 을 설치해야 합니다.
-
-```shell
-sudo apt install unzip
-```
-
-아래 명령어를 실행하여 압축을 해제합니다.
-
-```shell
-unzip mainnet.zip
-```
-
-압축을 해제하면 폴더 `agora-chain-mainnet` 가 생성되고 그 아래에 파일들이 생성됩니다.
-
-아래 명령어를 실행하여 설치된 폴더로 이동합니다.
-
-```shell
+mkdir agora-chain-mainnet
 cd agora-chain-mainnet
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/agora.sh)"
 ```
 
 ## 6. agora-el-node 시작하기
@@ -381,7 +363,7 @@ cd agora-chain-mainnet
 keystore-m_12381_3600_0_0_0-##########.json
 ```
 
-검증자키를 임포트하면 root/wallet 이라는 폴더가 생성됩니다. 이곳에 여러개의 검증자키가 하나의 파일로 저장됩니다.  
+검증자키를 임포트하면 networs/(mainnet|testnet|devnet)/root/wallet 이라는 폴더가 생성됩니다. 이곳에 여러개의 검증자키가 하나의 파일로 저장됩니다.  
 또한 wallet 에 접근하기 위해서는 비밀번호를 입력하여야 합니다.  
 최초 검증자키를 임포트할 때 wallet 은 자동으로 생성됩니다. 이때 wallet 의 비밀번호를 입력합니다.  
 따라서 당신은 검증자키의 비밀번호와 wallet 의 비밀번호 가 다르게 존재할 수 있다는 것을 이해해야 합니다.  
@@ -391,16 +373,16 @@ keystore-m_12381_3600_0_0_0-##########.json
 서버로 파일을 전송하는 방법은 다양합니다.  
 여기서는 내컴퓨터의 파일의 내용을 복사한 후, 서버에 파일을 생성하여 붙여넣는 방법을 사용해 보겠습니다.  
 
-아래 명령어를 사용하여 폴더 root 아래에 mykeys 라는 이름의 폴더를 생성합니다.  
+아래 명령어를 사용하여 폴더 mykeys 라는 이름의 폴더를 생성합니다.  
 
 ```shell
-mkdir root/mykeys
+mkdir mykeys
 ```
 
-아래 명령어를 사용하여 폴더 root/mykeys 아래에 파일 key1.json을 생성하고 편집기를 실행합니다.  
+아래 명령어를 사용하여 폴더 mykeys 아래에 파일 key1.json을 생성하고 편집기를 실행합니다.  
 
 ```shell
-nano root/mykeys/key1.json
+nano mykeys/key1.json
 ```
 
 - **nono 편집기의 명령어의 단축키는 다음과 같습니다.**
@@ -424,13 +406,13 @@ nano root/mykeys/key1.json
 keystore-m_12381_3600_0_0_0-##########.json
 ```
 
-이제 root/mykeys/key1.json 에는 내컴퓨터에서 생성한 검증자키 파일의 내용이 복사되었습니다.  
+이제 mykeys/key1.json 에는 내컴퓨터에서 생성한 검증자키 파일의 내용이 복사되었습니다.  
 ctrl+o를 눌러 저장합니다. 그러면 파일이름이 보여주고 저장할지 취소할 지 물어봅니다. 이때 엔터키를 눌러저장을 합니다.  
 그리고 ctrl+x를 눌러서 편집기를 종료합니다.  
 
 #### 8.2.2. 검증자키를 임포트하기
 
-아래 명령어를 실행하면 폴더 root/mykeys 내부의 모든 검증자키 들이 wallet 으로 임포트됩니다.
+아래 명령어를 실행하면 폴더 mykeys 내부의 모든 검증자키 들이 wallet 으로 임포트됩니다.
 
 ```shell
 ./agora.sh validator accounts import mykeys
