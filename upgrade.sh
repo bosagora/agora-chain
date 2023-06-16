@@ -109,6 +109,7 @@ then
       mv -f root .root
       rm docker-compose.yml
       rm docker-compose-monitoring.yml
+      ./agora.sh network mainnet
   elif find . | grep -q "2019" "$FILENAME"
   then
       cp -rf root/chain networks/testnet/root/
@@ -118,6 +119,7 @@ then
       mv -f root .root
       rm docker-compose.yml
       rm docker-compose-monitoring.yml
+      ./agora.sh network testnet
   elif find . | grep -q "1337" "$FILENAME"
   then
       cp -rf root/chain networks/devnet/root/
@@ -127,6 +129,7 @@ then
       mv -f root .root
       rm docker-compose.yml
       rm docker-compose-monitoring.yml
+      ./agora.sh network devnet
   fi
 
   echo "Completed migration ..."
