@@ -88,6 +88,8 @@ if not exist "networks" (
   call :downloadFile agora.bat
   call :downloadFile agora.sh
 
+  call :moveStorage
+
   echo Completed install ...
 
   goto :end
@@ -172,6 +174,54 @@ goto :end
 
 :downloadFile
 curl https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/%~1 -f -s -S -L -o %~1
+goto :end
+
+:moveStorage
+set FILENAME=root\config\el\genesis.json
+if exist "%FILENAME%" (
+  echo Starts migration ...
+  set CHAIN_ID_MAIN_NET=0
+  for /f "tokens=1 delims=:" %%i in ('findstr /n 2151 %FILENAME%') do set CHAIN_ID_MAIN_NET=%%i
+  if not "%CHAIN_ID_DEV_NET%" == "0" (
+    xcopy root\chain\*.* networks\mainnet\root\chain\ /s /c /y /i /h /q
+    xcopy root\wallet\*.* networks\mainnet\root\chain\ /s /c /y /i /h /q
+    copy root\config\cl\password.txt networks\mainnet\root\config\cl\password.txt /y
+    copy root\config\cl\proposer_config.json networks\mainnet\root\config\cl\proposer_config.json /y
+    del /q docker-compose.yml
+    del /q docker-compose-monitoring.yml
+    rename root .root
+    call agora.bat mainnet
+  ) else (
+    set CHAIN_ID_TEST_NET=0
+    for /f "tokens=1 delims=:" %%i in ('findstr /n 2019 %FILENAME%') do set CHAIN_ID_TEST_NET=%%i
+    echo %CHAIN_ID_TEST_NET%
+    if not "%CHAIN_ID_TEST_NET%" == "0" (
+      xcopy root\chain\*.* networks\testnet\root\chain\  /s /c /y /i /h /q
+      xcopy root\wallet\*.* networks\testnet\root\chain\  /s /c /y /i /h /q
+      copy root\config\cl\password.txt networks\testnet\root\config\cl\password.txt /y
+      copy root\config\cl\proposer_config.json networks\testnet\root\config\cl\proposer_config.json /y
+      rename root .root
+      del /q docker-compose.yml
+      del /q docker-compose-monitoring.yml
+      call agora.bat testnet
+    ) else (
+      set CHAIN_ID_DEV_NET=0
+      for /f "tokens=1 delims=:" %%i in ('findstr /n 1337 %FILENAME%') do set CHAIN_ID_DEV_NET=%%i
+      echo %CHAIN_ID_DEV_NET%
+      if not "%CHAIN_ID_DEV_NET%" == "0" (
+        xcopy root\chain\*.* networks\devnet\root\chain\  /s /c /y /i /h /q
+        xcopy root\wallet\*.* networks\devnet\root\chain\  /s /c /y /i /h /q
+        copy root\config\cl\password.txt networks\devnet\root\config\cl\password.txt /y
+        copy root\config\cl\proposer_config.json networks\devnet\root\config\cl\proposer_config.json /y
+        rename root .root
+        del /q docker-compose.yml
+        del /q docker-compose-monitoring.yml
+        call agora.bat devnet
+      )
+    )
+  )
+  echo Completed migration ...
+)
 goto :end
 
 :printHelp
