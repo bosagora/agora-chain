@@ -326,6 +326,14 @@ if "%~1"=="el-node" (
 
         if "%~3"=="create" (
 
+            if "%~4"=="" (
+                SET WALLET_FOLDER=wallet
+                ECHO Wallet folder is !WALLET_FOLDER!
+            ) else (
+                SET WALLET_FOLDER=%~4
+                ECHO Wallet folder is !WALLET_FOLDER!
+            )
+
             docker run -it ^
             -v %cd%\root:/root ^
             --network host ^
@@ -335,13 +343,34 @@ if "%~1"=="el-node" (
             wallet create ^
             --accept-terms-of-use ^
             --chain-config-file=/root/config/cl/chain-config.yaml ^
-            --wallet-dir=/root/wallet
+            --wallet-dir=/root/!WALLET_FOLDER!
+
+        ) else if "%~3"=="recover" (
+
+            if "%~4"=="" (
+                SET WALLET_FOLDER=recover
+                ECHO Wallet folder is !WALLET_FOLDER!
+            ) else (
+                SET WALLET_FOLDER=%~4
+                ECHO Wallet folder is !WALLET_FOLDER!
+            )
+
+            docker run -it ^
+            -v %cd%\root:/root ^
+            --network host ^
+            --name cl-validator --rm ^
+            --platform linux/amd64 ^
+            bosagora/agora-cl-validator:v2.0.0 ^
+            wallet recover ^
+            --accept-terms-of-use ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
+            --wallet-dir=/root/!WALLET_FOLDER!
 
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
             echo [31mUsage: ./agora.bat validator wallet FLAGS.[0m
-            echo [31mFLAGS can be create [0m
+            echo [31mFLAGS can be create, recover[0m
             exit /B 1
 
         )

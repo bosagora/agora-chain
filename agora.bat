@@ -242,7 +242,7 @@ echo [33magora.bat cl-node ( run )[0m
 echo [34m    cl-node run[0m
 echo        - Run agora-cl.
 echo.
-echo [33magora.bat validator ( accounts, exit, withdraw, slashing-protection-history )[0m
+echo [33magora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )[0m
 echo.
 echo [33magora.bat validator accounts ( import, list, backup  )[0m
 echo [34m    validator accounts import ^<validator keys folder^>[0m
@@ -269,6 +269,12 @@ echo            - If a validator's server is changed to another server, the vali
 echo            - To avoid this, you need to transfer the block verification information that the validators has performed so far.
 echo [34m    validator slashing-protection-history import ^<data folder^>[0m
 echo        - Register block verification information performed by validators.
+echo.
+echo [33magora.bat validator wallet ( create, recover )[0m
+echo [34m    validator wallet create ^<wallet folder^>[0m
+echo        - Create an HD wallet.
+echo [34m    validator wallet create ^<wallet folder^>[0m
+echo        - Recovery an HD wallet.
 echo.
 echo [33magora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )[0m
 echo [34m    deposit-cli new-mnemonic[0m

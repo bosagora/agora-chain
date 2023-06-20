@@ -106,7 +106,7 @@ https://docs.docker.com/engine/install/
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
   
-  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history )
+  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
   ./agora.sh validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -134,6 +134,12 @@ https://docs.docker.com/engine/install/
              - 이 때 필요한 기능이 이 명령어입니다.
       validator slashing-protection-history import <data folder>
          - 검증자가 수행한 블록 검증 정보를 등록합니다.
+
+  ./agora.sh validator wallet ( create, recover )
+      validator wallet create <wallet folder>
+         - HD 월렛을 로컬에 생성한다.
+      validator wallet recover <wallet folder>
+         - HD 월렛을 로컬에 복원한다.
   
   ./agora.sh deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
       deposit-cli new-mnemonic
@@ -439,7 +445,7 @@ nano ./root/config/cl/proposer_config.json
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
   
-  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history )
+  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
   agora.bat validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -467,6 +473,12 @@ nano ./root/config/cl/proposer_config.json
              - 이 때 필요한 기능이 이 명령어입니다.
       validator slashing-protection-history import <data folder>
          - 검증자가 수행한 블록 검증 정보를 등록합니다.
+
+  agora.bat validator wallet ( create, recover )
+      validator wallet create <wallet folder>
+         - HD 월렛을 로컬에 생성한다.
+      validator wallet recover <wallet folder>
+         - HD 월렛을 로컬에 복원한다.
 
   agora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
       deposit-cli new-mnemonic
