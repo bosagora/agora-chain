@@ -13,7 +13,7 @@ for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-
 )
 :printError
 echo [31mERROR: PROCESS missing or invalid[0m
-echo Usage: ./agora.bat PROCESS FLAGS.
+echo Usage: agora.bat PROCESS FLAGS.
 echo.
 echo PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl.
 echo FLAGS are the flags or arguments passed to the PROCESS.
@@ -65,7 +65,7 @@ if "%~1"=="el-node" (
 
         echo FLAGS are the flags or arguments passed to the PROCESS.
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat el-node FLAGS.[0m
+        echo [31mUsage: agora.bat el-node FLAGS.[0m
         echo [31mFLAGS can be init, run[0m
 
     )
@@ -91,7 +91,7 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat cl-node FLAGS.[0m
+        echo [31mUsage: agora.bat cl-node FLAGS.[0m
         echo [31mFLAGS can be run[0m
 
     )
@@ -218,7 +218,7 @@ if "%~1"=="el-node" (
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
-            echo [31mUsage: ./agora.bat validator accounts FLAGS.[0m
+            echo [31mUsage: agora.bat validator accounts FLAGS.[0m
             echo [31mFLAGS can be import, list, backup [0m
         )
 
@@ -317,7 +317,7 @@ if "%~1"=="el-node" (
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
-            echo [31mUsage: ./agora.bat validator slashing-protection-history FLAGS.[0m
+            echo [31mUsage: agora.bat validator slashing-protection-history FLAGS.[0m
             echo [31mFLAGS can be import, export [0m
 
         )
@@ -369,18 +369,16 @@ if "%~1"=="el-node" (
         ) else (
 
             echo [31mFLAGS '%~3' is not found![0m
-            echo [31mUsage: ./agora.bat validator wallet FLAGS.[0m
+            echo [31mUsage: agora.bat validator wallet FLAGS.[0m
             echo [31mFLAGS can be create, recover[0m
-            exit /B 0
 
         )
 
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat validator FLAGS.[0m
+        echo [31mUsage: agora.bat validator FLAGS.[0m
         echo [31mFLAGS can be run, accounts, wallet[0m
-        exit /B 0
 
     )
 
@@ -437,9 +435,8 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat deposit-cli FLAGS.[0m
+        echo [31mUsage: agora.bat deposit-cli FLAGS.[0m
         echo [31mFLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change[0m
-        exit /B 0
 
     )
 
@@ -456,9 +453,8 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat docker-compose FLAGS.[0m
+        echo [31mUsage: agora.bat docker-compose FLAGS.[0m
         echo [31mFLAGS can be up down[0m
-        exit /B 0
 
     )
 
@@ -475,7 +471,7 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat docker-compose-monitoring FLAGS.[0m
+        echo [31mUsage: agora.bat docker-compose-monitoring FLAGS.[0m
         echo [31mFLAGS can be up down[0m
 
     )
@@ -547,7 +543,7 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: ./agora.bat cl FLAGS.[0m
+        echo [31mUsage: agora.bat cl FLAGS.[0m
         echo [31mFLAGS can be node, validator, ctl[0m
 
     )
@@ -555,7 +551,7 @@ if "%~1"=="el-node" (
 ) else (
 
     echo [31mProcess '%~1' is not found![0m
-    echo [31mUsage: ./agora.bat PROCESS FLAGS.[0m
+    echo [31mUsage: agora.bat PROCESS FLAGS.[0m
     echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl[0m
 
 )
