@@ -113,6 +113,8 @@ https://docs.docker.com/engine/install/
          - 로컬 월렛에 검증자키를 추가합니다.
       validator accounts list
          - 로컬 월렛에 저장된 검증자키를 보여줍니다.
+      validator accounts delete
+         - 로컬 월렛에서 선택한 검증자키를 제거합니다.
       validator accounts backup <validator keys folder>
          - 로컬 월렛에 저장된 검증자키를 백업합니다.
   
@@ -444,6 +446,8 @@ nano ./root/config/cl/proposer_config.json
          - 로컬 월렛에 검증자키를 추가합니다.
       validator accounts list
          - 로컬 월렛에 저장된 검증자키를 보여줍니다.
+      validator accounts delete
+         - 로컬 월렛에서 선택한 검증자키를 제거합니다.
       validator accounts backup <validator keys folder>
          - 로컬 월렛에 저장된 검증자키를 백업합니다.
   

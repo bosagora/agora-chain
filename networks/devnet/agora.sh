@@ -209,6 +209,19 @@ elif [ "$1" = "validator" ]; then
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --wallet-dir=/root/wallet
 
+        elif [ "$3" = "delete" ]; then
+
+            docker run -it \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --name cl-validator --rm \
+            --platform linux/amd64 \
+            bosagora/agora-cl-validator:agora_v4.0.5-ceb45d \
+            accounts delete \
+            --accept-terms-of-use \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --wallet-dir=/root/wallet
+
         elif [ "$3" = "backup" ]; then
 
             if [ "$#" -lt 4 ]; then

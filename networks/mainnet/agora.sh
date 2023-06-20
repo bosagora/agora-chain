@@ -196,6 +196,19 @@ elif [ "$1" = "validator" ]; then
             --keys-dir=/agora-chain/"$DATA_FOLDER" \
             --wallet-dir=/root/wallet
 
+        elif [ "$3" = "delete" ]; then
+
+            docker run -it \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --name cl-validator --rm \
+            --platform linux/amd64 \
+            bosagora/agora-cl-validator:v1.0.3 \
+            accounts delete \
+            --accept-terms-of-use \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --wallet-dir=/root/wallet
+
         elif [ "$3" = "list" ]; then
 
             docker run -it \

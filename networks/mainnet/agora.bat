@@ -175,6 +175,19 @@ if "%~1"=="el-node" (
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet
 
+        if "%~3"=="delete" (
+
+            docker run -it ^
+            -v %cd%\root:/root ^
+            -v %cd%\..\..\:/agora-chain ^
+            --name cl-validator --rm ^
+            --platform linux/amd64 ^
+            bosagora/agora-cl-validator:v1.0.3 ^
+            accounts delete ^
+            --accept-terms-of-use ^
+            --chain-config-file=/root/config/cl/chain-config.yaml ^
+            --wallet-dir=/root/wallet
+
         ) else if "%~3"=="backup" (
 
             if "%~4"=="" (
