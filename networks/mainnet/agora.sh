@@ -378,6 +378,45 @@ elif [ "$1" = "validator" ]; then
 
     fi
 
+elif [ "$1" = "deposit-cli" ]; then
+
+    if [ "$#" -lt 2 ]; then
+        color "31" "Usage: ./agora.sh deposit-cli FLAGS."
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic"
+        exit 1
+    fi
+
+    if [ "$2" = "new-mnemonic" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        new-mnemonic \
+        --folder=/agora-chain
+
+    elif [ "$2" = "existing-mnemonic" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        existing-mnemonic \
+        --folder=/agora-chain
+
+    else
+
+        color "31" "FLAGS '$2' is not found!"
+        color "31" "Usage: ./agora.sh deposit-cli FLAGS."
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic"
+        exit 1
+
+    fi
+
 elif [ "$1" = "docker-compose" ]; then
 
     if [ "$#" -lt 2 ]; then

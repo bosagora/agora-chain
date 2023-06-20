@@ -106,7 +106,7 @@ https://docs.docker.com/engine/install/
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
   
-  ./agora.sh validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
+  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history )
   
   ./agora.sh validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -118,9 +118,6 @@ https://docs.docker.com/engine/install/
   
       validator exit
          - 검증자 기능을 자발적으로 종료하는 데 사용됩니다. 이렇게 하면 검증자의 키를 선택하는 화면이 나타납니다.
-      validator generate-bls-to-execution-change <data folder>
-         - 검증자의 금액이 인출될 주소를 등록하는 데 필요한 데이터를 생성합니다.
-         - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
       validator withdraw <data folder>
          - 미리 생성된 인출 주소 등록 데이터를 네트워크로 전송합니다.
          - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
@@ -136,6 +133,15 @@ https://docs.docker.com/engine/install/
       validator slashing-protection-history import <data folder>
          - 검증자가 수행한 블록 검증 정보를 등록합니다.
   
+  ./agora.sh deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
+      deposit-cli new-mnemonic
+         - 새로운 니모닉과 함께 검증자키를 생성하기를 원할 때 사용되는 명령어입니다.
+      deposit-cli existing-mnemonic
+         - 이미 가지고 있는 니모닉을 이용해서 새로운 검증자키를 생성하기를 원할 때 사용되는 명령어입니다.
+      deposit-cli generate-bls-to-execution-change <data folder>
+         - 검증자의 금액이 인출될 주소를 등록하는 데 필요한 데이터를 생성합니다.
+         - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
+
   ./agora.sh docker-compose ( up, down )
       docker-compose up
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 실행합니다.
@@ -190,6 +196,18 @@ https://docs.docker.com/engine/install/
 
 ### 검증자의 계정 (리눅스 및 맥 사용자용)
 
+- 니모닉을 가지고 있지 않을 때 검증자키를 생성하기
+
+  ```shell
+  ./agora.sh deposit-cli new-mnemonic
+  ```
+
+- 니모닉을 가지고 있을 때 검증자키를 생성하기
+
+  ```shell
+  ./agora.sh deposit-cli existing-mnemonic
+  ```
+
 - 검증자 키를 월렛에 추가하기
 
   ```shell
@@ -238,7 +256,7 @@ https://docs.docker.com/engine/install/
 - 인출이 가능하도록 하기 위해 출금주소가 포함된 서명된 데이타를 생성하기
 
   ```shell
-  ./agora.sh validator generate-bls-to-execution-change <folder>
+  ./agora.sh deposit-cli generate-bls-to-execution-change <folder>
   ```
   `<folder>` 는 서명된 데이타가 저장된 폴더입니다. 입력하지 않으면 `./bls_to_execution_changes` 로 처리됩니다.
 
@@ -419,7 +437,7 @@ nano ./root/config/cl/proposer_config.json
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
   
-  agora.bat validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
+  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history )
   
   agora.bat validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -431,9 +449,6 @@ nano ./root/config/cl/proposer_config.json
   
       validator exit
          - 검증자 기능을 자발적으로 종료하는 데 사용됩니다. 이렇게 하면 검증자의 키를 선택하는 화면이 나타납니다.
-      validator generate-bls-to-execution-change <data folder>
-         - 검증자의 금액이 인출될 주소를 등록하는 데 필요한 데이터를 생성합니다.
-         - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
       validator withdraw <data folder>
          - 미리 생성된 인출 주소 등록 데이터를 네트워크로 전송합니다.
          - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
@@ -448,7 +463,16 @@ nano ./root/config/cl/proposer_config.json
              - 이 때 필요한 기능이 이 명령어입니다.
       validator slashing-protection-history import <data folder>
          - 검증자가 수행한 블록 검증 정보를 등록합니다.
-  
+
+  agora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
+      deposit-cli new-mnemonic
+         - 새로운 니모닉과 함께 검증자키를 생성하기를 원할 때 사용되는 명령어입니다.
+      deposit-cli existing-mnemonic
+         - 이미 가지고 있는 니모닉을 이용해서 새로운 검증자키를 생성하기를 원할 때 사용되는 명령어입니다.
+      deposit-cli generate-bls-to-execution-change <data folder>
+         - 검증자의 금액이 인출될 주소를 등록하는 데 필요한 데이터를 생성합니다.
+         - 현재 devnet만 지원됩니다. 다른 네트워크는 나중에 지원됩니다.
+
   agora.bat docker-compose ( up, down )
       docker-compose up
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 실행합니다.
@@ -504,6 +528,18 @@ upgrade.bat
 
 ### 검증자의 계정 (윈도우즈 사용자용)
 
+- 니모닉을 가지고 있지 않을 때 검증자키를 생성하기
+
+  ```shell
+  agora.bat deposit-cli new-mnemonic
+  ```
+
+- 니모닉을 가지고 있을 때 검증자키를 생성하기
+
+  ```shell
+  agora.bat deposit-cli existing-mnemonic
+  ```
+
 - 검증자 키를 월렛에 추가하기
   
   ```shell
@@ -553,7 +589,7 @@ upgrade.bat
 - 인출이 가능하도록 하기 위해 출금주소가 포함된 서명된 데이타를 생성하기
 
   ```shell
-  agora.bat validator generate-bls-to-execution-change <folder>
+  agora.bat deposit-cli generate-bls-to-execution-change <folder>
   ```
   `<folder>` 는 서명된 데이타가 저장될 폴더입니다. 입력하지 않으면 `./bls_to_execution_changes` 로 처리됩니다.
 

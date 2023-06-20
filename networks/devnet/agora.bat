@@ -6,7 +6,7 @@ SET P2P_HOST_IP=%%F
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator docker-compose docker-compose-monitoring start stop) do (
+for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-monitoring start stop) do (
     if %1 equ %%a (
         goto validprocess
     )
@@ -224,32 +224,6 @@ if "%~1"=="el-node" (
         --accept-terms-of-use ^
         --wallet-password-file=/root/config/cl/password.txt
 
-    ) else if "%~2"=="generate-bls-to-execution-change" (
-
-        if "%~3"=="" (
-            SET BLS2EXEC_DATA_FOLDER=bls_to_execution_changes
-            ECHO Default data folder is !BLS2EXEC_DATA_FOLDER!
-        ) else (
-            SET BLS2EXEC_DATA_FOLDER=%~3
-            ECHO Data folder is !BLS2EXEC_DATA_FOLDER!
-        )
-
-        if exist %cd%\..\..\!BLS2EXEC_DATA_FOLDER! (
-          RD /S /Q %cd%\..\..\!BLS2EXEC_DATA_FOLDER!
-        )
-
-        mkdir %cd%\..\..\!BLS2EXEC_DATA_FOLDER!
-
-        docker run -it ^
-        -v %cd%\root:/root ^
-        -v %cd%\..\..\:/agora-chain ^
-        --name deposit-ctl --rm ^
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
-        --language=english ^
-        generate-bls-to-execution-change ^
-        --bls_to_execution_changes_folder=/agora-chain/!BLS2EXEC_DATA_FOLDER! ^
-        --chain=devnet
-
     ) else if "%~2"=="withdraw" (
 
         if "%~3"=="" (
@@ -364,6 +338,65 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat validator FLAGS.[0m
         echo [31mFLAGS can be run, accounts, wallet[0m
+        exit /B 1
+
+    )
+
+) else if "%~1"=="deposit-cli" (
+
+    if "%~2"=="new-mnemonic" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --name deposit-cli --rm ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        --language=english ^
+        new-mnemonic ^
+        --folder=/agora-chain
+
+    ) else if "%~2"=="existing-mnemonic" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --name deposit-cli --rm ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        --language=english ^
+        existing-mnemonic ^
+        --folder=/agora-chain
+
+    ) else if "%~2"=="generate-bls-to-execution-change" (
+
+        if "%~3"=="" (
+            SET BLS2EXEC_DATA_FOLDER=bls_to_execution_changes
+            ECHO Default data folder is !BLS2EXEC_DATA_FOLDER!
+        ) else (
+            SET BLS2EXEC_DATA_FOLDER=%~3
+            ECHO Data folder is !BLS2EXEC_DATA_FOLDER!
+        )
+
+        if exist %cd%\..\..\!BLS2EXEC_DATA_FOLDER! (
+          RD /S /Q %cd%\..\..\!BLS2EXEC_DATA_FOLDER!
+        )
+
+        mkdir %cd%\..\..\!BLS2EXEC_DATA_FOLDER!
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --name deposit-ctl --rm ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        --language=english ^
+        generate-bls-to-execution-change ^
+        --bls_to_execution_changes_folder=/agora-chain/!BLS2EXEC_DATA_FOLDER! ^
+        --chain=devnet
+
+    ) else (
+
+        echo [31mFLAGS '%~2' is not found![0m
+        echo [31mUsage: ./agora.bat deposit-cli FLAGS.[0m
+        echo [31mFLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change[0m
         exit /B 1
 
     )

@@ -103,7 +103,7 @@ https://docs.docker.com/engine/install/
       cl-node run
          - Run agora-cl.
   
-  ./agora.sh validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
+  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history )
   
   ./agora.sh validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -115,9 +115,6 @@ https://docs.docker.com/engine/install/
   
       validator exit
          - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
-      validator generate-bls-to-execution-change <data folder>
-         - Generates the data required to register the address to which the validator's amount will be withdrawn.
-         - Currently, only devnet is supported. Other networks will be supported later.
       validator withdraw <data folder>
          - Send pre-created withdrawal address registration data to the network.
          - Currently, only devnet is supported. Other networks will be supported later.
@@ -132,6 +129,15 @@ https://docs.docker.com/engine/install/
       validator slashing-protection-history import <data folder>
          - Register block verification information performed by validators.
   
+  ./agora.sh deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
+      deposit-cli new-mnemonic
+         - This command is used to generate keystores with a new mnemonic.
+      deposit-cli existing-mnemonic
+         - This command is used to re-generate or derive new keys from your existing mnemonic.
+      deposit-cli generate-bls-to-execution-change <data folder>
+         - Generates the data required to register the address to which the validator's amount will be withdrawn.
+         - Currently, only devnet is supported. Other networks will be supported later.        
+
   ./agora.sh docker-compose ( up, down )
       docker-compose up
          - Run agora-el, agora-cl, validator.
@@ -186,6 +192,18 @@ https://docs.docker.com/engine/install/
 
 ### Validator accounts for Linux or MacOS
 
+- Generate your validator keys when you don't have mnemonic
+
+  ```shell
+  ./agora.sh deposit-cli new-mnemonic
+  ```
+
+- Generate your validator keys when you have mnemonic
+
+  ```shell
+  ./agora.sh deposit-cli existing-mnemonic
+  ```
+
 - Import your key stores
 
   ```shell
@@ -234,7 +252,7 @@ https://docs.docker.com/engine/install/
 - Generate the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  ./agora.sh validator generate-bls-to-execution-change <folder>
+  ./agora.sh deposit-cli generate-bls-to-execution-change <folder>
   ```
   `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
 
@@ -414,8 +432,8 @@ or
       cl-node run
          - Run agora-cl.
   
-  agora.bat validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )
-  
+  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history )
+
   agora.bat validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
          - Add the validator's keys to the local wallet.
@@ -426,13 +444,10 @@ or
   
       validator exit
          - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
-      validator generate-bls-to-execution-change <data folder>
-         - Generates the data required to register the address to which the validator's amount will be withdrawn.
-         - Currently, only devnet is supported. Other networks will be supported later.
       validator withdraw <data folder>
          - Send pre-created withdrawal address registration data to the network.
          - Currently, only devnet is supported. Other networks will be supported later.
-  
+
   agora.bat validator slashing-protection-history ( export, import ) 
       validator slashing-protection-history export <data folder>
          - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped.
@@ -442,7 +457,16 @@ or
              - To avoid this, you need to transfer the block verification information that the validators has performed so far.
       validator slashing-protection-history import <data folder>
          - Register block verification information performed by validators.
-  
+
+  agora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
+      deposit-cli new-mnemonic
+         - This command is used to generate keystores with a new mnemonic.
+      deposit-cli existing-mnemonic
+         - This command is used to re-generate or derive new keys from your existing mnemonic.
+      deposit-cli generate-bls-to-execution-change <data folder>
+         - Generates the data required to register the address to which the validator's amount will be withdrawn.
+         - Currently, only devnet is supported. Other networks will be supported later.        
+
   agora.bat docker-compose ( up, down )
       docker-compose up
          - Run agora-el, agora-cl, validator.
@@ -498,6 +522,18 @@ upgrade.bat
 
 ### Validator accounts for Windows
 
+- Generate your validator keys when you don't have mnemonic
+
+  ```shell
+  agora.bat deposit-cli new-mnemonic
+  ```
+
+- Generate your validator keys when you have mnemonic
+
+  ```shell
+  agora.bat deposit-cli existing-mnemonic
+  ```
+
 - Import your key stores
   
   ```shell
@@ -548,7 +584,7 @@ upgrade.bat
 - Generate the SignedBLSToExecutionChange data to enable withdrawals
 
   ```shell
-  agora.bat validator generate-bls-to-execution-change <folder>
+  agora.bat deposit-cli generate-bls-to-execution-change <folder>
   ```
   `<folder>` is where the SignedBLSToExecutionChange data is stored. The default folder is `./bls_to_execution_changes`
 

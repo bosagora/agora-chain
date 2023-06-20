@@ -242,7 +242,7 @@ echo [33magora.bat cl-node ( run )[0m
 echo [34m    cl-node run[0m
 echo        - Run agora-cl.
 echo.
-echo [33magora.bat validator ( accounts, exit, generate-bls-to-execution-change, withdraw, slashing-protection-history )[0m
+echo [33magora.bat validator ( accounts, exit, withdraw, slashing-protection-history )[0m
 echo.
 echo [33magora.bat validator accounts ( import, list, backup  )[0m
 echo [34m    validator accounts import ^<validator keys folder^>[0m
@@ -254,9 +254,6 @@ echo        - Back up the validator's keys stored in the local wallet.
 echo.
 echo [34m    validator exit[0m
 echo        - Used to voluntarily exit the validator's function. After this is done, you will see a screen where you select the validator's keys.
-echo [34m    validator generate-bls-to-execution-change ^<data folder^>[0m
-echo        - Generates the data required to register the address to which the validator's amount will be withdrawn.
-echo        - Currently, only devnet is supported. Other networks will be supported later.
 echo [34m    validator withdraw ^<data folder^>[0m
 echo        - Send pre-created withdrawal address registration data to the network.
 echo        - Currently, only devnet is supported. Other networks will be supported later.
@@ -270,6 +267,15 @@ echo            - If a validator's server is changed to another server, the vali
 echo            - To avoid this, you need to transfer the block verification information that the validators has performed so far.
 echo [34m    validator slashing-protection-history import ^<data folder^>[0m
 echo        - Register block verification information performed by validators.
+echo.
+echo [33magora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )[0m
+echo [34m    deposit-cli new-mnemonic[0m
+echo        - This command is used to generate keystores with a new mnemonic..
+echo [34m    deposit-cli existing-mnemonic[0m
+echo        - This command is used to re-generate or derive new keys from your existing mnemonic.
+echo [34m    deposit-cli generate-bls-to-execution-change ^<data folder^>[0m
+echo        - Generates the data required to register the address to which the validator's amount will be withdrawn.
+echo        - Currently, only devnet is supported. Other networks will be supported later.
 echo.
 echo [33magora.bat docker-compose ( up, down )[0m
 echo [34m    docker-compose up[0m
