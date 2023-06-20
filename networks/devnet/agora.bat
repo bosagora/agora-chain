@@ -6,7 +6,7 @@ SET P2P_HOST_IP=%%F
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-monitoring start stop) do (
+for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-monitoring start stop cl) do (
     if %1 equ %%a (
         goto validprocess
     )
@@ -15,10 +15,10 @@ for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-
 echo [31mERROR: PROCESS missing or invalid[0m
 echo Usage: ./agora.bat PROCESS FLAGS.
 echo.
-echo PROCESS can be el-node, cl-node, validator, docker-compose.
+echo PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl.
 echo FLAGS are the flags or arguments passed to the PROCESS.
 echo.
-exit /B 1
+exit /B 0
 :validprocess
 
 SetLocal EnableDelayedExpansion
@@ -371,7 +371,7 @@ if "%~1"=="el-node" (
             echo [31mFLAGS '%~3' is not found![0m
             echo [31mUsage: ./agora.bat validator wallet FLAGS.[0m
             echo [31mFLAGS can be create, recover[0m
-            exit /B 1
+            exit /B 0
 
         )
 
@@ -380,7 +380,7 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat validator FLAGS.[0m
         echo [31mFLAGS can be run, accounts, wallet[0m
-        exit /B 1
+        exit /B 0
 
     )
 
@@ -439,7 +439,7 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat deposit-cli FLAGS.[0m
         echo [31mFLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change[0m
-        exit /B 1
+        exit /B 0
 
     )
 
@@ -458,7 +458,7 @@ if "%~1"=="el-node" (
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: ./agora.bat docker-compose FLAGS.[0m
         echo [31mFLAGS can be up down[0m
-        exit /B 1
+        exit /B 0
 
     )
 
@@ -488,11 +488,75 @@ if "%~1"=="el-node" (
 
     docker-compose -f docker-compose-monitoring.yml down
 
+) else if "%~1"=="cl" (
+
+    echo 1. Folder Mount.
+    echo This folder A [ %cd% ] is mounted as /root.
+    echo Please use /root for the contents under folder A.
+    echo 2. Folder Mount.
+    echo This folder B [ %cd%\..\..\ ]  is mounted as /agora-chain.
+    echo Please use /agora-chain for the contents under folder B.
+
+    if "%~2"=="node" (
+
+        echo 3. Attempt to open the following ports.
+        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
+
+        shift /2
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
+        --network bosagora_network ^
+        --name cl-node-exec --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-node:v2.0.0 ^
+        %* ^
+        --accept-terms-of-use ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --config-file=/root/config/cl/config.yaml
+
+    ) else if "%~2"=="validator" (
+
+        shift /2
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --network bosagora_network ^
+        --name cl-validator-exec --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-validator:v2.0.0 ^
+        %* ^
+        --accept-terms-of-use ^
+        --chain-config-file=/root/config/cl/chain-config.yaml
+
+    ) else if "%~2"=="ctl" (
+
+        shift /2
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --network bosagora_network ^
+        --name cl-ctl-exec --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-ctl:v2.0.0 ^
+        %* ^
+        --accept-terms-of-use ^
+        --chain-config-file=/root/config/cl/chain-config.yaml
+
+    ) else (
+
+        echo [31mFLAGS '%~2' is not found![0m
+        echo [31mUsage: ./agora.bat cl FLAGS.[0m
+        echo [31mFLAGS can be node, validator, ctl[0m
+
+    )
+
 ) else (
 
     echo [31mProcess '%~1' is not found![0m
     echo [31mUsage: ./agora.bat PROCESS FLAGS.[0m
-    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring[0m
+    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl[0m
 
 )
 

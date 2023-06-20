@@ -196,19 +196,6 @@ elif [ "$1" = "validator" ]; then
             --keys-dir=/agora-chain/"$DATA_FOLDER" \
             --wallet-dir=/root/wallet
 
-        elif [ "$3" = "delete" ]; then
-
-            docker run -it \
-            -v "$(pwd)"/root:/root \
-            -v "$(pwd)"/../../:/agora-chain \
-            --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
-            accounts delete \
-            --accept-terms-of-use \
-            --chain-config-file=/root/config/cl/chain-config.yaml \
-            --wallet-dir=/root/wallet
-
         elif [ "$3" = "list" ]; then
 
             docker run -it \
@@ -218,6 +205,19 @@ elif [ "$1" = "validator" ]; then
             --platform linux/amd64 \
             bosagora/agora-cl-validator:v1.0.3 \
             accounts list \
+            --accept-terms-of-use \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --wallet-dir=/root/wallet
+
+        elif [ "$3" = "delete" ]; then
+
+            docker run -it \
+            -v "$(pwd)"/root:/root \
+            -v "$(pwd)"/../../:/agora-chain \
+            --name cl-validator --rm \
+            --platform linux/amd64 \
+            bosagora/agora-cl-validator:v1.0.3 \
+            accounts delete \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
             --wallet-dir=/root/wallet
@@ -525,6 +525,77 @@ elif [ "$1" = "stop" ]; then
 
     export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
     docker-compose -f docker-compose-monitoring.yml down
+
+elif [ "$1" = "cl" ]; then
+
+    if [ "$#" -lt 2 ]; then
+        color "31" "Usage: ./agora.sh cl FLAGS."
+        color "31" "FLAGS can be node, validator, ctl"
+        exit 1
+    fi
+
+    echo 1. Folder Mount.
+    echo This folder A [ "$(pwd)" ] is mounted as /root.
+    echo Please use /root for the contents under folder A.
+    echo 2. Folder Mount.
+    echo This folder B [ "$(pwd)/../../" ]  is mounted as /agora-chain.
+    echo Please use /agora-chain for the contents under folder B.
+
+    if [ "$2" = "node" ]; then
+
+        echo 3. Attempt to open the following ports.
+        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
+
+        shift 2
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp \
+        --network bosagora_network \
+        --name cl-node-exec --rm \
+        --platform linux/amd64 \
+        bosagora/agora-cl-node:v1.0.3 \
+        "$@" \
+        --accept-terms-of-use \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --config-file=/root/config/cl/config.yaml
+
+    elif [ "$2" = "validator" ]; then
+
+        shift 2
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --network bosagora_network \
+        --name cl-validator-exec --rm \
+        --platform linux/amd64 \
+        bosagora/agora-cl-validator:v1.0.3 \
+        "$@" \
+        --accept-terms-of-use \
+        --chain-config-file=/root/config/cl/chain-config.yaml
+
+    elif [ "$2" = "ctl" ]; then
+
+        shift 2
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --network bosagora_network \
+        --name cl-ctl-exec --rm \
+        --platform linux/amd64 \
+        bosagora/agora-cl-ctl:v1.0.3 \
+        "$@" \
+        --accept-terms-of-use \
+        --chain-config-file=/root/config/cl/chain-config.yaml
+
+    else
+
+        color "31" "FLAGS '$2' is not found!"
+        color "31" "Usage: ./agora.sh cl FLAGS."
+        color "31" "FLAGS can be node, validator, ctl"
+        exit 1
+
+    fi
 
 else
 
