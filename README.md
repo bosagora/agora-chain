@@ -103,7 +103,7 @@ https://docs.docker.com/engine/install/
       cl-node run
          - Run agora-cl.
   
-  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history )
+  ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
   ./agora.sh validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -131,6 +131,12 @@ https://docs.docker.com/engine/install/
       validator slashing-protection-history import <data folder>
          - Register block verification information performed by validators.
   
+  ./agora.sh validator wallet ( create, recover )
+      validator wallet create <wallet folder>
+         - Create an HD wallet.
+      validator wallet recover <wallet folder>
+         - Recovery an HD wallet.
+
   ./agora.sh deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
       deposit-cli new-mnemonic
          - This command is used to generate keystores with a new mnemonic.
@@ -434,7 +440,7 @@ or
       cl-node run
          - Run agora-cl.
   
-  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history )
+  agora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
   agora.bat validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
@@ -461,6 +467,12 @@ or
              - To avoid this, you need to transfer the block verification information that the validators has performed so far.
       validator slashing-protection-history import <data folder>
          - Register block verification information performed by validators.
+
+  agora.bat validator wallet ( create, recover )
+      validator wallet create <wallet folder>
+         - Create an HD wallet.
+      validator wallet recover <wallet folder>
+         - Recovery an HD wallet.
 
   agora.bat deposit-cli ( new-mnemonic, existing-mnemonic, generate-bls-to-execution-change )
       deposit-cli new-mnemonic

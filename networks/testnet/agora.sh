@@ -363,6 +363,14 @@ elif [ "$1" = "validator" ]; then
 
         if [ "$3" = "create" ]; then
 
+            if [ "$#" -lt 4 ]; then
+                WALLET_FOLDER="wallet"
+                echo "Wallet folder is $WALLET_FOLDER"
+            else
+                WALLET_FOLDER="$4"
+                echo "Wallet folder is $WALLET_FOLDER"
+            fi
+
             docker run -it \
             -v "$(pwd)"/root:/root \
             --name cl-validator --rm \
@@ -371,13 +379,33 @@ elif [ "$1" = "validator" ]; then
             wallet create \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
-            --wallet-dir=/root/wallet
+            --wallet-dir=/root/$WALLET_FOLDER
+
+        elif [ "$3" = "recover" ]; then
+
+            if [ "$#" -lt 4 ]; then
+                WALLET_FOLDER="recover"
+                echo "Wallet folder is $WALLET_FOLDER"
+            else
+                WALLET_FOLDER="$4"
+                echo "Wallet folder is $WALLET_FOLDER"
+            fi
+
+            docker run -it \
+            -v "$(pwd)"/root:/root \
+            --name cl-validator --rm \
+            --platform linux/amd64 \
+            bosagora/agora-cl-validator:v1.0.3 \
+            wallet recover \
+            --accept-terms-of-use \
+            --chain-config-file=/root/config/cl/chain-config.yaml \
+            --wallet-dir=/root/$WALLET_FOLDER
 
         else
 
             color "31" "FLAGS '$3' is not found!"
             color "31" "Usage: ./agora.sh validator wallet FLAGS."
-            color "31" "FLAGS can be create"
+            color "31" "FLAGS can be create, recover"
             exit 1
 
         fi
