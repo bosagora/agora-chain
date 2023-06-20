@@ -269,40 +269,6 @@ elif [ "$1" = "validator" ]; then
         --accept-terms-of-use \
         --wallet-password-file=/root/config/cl/password.txt
 
-    elif [ "$2" = "generate-bls-to-execution-change" ]; then
-
-        if [ "$#" -lt 3 ]; then
-            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
-            echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
-        else
-            BLS2EXEC_DATA_FOLDER="$3"
-            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
-        fi
-
-        if [ "$system" == "linux" ]; then
-            sudo rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
-        else
-            rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
-        fi
-
-        mkdir -p "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
-
-        docker run -it \
-        -v "$(pwd)"/root:/root \
-        -v "$(pwd)"/../../:/agora-chain \
-        --name deposit-ctl --rm \
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
-        --language=english \
-        generate-bls-to-execution-change \
-        --bls_to_execution_changes_folder=/agora-chain/"$BLS2EXEC_DATA_FOLDER" \
-        --chain=devnet
-
-        if [ "$system" == "linux" ]; then
-            sudo chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
-        else
-            chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
-        fi
-
     elif [ "$2" = "withdraw" ]; then
 
         if [ "$#" -lt 3 ]; then
@@ -432,7 +398,79 @@ elif [ "$1" = "validator" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be run, import, accounts exit, generate-bls-to-execution-change, withdraw, slashing-protection-history, wallet"
+        color "31" "FLAGS can be run, import, accounts exit, withdraw, slashing-protection-history, wallet"
+        exit 1
+
+    fi
+
+elif [ "$1" = "deposit-cli" ]; then
+
+    if [ "$#" -lt 2 ]; then
+        color "31" "Usage: ./agora.sh deposit-cli FLAGS."
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change"
+        exit 1
+    fi
+
+    if [ "$2" = "new-mnemonic" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        new-mnemonic \
+        --folder=/agora-chain
+
+    elif [ "$2" = "existing-mnemonic" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        existing-mnemonic \
+        --folder=/agora-chain
+
+    elif [ "$2" = "generate-bls-to-execution-change" ]; then
+
+        if [ "$#" -lt 3 ]; then
+            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+            echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
+        else
+            BLS2EXEC_DATA_FOLDER="$3"
+            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
+        fi
+
+        if [ "$system" == "linux" ]; then
+            sudo rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        else
+            rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        fi
+
+        mkdir -p "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        --language=english \
+        generate-bls-to-execution-change \
+        --bls_to_execution_changes_folder=/agora-chain/"$BLS2EXEC_DATA_FOLDER"
+
+        if [ "$system" == "linux" ]; then
+            sudo chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        else
+            chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        fi
+
+    else
+
+        color "31" "FLAGS '$2' is not found!"
+        color "31" "Usage: ./agora.sh deposit-cli FLAGS."
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change"
         exit 1
 
     fi
