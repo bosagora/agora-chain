@@ -110,6 +110,8 @@ https://docs.docker.com/engine/install/
          - Add the validator's keys to the local wallet.
       validator accounts list
          - Show the validator's keys stored in the local wallet.
+      validator accounts delete
+         - Delete the validator's keys from the local wallet.
       validator accounts backup <validator keys folder>
          - Back up the validator's keys stored in the local wallet.
   
@@ -421,6 +423,8 @@ or
          - Add the validator's keys to the local wallet.
       validator accounts list
          - Show the validator's keys stored in the local wallet.
+      validator accounts delete
+         - Delete the validator's keys from the local wallet.
       validator accounts backup <validator keys folder>
          - Back up the validator's keys stored in the local wallet.
   

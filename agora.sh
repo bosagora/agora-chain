@@ -207,6 +207,8 @@ if [ "$#" -lt 1 ]; then
     color "37;1" "       - Add the validator's keys to the local wallet."
     color "34;5" "    validator accounts list"
     color "37;1" "       - Show the validator's keys stored in the local wallet."
+    color "34;5" "    validator accounts delete"
+    color "37;1" "       - Delete the validator's keys from the local wallet."
     color "34;5" "    validator accounts backup <validator keys folder>"
     color "37;1" "       - Back up the validator's keys stored in the local wallet."
     color "37;1" ""

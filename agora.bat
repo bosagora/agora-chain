@@ -249,6 +249,8 @@ echo [34m    validator accounts import ^<validator keys folder^>[0m
 echo        - Add the validator's keys to the local wallet.
 echo [34m    validator accounts list[0m
 echo        - Show the validator's keys stored in the local wallet.
+echo [34m    validator accounts delete[0m
+echo        - Delete the validator's keys from the local wallet.
 echo [34m    validator accounts backup ^<validator keys folder^>[0m
 echo        - Back up the validator's keys stored in the local wallet.
 echo.
