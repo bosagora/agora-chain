@@ -169,6 +169,20 @@ https://docs.docker.com/engine/install/
   ./agora.sh stop
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자 와 모니터링에 필요한 컨테이너들를 중지합니다.
          - 이것은  './agora.sh docker-compose-monitoring down' 와 동일합니다.
+
+  ./agora.sh exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+      exec el-node ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-el-node 를 실행합니다.
+      exec el-node-port ...
+         - 사용자가 입력한 파라메터와 포트 포워딩을를 사용하여 agora-el-node 를 실행합니다.
+      exec cl-node ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-node 를 실행합니다.
+      exec cl-node-port ...
+         - 사용자가 입력한 파라메터와 포트 포워딩을 사용하여 agora-cl-node 를 실행합니다.
+      exec cl-validator ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-validator 를 실행합니다.
+      exec cl-ctl ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-ctl 를 실행합니다.
   
   ./agora.sh upgrade
          - 가장 최신의 버전이 설치됩니다. 이때 데이타는 보존됩니다.
@@ -508,6 +522,20 @@ nano ./root/config/cl/proposer_config.json
   agora.bat stop
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자 와 모니터링에 필요한 컨테이너들를 중지합니다.
          - 이것은  './agora.sh docker-compose-monitoring down' 와 동일합니다.
+  
+  agora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+      exec el-node ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-el-node 를 실행합니다.
+      exec el-node-port ...
+         - 사용자가 입력한 파라메터와 포트 포워딩을를 사용하여 agora-el-node 를 실행합니다.
+      exec cl-node ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-node 를 실행합니다.
+      exec cl-node-port ...
+         - 사용자가 입력한 파라메터와 포트 포워딩을 사용하여 agora-cl-node 를 실행합니다.
+      exec cl-validator ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-validator 를 실행합니다.
+      exec cl-ctl ...
+         - 사용자가 입력한 파라메터를 사용하여 agora-cl-ctl 를 실행합니다.
   
   agora.bat upgrade
          - 가장 최신의 버전이 설치됩니다. 이때 데이타는 보존됩니다.
