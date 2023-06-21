@@ -305,6 +305,20 @@ echo [33magora.bat stop[0m
 echo        - Stop agora-el, agora-cl, validator, and containers required for monitoring.
 echo        - It's the same as 'agora.bat docker-compose-monitoring down'
 echo.
+echo [33magora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )[0m
+echo [34m    exec el-node[0m
+echo        - Run agora-el-node with user-entered parameters.
+echo [34m    exec el-node-port[0m
+echo        - Run agora-el-node with port forwarding and user-entered parameters.
+echo [34m    exec cl-node[0m
+echo        - Run agora-cl-node with user-entered parameters.
+echo [34m    exec cl-node-port[0m
+echo        - Run agora-cl-node with port forwarding and user-entered parameters.
+echo [34m    exec cl-validator[0m
+echo        - Run agora-cl-validator with user-entered parameters.
+echo [34m    exec cl-ctl[0m
+echo        - Run agora-cl-ctl with user-entered parameters.
+echo.
 echo [33magora.bat upgrade[0m
 echo        - The latest version is installed, at which point the user data is preserved.
 exit /B 1

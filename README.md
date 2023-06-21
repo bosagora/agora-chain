@@ -166,6 +166,20 @@ https://docs.docker.com/engine/install/
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as './agora.sh docker-compose-monitoring down'
   
+  ./agora.sh exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+      exec el-node ...
+         - Run agora-el-node with user-entered parameters.
+      exec el-node-port ...
+         - Run agora-el-node with port forwarding and user-entered parameters.
+      exec cl-node ...
+         - Run agora-cl-node with user-entered parameters.
+      exec cl-node-port ...
+         - Run agora-cl-node with port forwarding and user-entered parameters.
+      exec cl-validator ...
+         - Run agora-cl-validator with user-entered parameters.
+      exec cl-ctl ...
+         - Run agora-cl-ctl with user-entered parameters.
+  
   ./agora.sh upgrade
          - The latest version is installed, at which point the user data is preserved.
   ```
@@ -502,6 +516,20 @@ or
   agora.bat stop
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as 'agora.bat docker-compose-monitoring down'
+
+  agora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+      exec el-node ...
+         - Run agora-el-node with user-entered parameters.
+      exec el-node-port ...
+         - Run agora-el-node with port forwarding and user-entered parameters.
+      exec cl-node ...
+         - Run agora-cl-node with user-entered parameters.
+      exec cl-node-port ...
+         - Run agora-cl-node with port forwarding and user-entered parameters.
+      exec cl-validator ...
+         - Run agora-cl-validator with user-entered parameters.
+      exec cl-ctl ...
+         - Run agora-cl-ctl with user-entered parameters.
   
   agora.bat upgrade
          - The latest version is installed, at which point the user data is preserved.
