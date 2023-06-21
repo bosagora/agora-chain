@@ -612,23 +612,6 @@ elif [ "$1" = "exec" ]; then
         --config=/root/config/el/config.toml \
         "$@"
 
-    elif [ "$2" = "el-node-port" ]; then
-
-        echo 3. Attempt to open the following ports.
-        echo 6060/tcp, 8545/tcp, 30303/tcp, 30303/udp
-
-        shift 2
-        docker run -it \
-        -v "$(pwd)"/root:/root \
-        -v "$(pwd)"/../../:/agora-chain \
-        -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
-        --network bosagora_network \
-        --name el-node-exec --rm \
-        bosagora/agora-el-node:v2.0.0 \
-        --datadir=/root/chain/el \
-        --config=/root/config/el/config.toml \
-        "$@"
-
     elif [ "$2" = "cl-node" ]; then
 
         shift 2
@@ -644,32 +627,13 @@ elif [ "$1" = "exec" ]; then
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml
 
-    elif [ "$2" = "cl-node-port" ]; then
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 8080/tcp, 13000/tcp, 12000/udp
-
-        shift 2
-        docker run -it \
-        -v "$(pwd)"/root:/root \
-        -v "$(pwd)"/../../:/agora-chain \
-        -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
-        --network bosagora_network \
-        --name cl-node-exec --rm \
-        --platform linux/amd64 \
-        bosagora/agora-cl-node:v2.0.0 \
-        "$@" \
-        --accept-terms-of-use \
-        --chain-config-file=/root/config/cl/chain-config.yaml \
-        --config-file=/root/config/cl/config.yaml
-
     elif [ "$2" = "cl-validator" ]; then
 
         shift 2
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        --network host \
+        --network bosagora_network \
         --name cl-validator-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-cl-validator:v2.0.0 \
@@ -683,7 +647,7 @@ elif [ "$1" = "exec" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        --network host \
+        --network bosagora_network \
         --name cl-ctl-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-cl-ctl:v2.0.0 \

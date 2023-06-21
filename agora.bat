@@ -308,12 +308,8 @@ echo.
 echo [33magora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )[0m
 echo [34m    exec el-node[0m
 echo        - Run agora-el-node with user-entered parameters.
-echo [34m    exec el-node-port[0m
-echo        - Run agora-el-node with port forwarding and user-entered parameters.
 echo [34m    exec cl-node[0m
 echo        - Run agora-cl-node with user-entered parameters.
-echo [34m    exec cl-node-port[0m
-echo        - Run agora-cl-node with port forwarding and user-entered parameters.
 echo [34m    exec cl-validator[0m
 echo        - Run agora-cl-validator with user-entered parameters.
 echo [34m    exec cl-ctl[0m
