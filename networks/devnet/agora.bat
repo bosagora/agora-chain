@@ -561,7 +561,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network bosagora_network ^
+        --network host ^
         --name cl-validator-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-validator:v2.0.0 ^
@@ -575,7 +575,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network bosagora_network ^
+        --network host ^
         --name cl-ctl-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-ctl:v2.0.0 ^
