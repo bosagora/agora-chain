@@ -174,7 +174,7 @@ if "%~1"=="el-node" (
             --chain-config-file=/root/config/cl/chain-config.yaml ^
             --wallet-dir=/root/wallet
 
-        if "%~3"=="delete" (
+        ) else if "%~3"=="delete" (
 
             docker run -it ^
             -v %cd%\root:/root ^
@@ -495,14 +495,10 @@ if "%~1"=="el-node" (
 
     if "%~2"=="node" (
 
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
         shift /2
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
         --network bosagora_network ^
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^

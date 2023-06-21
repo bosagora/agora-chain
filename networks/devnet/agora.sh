@@ -601,14 +601,10 @@ elif [ "$1" = "cl" ]; then
 
     if [ "$2" = "node" ]; then
 
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
         shift 2
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp \
         --network bosagora_network \
         --name cl-node-exec --rm \
         --platform linux/amd64 \
