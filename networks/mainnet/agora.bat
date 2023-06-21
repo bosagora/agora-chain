@@ -442,6 +442,15 @@ if "%~1"=="el-node" (
     echo This folder B [ %cd%\..\..\ ]  is mounted as /agora-chain.
     echo Please use /agora-chain for the contents under folder B.
 
+    set /a argc=0
+    set args=
+    for %%x in (%*) do (
+        set /a argc = argc+=1
+        if !argc! gtr 2 (
+            set args=!args! %%x
+        )
+    )
+
     if "%~2"=="el-node" (
 
         docker run -it ^
@@ -452,7 +461,7 @@ if "%~1"=="el-node" (
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
-        %*
+        !args!
 
     ) else if "%~2"=="el-node-port" (
 
@@ -468,18 +477,17 @@ if "%~1"=="el-node" (
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
-        %*
+        !args!
 
     ) else if "%~2"=="cl-node" (
 
-        shift /2
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-node:v1.0.3 ^
-        %* ^
+        !args! ^
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml
@@ -489,7 +497,6 @@ if "%~1"=="el-node" (
         echo 3. Attempt to open the following ports.
         echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
 
-        shift /2
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
@@ -497,14 +504,13 @@ if "%~1"=="el-node" (
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-node:v2.0.0 ^
-        %* ^
+        !args! ^
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml
 
     ) else if "%~2"=="cl-validator" (
 
-        shift /2
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
@@ -512,13 +518,12 @@ if "%~1"=="el-node" (
         --name cl-validator-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-validator:v1.0.3 ^
-        %* ^
+        !args! ^
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml
 
     ) else if "%~2"=="cl-ctl" (
 
-        shift /2
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
@@ -526,7 +531,7 @@ if "%~1"=="el-node" (
         --name cl-ctl-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-ctl:v1.0.3 ^
-        %* ^
+        !args! ^
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml
 
