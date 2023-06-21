@@ -6,7 +6,7 @@ SET P2P_HOST_IP=%%F
 if "%~1"=="" (
   goto printError
 )
-for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-monitoring start stop cl) do (
+for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-monitoring start stop exec) do (
     if %1 equ %%a (
         goto validprocess
     )
@@ -15,7 +15,7 @@ for %%a in (el-node cl-node validator deposit-cli docker-compose docker-compose-
 echo [31mERROR: PROCESS missing or invalid[0m
 echo Usage: agora.bat PROCESS FLAGS.
 echo.
-echo PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl.
+echo PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec.
 echo FLAGS are the flags or arguments passed to the PROCESS.
 echo.
 exit /B 0
@@ -484,7 +484,7 @@ if "%~1"=="el-node" (
 
     docker-compose -f docker-compose-monitoring.yml down
 
-) else if "%~1"=="cl" (
+) else if "%~1"=="exec" (
 
     echo 1. Folder Mount.
     echo This folder A [ %cd% ] is mounted as /root.
@@ -493,7 +493,35 @@ if "%~1"=="el-node" (
     echo This folder B [ %cd%\..\..\ ]  is mounted as /agora-chain.
     echo Please use /agora-chain for the contents under folder B.
 
-    if "%~2"=="node" (
+    if "%~2"=="el-node" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        --network bosagora_network ^
+        --name el-node --rm  ^
+        bosagora/agora-el-node:v2.0.0  ^
+        --config=/root/config/el/config.toml ^
+        --datadir=/root/chain/el ^
+        %*
+
+    ) else if "%~2"=="el-node-port" (
+
+        echo 3. Attempt to open the following ports.
+        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
+        --network bosagora_network ^
+        --name el-node --rm  ^
+        bosagora/agora-el-node:v2.0.0  ^
+        --config=/root/config/el/config.toml ^
+        --datadir=/root/chain/el ^
+        %*
+
+    ) else if "%~2"=="cl-node" (
 
         shift /2
         docker run -it ^
@@ -508,7 +536,26 @@ if "%~1"=="el-node" (
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml
 
-    ) else if "%~2"=="validator" (
+    ) else if "%~2"=="cl-node-port" (
+
+        echo 3. Attempt to open the following ports.
+        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
+
+        shift /2
+        docker run -it ^
+        -v %cd%\root:/root ^
+        -v %cd%\..\..\:/agora-chain ^
+        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
+        --network bosagora_network ^
+        --name cl-node-exec --rm ^
+        --platform linux/amd64 ^
+        bosagora/agora-cl-node:v2.0.0 ^
+        %* ^
+        --accept-terms-of-use ^
+        --chain-config-file=/root/config/cl/chain-config.yaml ^
+        --config-file=/root/config/cl/config.yaml
+
+    ) else if "%~2"=="cl-validator" (
 
         shift /2
         docker run -it ^
@@ -522,7 +569,7 @@ if "%~1"=="el-node" (
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml
 
-    ) else if "%~2"=="ctl" (
+    ) else if "%~2"=="cl-ctl" (
 
         shift /2
         docker run -it ^
@@ -539,8 +586,8 @@ if "%~1"=="el-node" (
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m
-        echo [31mUsage: agora.bat cl FLAGS.[0m
-        echo [31mFLAGS can be node, validator, ctl[0m
+        echo [31mUsage: agora.bat exec FLAGS.[0m
+        echo [31mFLAGS can be el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl[0m
 
     )
 
@@ -548,7 +595,7 @@ if "%~1"=="el-node" (
 
     echo [31mProcess '%~1' is not found![0m
     echo [31mUsage: agora.bat PROCESS FLAGS.[0m
-    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, cl[0m
+    echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec[0m
 
 )
 
