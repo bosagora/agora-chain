@@ -448,6 +448,7 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
         --name el-node --rm  ^
+        --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
@@ -463,6 +464,7 @@ if "%~1"=="el-node" (
         -v %cd%\..\..\:/agora-chain ^
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
         --name el-node --rm  ^
+        --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1  ^
         --config=/root/config/el/config.toml ^
         --datadir=/root/chain/el ^
@@ -474,7 +476,6 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network bosagora_network ^
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-node:v1.0.3 ^
@@ -493,7 +494,6 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
         -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
-        --network bosagora_network ^
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-node:v2.0.0 ^
@@ -508,7 +508,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network bosagora_network ^
+        --network host ^
         --name cl-validator-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-validator:v1.0.3 ^
@@ -522,7 +522,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network bosagora_network ^
+        --network host ^
         --name cl-ctl-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-ctl:v1.0.3 ^

@@ -669,7 +669,7 @@ elif [ "$1" = "exec" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        --network bosagora_network \
+        --network host \
         --name cl-validator-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-cl-validator:v2.0.0 \
@@ -683,7 +683,7 @@ elif [ "$1" = "exec" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        --network bosagora_network \
+        --network host \
         --name cl-ctl-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-cl-ctl:v2.0.0 \
