@@ -456,22 +456,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --name el-node --rm  ^
-        --platform linux/amd64 ^
-        bosagora/agora-el-node:v1.0.1  ^
-        --config=/root/config/el/config.toml ^
-        --datadir=/root/chain/el ^
-        !args!
-
-    ) else if "%~2"=="el-node-port" (
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
-        docker run -it ^
-        -v %cd%\root:/root ^
-        -v %cd%\..\..\:/agora-chain ^
-        -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
+        --network host ^
         --name el-node --rm  ^
         --platform linux/amd64 ^
         bosagora/agora-el-node:v1.0.1  ^
@@ -484,26 +469,10 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
+        --network host ^
         --name cl-node-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-node:v1.0.3 ^
-        !args! ^
-        --accept-terms-of-use ^
-        --chain-config-file=/root/config/cl/chain-config.yaml ^
-        --config-file=/root/config/cl/config.yaml
-
-    ) else if "%~2"=="cl-node-port" (
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
-        docker run -it ^
-        -v %cd%\root:/root ^
-        -v %cd%\..\..\:/agora-chain ^
-        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
-        --name cl-node-exec --rm ^
-        --platform linux/amd64 ^
-        bosagora/agora-cl-node:v2.0.0 ^
         !args! ^
         --accept-terms-of-use ^
         --chain-config-file=/root/config/cl/chain-config.yaml ^

@@ -514,22 +514,6 @@ if "%~1"=="el-node" (
         --datadir=/root/chain/el ^
         !args!
 
-    ) else if "%~2"=="el-node-port" (
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
-        docker run -it ^
-        -v %cd%\root:/root ^
-        -v %cd%\..\..\:/agora-chain ^
-        -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp ^
-        --network bosagora_network ^
-        --name el-node --rm  ^
-        bosagora/agora-el-node:v2.0.0  ^
-        --config=/root/config/el/config.toml ^
-        --datadir=/root/chain/el ^
-       !args!
-
     ) else if "%~2"=="cl-node" (
 
         docker run -it ^
@@ -544,30 +528,12 @@ if "%~1"=="el-node" (
         --chain-config-file=/root/config/cl/chain-config.yaml ^
         --config-file=/root/config/cl/config.yaml
 
-    ) else if "%~2"=="cl-node-port" (
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 13000/tcp, 12000/udp
-
-        docker run -it ^
-        -v %cd%\root:/root ^
-        -v %cd%\..\..\:/agora-chain ^
-        -p 3500:3500 -p 4000:4000 -p 13000:13000 -p 12000:12000/udp ^
-        --network bosagora_network ^
-        --name cl-node-exec --rm ^
-        --platform linux/amd64 ^
-        bosagora/agora-cl-node:v2.0.0 ^
-        !args! ^
-        --accept-terms-of-use ^
-        --chain-config-file=/root/config/cl/chain-config.yaml ^
-        --config-file=/root/config/cl/config.yaml
-
     ) else if "%~2"=="cl-validator" (
 
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network host ^
+        --network bosagora_network ^
         --name cl-validator-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-validator:v2.0.0 ^
@@ -580,7 +546,7 @@ if "%~1"=="el-node" (
         docker run -it ^
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
-        --network host ^
+        --network bosagora_network ^
         --name cl-ctl-exec --rm ^
         --platform linux/amd64 ^
         bosagora/agora-cl-ctl:v2.0.0 ^

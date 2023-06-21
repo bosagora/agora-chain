@@ -547,23 +547,7 @@ elif [ "$1" = "exec" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
-        --name el-node-exec --rm \
-        --platform linux/amd64 \
-        bosagora/agora-el-node:v1.0.1 \
-        --datadir=/root/chain/el \
-        --config=/root/config/el/config.toml \
-        "$@"
-
-    elif [ "$2" = "el-node-port" ]; then
-
-        echo 3. Attempt to open the following ports.
-        echo 6060/tcp, 8545/tcp, 30303/tcp, 30303/udp
-
-        shift 2
-        docker run -it \
-        -v "$(pwd)"/root:/root \
-        -v "$(pwd)"/../../:/agora-chain \
-        -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
+        --network host \
         --name el-node-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-el-node:v1.0.1 \
@@ -577,27 +561,10 @@ elif [ "$1" = "exec" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
+        --network host \
         --name cl-node-exec --rm \
         --platform linux/amd64 \
         bosagora/agora-cl-node:v1.0.3 \
-        "$@" \
-        --accept-terms-of-use \
-        --chain-config-file=/root/config/cl/chain-config.yaml \
-        --config-file=/root/config/cl/config.yaml
-
-    elif [ "$2" = "cl-node-port" ]; then
-
-        echo 3. Attempt to open the following ports.
-        echo 3500/tcp, 4000/tcp, 8080/tcp, 13000/tcp, 12000/udp
-
-        shift 2
-        docker run -it \
-        -v "$(pwd)"/root:/root \
-        -v "$(pwd)"/../../:/agora-chain \
-        -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
-        --name cl-node-exec --rm \
-        --platform linux/amd64 \
-        bosagora/agora-cl-node:v2.0.0 \
         "$@" \
         --accept-terms-of-use \
         --chain-config-file=/root/config/cl/chain-config.yaml \
