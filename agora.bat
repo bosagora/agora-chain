@@ -226,7 +226,7 @@ goto :end
 
 :printHelp
 echo [31mUsage: agora.bat PROCESS FLAGS.[0m
-echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade.[0m
+echo [31mPROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade.[0m
 echo.
 echo [33magora.bat network ^< network to change ^>[0m
 echo        - ^< network to change ^> is one of mainnet, testnet, and devnet, and the default is mainnet.
@@ -305,7 +305,7 @@ echo [33magora.bat stop[0m
 echo        - Stop agora-el, agora-cl, validator, and containers required for monitoring.
 echo        - It's the same as 'agora.bat docker-compose-monitoring down'
 echo.
-echo [33magora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )[0m
+echo [33magora.bat exec ( el-node, cl-node, cl-validator, cl-ctl )[0m
 echo [34m    exec el-node[0m
 echo        - Run agora-el-node with user-entered parameters.
 echo [34m    exec cl-node[0m

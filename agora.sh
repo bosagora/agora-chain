@@ -184,7 +184,7 @@ fi
 
 if [ "$#" -lt 1 ]; then
     color "31;5" "Usage: ./agora.sh PROCESS FLAGS."
-    color "31;5" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade"
+    color "31;5" "PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade"
     color "37;1" ""
     color "33;5" "./agora.sh network <network to change>"
     color "37;1" "       - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet."
@@ -263,7 +263,7 @@ if [ "$#" -lt 1 ]; then
     color "37;1" "       - Stop agora-el, agora-cl, validator, and containers required for monitoring."
     color "37;1" "       - It's the same as './agora.sh docker-compose-monitoring down'"
     color "37;1" ""
-    color "33;5" "./agora.sh exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )"
+    color "33;5" "./agora.sh exec ( el-node, cl-node, cl-validator, cl-ctl )"
     color "34;5" "    exec el-node ..."
     color "37;1" "       - Run agora-el-node with user-entered parameters."
     color "34;5" "    exec cl-node ..."

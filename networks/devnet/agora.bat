@@ -558,7 +558,7 @@ if "%~1"=="el-node" (
 
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: agora.bat exec FLAGS.[0m
-        echo [31mFLAGS can be el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl[0m
+        echo [31mFLAGS can be el-node, cl-node, cl-validator, cl-ctl[0m
 
     )
 
