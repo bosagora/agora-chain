@@ -588,7 +588,7 @@ elif [ "$1" = "exec" ]; then
 
     if [ "$#" -lt 2 ]; then
         color "31" "Usage: ./agora.sh exec FLAGS."
-        color "31" "FLAGS can be el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl"
+        color "31" "FLAGS can be el-node, cl-node, cl-validator, cl-ctl"
         exit 1
     fi
 
@@ -659,7 +659,7 @@ elif [ "$1" = "exec" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh exec FLAGS."
-        color "31" "FLAGS can be el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl"
+        color "31" "FLAGS can be el-node, cl-node, cl-validator, cl-ctl"
         exit 1
 
     fi

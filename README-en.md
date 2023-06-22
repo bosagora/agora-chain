@@ -87,7 +87,7 @@ https://docs.docker.com/engine/install/
   ./agora.sh 
   agora.sh version 2.0.0
   Usage: ./agora.sh PROCESS FLAGS.
-  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade
   
   ./agora.sh network <network to change>
          - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet.
@@ -166,7 +166,7 @@ https://docs.docker.com/engine/install/
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as './agora.sh docker-compose-monitoring down'
 
-  ./agora.sh exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+  ./agora.sh exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - Run agora-el-node with user-entered parameters.
       exec cl-node ...
@@ -434,7 +434,7 @@ or
   agora.bat
   agora.bat version 2.0.0
   Usage: agora.bat PROCESS FLAGS.
-  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade
   
   agora.bat network <network to change>
          - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet.
@@ -513,7 +513,7 @@ or
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as 'agora.bat docker-compose-monitoring down'
   
-  agora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+  agora.bat exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - Run agora-el-node with user-entered parameters.
       exec cl-node ...

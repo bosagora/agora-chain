@@ -90,7 +90,7 @@ https://docs.docker.com/engine/install/
   ./agora.sh 
   agora.sh version 2.0.0
   Usage: ./agora.sh PROCESS FLAGS.
-  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade
   
   ./agora.sh network <network to change>
          - <network to change> 는 mainnet, testnet, devnet 중 하나이며 기본값은 mainnet 입니다.
@@ -170,7 +170,7 @@ https://docs.docker.com/engine/install/
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자 와 모니터링에 필요한 컨테이너들를 중지합니다.
          - 이것은  './agora.sh docker-compose-monitoring down' 와 동일합니다.
 
-  ./agora.sh exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+  ./agora.sh exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - 사용자가 입력한 파라메터를 사용하여 agora-el-node 를 실행합니다.
       exec cl-node ...
@@ -439,7 +439,7 @@ nano ./root/config/cl/proposer_config.json
   agora.bat
   agora.bat version 2.0.0
   Usage: agora.bat PROCESS FLAGS.
-  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade
   
   agora.bat network <network to change>
          - <network to change> 는 mainnet, testnet, devnet 중 하나이며 기본값은 mainnet 입니다.
@@ -519,7 +519,7 @@ nano ./root/config/cl/proposer_config.json
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자 와 모니터링에 필요한 컨테이너들를 중지합니다.
          - 이것은  './agora.sh docker-compose-monitoring down' 와 동일합니다.
   
-  agora.bat exec ( el-node, el-node-port, cl-node, cl-node-port, cl-validator, cl-ctl )
+  agora.bat exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - 사용자가 입력한 파라메터를 사용하여 agora-el-node 를 실행합니다.
       exec cl-node ...
