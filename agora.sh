@@ -52,6 +52,9 @@ then
 
   echo "Starts install ..."
 
+  echo "Stops BOSagora nodes ..."
+  ./agora.sh docker-compose-monitoring down
+
   echo "Creating folds ..."
   createFolder networks
   createFolder networks/mainnet
@@ -131,8 +134,6 @@ then
   chmod 755 networks/testnet/agora.sh
   chmod 755 networks/devnet/agora.sh
   chmod 755 agora.sh
-
-  ./agora.sh stop
 
   FILENAME=root/config/el/genesis.json
 

@@ -10,6 +10,9 @@ function downloadFile() {
 
 echo "Starts upgrade..."
 
+echo "Stops BOSagora nodes ..."
+./agora.sh docker-compose-monitoring down
+
 echo "Creating folds ..."
 
 createFolder networks
@@ -85,10 +88,6 @@ chmod 755 networks/testnet/agora.sh
 chmod 755 networks/devnet/agora.sh
 chmod 755 agora.sh
 
-
-echo "Stops BOSagora nodes ..."
-
-./agora.sh docker-compose-monitoring down
 
 FILENAME=root/config/el/genesis.json
 

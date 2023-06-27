@@ -2,6 +2,8 @@
 
 echo Starts upgrade...
 
+call :stopNodes
+
 echo Creating folds ...
 call :createFolder networks
 call :createFolder networks\mainnet
@@ -71,7 +73,6 @@ call :downloadFile networks/devnet/docker-compose-monitoring.yml
 call :downloadFile agora.bat
 call :downloadFile agora.sh
 
-call :stopNodes
 call :moveStorage
 
 echo Completed upgrade...

@@ -13,6 +13,9 @@ if not exist "networks" (
 
   echo Starts install ...
 
+  echo Stops BOSagora nodes ...
+  agora.bat docker-compose-monitoring down
+
   echo Creating folds ...
   call :createFolder networks
   call :createFolder networks\mainnet
@@ -87,8 +90,6 @@ if not exist "networks" (
 
   call :downloadFile agora.bat
   call :downloadFile agora.sh
-
-  call agora.bat stop
 
   call :moveStorage
 
