@@ -82,6 +82,16 @@ goto :end
 :stopNodes
 
 echo Stops BOSagora nodes ...
+set RUN_MAIN_NET_OLD=0
+for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "agora-chain-mainnet"') do set RUN_MAIN_NET_OLD=%%i
+if not "%RUN_MAIN_NET_OLD%" == "0" (
+  call agora.bat docker-compose-monitoring down
+)
+set RUN_TEST_NET_OLD=0
+for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "agora-chain-testnet"') do set RUN_TEST_NET_OLD=%%i
+if not "%RUN_TEST_NET_OLD%" == "0" (
+  call agora.bat docker-compose-monitoring down
+)
 set RUN_MAIN_NET=0
 for /f "tokens=1" %%i in ('docker-compose ls ^| find /i /c "mainnet"') do set RUN_MAIN_NET=%%i
 if not "%RUN_MAIN_NET%" == "0" (

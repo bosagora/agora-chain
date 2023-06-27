@@ -88,6 +88,8 @@ if not exist "networks" (
   call :downloadFile agora.bat
   call :downloadFile agora.sh
 
+  call agora.bat stop
+
   call :moveStorage
 
   echo Completed install ...

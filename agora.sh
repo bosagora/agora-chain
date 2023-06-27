@@ -132,6 +132,7 @@ then
   chmod 755 networks/devnet/agora.sh
   chmod 755 agora.sh
 
+  ./agora.sh stop
 
   FILENAME=root/config/el/genesis.json
 

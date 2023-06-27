@@ -88,7 +88,7 @@ chmod 755 agora.sh
 
 echo "Stops BOSagora nodes ..."
 
-if docker-compose ls | grep -q 'mainnet\|testnet\|devnet'
+if docker-compose ls | grep -q 'agora-chain-mainnet\|agora-chain-testnet\|mainnet\|testnet\|devnet'
 then
   ./agora.sh docker-compose-monitoring down
 fi
