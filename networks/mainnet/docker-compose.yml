@@ -1,7 +1,6 @@
 version: '3.3'
 services:
   agora-el-node:
-    platform: linux/amd64
     container_name: agora-el-node
     image: bosagora/agora-el-node:v1.0.1
     ports:
@@ -26,7 +25,6 @@ services:
         max-size: "100m"
 
   agora-cl-node:
-    platform: linux/amd64
     container_name: agora-cl-node
     image: bosagora/agora-cl-node:v1.0.3
     ports:
@@ -56,7 +54,6 @@ services:
         max-size: "100m"
 
   agora-cl-validator:
-    platform: linux/amd64
     container_name: agora-cl-validator
     image: bosagora/agora-cl-validator:v1.0.3
     ports:
