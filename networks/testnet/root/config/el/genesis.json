@@ -25,7 +25,8 @@
       "commonsBudget": "0xE3C45C923247b6200e1E602B2F368c0Da979D144",
       "commonsBudgetReward": 120000000000000000000,
       "lastCommonsBudgetRewardBlock": 15211600
-    }
+    },
+    "shanghaiTime": 1689123888
   },
   "difficulty": "1",
   "gasLimit": "8000000",

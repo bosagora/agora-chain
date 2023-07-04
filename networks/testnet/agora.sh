@@ -45,8 +45,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --name el-node --rm \
-        --platform linux/amd64 \
-        bosagora/agora-el-node:v1.0.1 \
+        bosagora/agora-el-node:v2.0.0 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
@@ -57,8 +56,7 @@ if [ "$1" = "el-node" ]; then
         -v "$(pwd)"/root:/root \
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
         --name el-node --rm \
-        --platform linux/amd64 \
-        bosagora/agora-el-node:v1.0.1 \
+        bosagora/agora-el-node:v2.0.0 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         --syncmode=full --metrics --metrics.addr=0.0.0.0 --metrics.port=6060
@@ -68,8 +66,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --name el-node-attach --rm \
-        --platform linux/amd64 \
-        bosagora/agora-el-node:v1.0.1 \
+        bosagora/agora-el-node:v2.0.0 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         attach /root/chain/el/geth.ipc
@@ -97,8 +94,7 @@ elif [ "$1" = "cl-node" ]; then
         -v "$(pwd)"/root:/root \
         -p 3500:3500 -p 4000:4000 -p 8080:8080 -p 13000:13000 -p 12000:12000/udp \
         --name cl-node --rm \
-        --platform linux/amd64 \
-        bosagora/agora-cl-node:v1.0.3 \
+        bosagora/agora-cl-node:v2.0.0 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --p2p-host-ip="$(curl -s https://ifconfig.me/ip)" \
@@ -139,8 +135,7 @@ elif [ "$1" = "validator" ]; then
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
         --name cl-validator --rm \
-        --platform linux/amd64 \
-        bosagora/agora-cl-validator:v1.0.3 \
+        bosagora/agora-cl-validator:v2.0.0 \
         accounts import \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --keys-dir=/agora-chain/"$DATA_FOLDER" \
@@ -153,8 +148,7 @@ elif [ "$1" = "validator" ]; then
         -p 8081:8081 \
         --network host \
         --name cl-validator --rm \
-        --platform linux/amd64 \
-        bosagora/agora-cl-validator:v1.0.3 \
+        bosagora/agora-cl-validator:v2.0.0 \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
         --datadir=/root/chain/cl/ \
@@ -188,8 +182,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/root:/root \
             -v "$(pwd)"/../../:/agora-chain \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             accounts import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -202,8 +195,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/root:/root \
             --network host \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             accounts list \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -215,8 +207,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/root:/root \
             -v "$(pwd)"/../../:/agora-chain \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             accounts delete \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -243,8 +234,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/../../:/agora-chain \
             --network host \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             accounts backup \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -272,15 +262,38 @@ elif [ "$1" = "validator" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --net host \
-        --name cl-validator --rm \
-       --platform linux/amd64 \
-        bosagora/agora-cl-validator:v1.0.3 \
-        accounts voluntary-exit \
-        --accept-terms-of-use \
-        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --name cl-ctl --rm \
+        bosagora/agora-cl-ctl:v2.0.0 \
+        validator exit \
         --wallet-dir=/root/wallet \
-        --beacon-rpc-provider=127.0.0.1:4000 \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --beacon-rpc-provider=https://cl-rpc.testnet.bosagora.org:4000 \
+        --accept-terms-of-use \
         --wallet-password-file=/root/config/cl/password.txt
+
+    elif [ "$2" = "withdraw" ]; then
+
+        if [ "$#" -lt 3 ]; then
+            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+            echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
+        else
+            BLS2EXEC_DATA_FOLDER="$3"
+            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
+        fi
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --network host \
+        --name cl-ctl --rm \
+        bosagora/agora-cl-ctl:v2.0.0 \
+        validator withdraw \
+        --chain-config-file=/root/config/cl/chain-config.yaml \
+        --config-file=/root/config/cl/config.yaml \
+        --beacon-node-host=https://testnet-sync.bosagora.org \
+        --accept-terms-of-use \
+        --confirm \
+        --path=/agora-chain/"$BLS2EXEC_DATA_FOLDER"
 
     elif [ "$2" = "slashing-protection-history" ]; then
 
@@ -305,8 +318,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/../../:/agora-chain \
             --network host \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             slashing-protection-history export \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -334,8 +346,7 @@ elif [ "$1" = "validator" ]; then
             -v "$(pwd)"/../../:/agora-chain \
             --network host \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             slashing-protection-history import \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -374,8 +385,7 @@ elif [ "$1" = "validator" ]; then
             docker run -it \
             -v "$(pwd)"/root:/root \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             wallet create \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -394,8 +404,7 @@ elif [ "$1" = "validator" ]; then
             docker run -it \
             -v "$(pwd)"/root:/root \
             --name cl-validator --rm \
-            --platform linux/amd64 \
-            bosagora/agora-cl-validator:v1.0.3 \
+            bosagora/agora-cl-validator:v2.0.0 \
             wallet recover \
             --accept-terms-of-use \
             --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -414,7 +423,7 @@ elif [ "$1" = "validator" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh validator FLAGS."
-        color "31" "FLAGS can be run, import, accounts exit, slashing-protection-history, wallet"
+        color "31" "FLAGS can be run, import, accounts exit, withdraw, slashing-protection-history, wallet"
         exit 1
 
     fi
@@ -423,7 +432,7 @@ elif [ "$1" = "deposit-cli" ]; then
 
     if [ "$#" -lt 2 ]; then
         color "31" "Usage: ./agora.sh deposit-cli FLAGS."
-        color "31" "FLAGS can be new-mnemonic, existing-mnemonic"
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change"
         exit 1
     fi
 
@@ -449,11 +458,43 @@ elif [ "$1" = "deposit-cli" ]; then
         existing-mnemonic \
         --folder=/agora-chain
 
+    elif [ "$2" = "generate-bls-to-execution-change" ]; then
+
+        if [ "$#" -lt 3 ]; then
+            BLS2EXEC_DATA_FOLDER="bls_to_execution_changes"
+            echo "Default data folder is $BLS2EXEC_DATA_FOLDER"
+        else
+            BLS2EXEC_DATA_FOLDER="$3"
+            echo "Data folder is $BLS2EXEC_DATA_FOLDER"
+        fi
+
+        if [ "$system" == "linux" ]; then
+            sudo rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        else
+            rm -rf "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        fi
+
+        mkdir -p "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        -v "$(pwd)"/../../:/agora-chain \
+        --name deposit-cli --rm \
+        bosagora/agora-deposit-cli:agora_v2.5.0-f0d7d3 \
+        generate-bls-to-execution-change \
+        --bls_to_execution_changes_folder=/agora-chain/"$BLS2EXEC_DATA_FOLDER"
+
+        if [ "$system" == "linux" ]; then
+            sudo chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        else
+            chown -R "$USER" "$(pwd)/../../$BLS2EXEC_DATA_FOLDER"
+        fi
+
     else
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh deposit-cli FLAGS."
-        color "31" "FLAGS can be new-mnemonic, existing-mnemonic"
+        color "31" "FLAGS can be new-mnemonic, existing-mnemonic, generate-bls-to-execution-change"
         exit 1
 
     fi
@@ -549,8 +590,7 @@ elif [ "$1" = "exec" ]; then
         -v "$(pwd)"/../../:/agora-chain \
         --network host \
         --name el-node-exec --rm \
-        --platform linux/amd64 \
-        bosagora/agora-el-node:v1.0.1 \
+        bosagora/agora-el-node:v2.0.0 \
         --datadir=/root/chain/el \
         --config=/root/config/el/config.toml \
         "$@"
@@ -564,7 +604,7 @@ elif [ "$1" = "exec" ]; then
         --network host \
         --name cl-node-exec --rm \
         --platform linux/amd64 \
-        bosagora/agora-cl-node:v1.0.3 \
+        bosagora/agora-cl-node:v2.0.0 \
         "$@" \
         --accept-terms-of-use \
         --chain-config-file=/root/config/cl/chain-config.yaml \
@@ -579,7 +619,7 @@ elif [ "$1" = "exec" ]; then
         --network host \
         --name cl-validator-exec --rm \
         --platform linux/amd64 \
-        bosagora/agora-cl-validator:v1.0.3 \
+        bosagora/agora-cl-validator:v2.0.0 \
         "$@" \
         --accept-terms-of-use \
         --chain-config-file=/root/config/cl/chain-config.yaml
@@ -593,7 +633,7 @@ elif [ "$1" = "exec" ]; then
         --network host \
         --name cl-ctl-exec --rm \
         --platform linux/amd64 \
-        bosagora/agora-cl-ctl:v1.0.3 \
+        bosagora/agora-cl-ctl:v2.0.0 \
         "$@" \
         --accept-terms-of-use \
         --chain-config-file=/root/config/cl/chain-config.yaml
