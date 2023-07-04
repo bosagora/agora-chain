@@ -433,7 +433,7 @@ elif [ "$1" = "deposit-cli" ]; then
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
         --name deposit-cli --rm \
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        bosagora/agora-deposit-cli:agora_v2.5.0-f0d7d3 \
         --language=english \
         new-mnemonic \
         --folder=/agora-chain
@@ -444,7 +444,7 @@ elif [ "$1" = "deposit-cli" ]; then
         -v "$(pwd)"/root:/root \
         -v "$(pwd)"/../../:/agora-chain \
         --name deposit-cli --rm \
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 \
+        bosagora/agora-deposit-cli:agora_v2.5.0-f0d7d3 \
         --language=english \
         existing-mnemonic \
         --folder=/agora-chain

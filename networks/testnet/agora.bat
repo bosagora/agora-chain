@@ -365,7 +365,7 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
         --name deposit-cli --rm ^
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-f0d7d3 ^
         --language=english ^
         new-mnemonic ^
         --folder=/agora-chain
@@ -376,7 +376,7 @@ if "%~1"=="el-node" (
         -v %cd%\root:/root ^
         -v %cd%\..\..\:/agora-chain ^
         --name deposit-cli --rm ^
-        bosagora/agora-deposit-cli:agora_v2.5.0-1839d2 ^
+        bosagora/agora-deposit-cli:agora_v2.5.0-f0d7d3 ^
         --language=english ^
         existing-mnemonic ^
         --folder=/agora-chain
