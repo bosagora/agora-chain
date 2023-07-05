@@ -283,7 +283,7 @@ https://docs.docker.com/engine/install/
   ```shell
   ./agora.sh validator withdraw <folder>
   ```
-  `<folder>` 는 슬래싱 방지를 위한 데이타가 저장될 폴더입니다. 입력하지 않으면 `./slashing-protection-export` 로 처리됩니다.
+  `<folder>` 는 서명된 데이타가 저장된 폴더입니다. 입력하지 않으면 `./bls_to_execution_changes` 로 처리됩니다.
 
 ### 슬래싱 방지 (리눅스 및 맥 사용자용)
 
@@ -635,7 +635,7 @@ upgrade.bat
   ```shell
   agora.bat validator withdraw <folder>
   ```
-  `<folder>` 는 서명된 데이타가 저장된 폴더입니다. 기본 폴더는 `./bls_to_execution_changes`
+  `<folder>` 는 서명된 데이타가 저장된 폴더입니다. 입력하지 않으면 `./bls_to_execution_changes` 로 처리됩니다.
   
 
 ### 슬래싱 방지 (윈도우즈 사용자용)
