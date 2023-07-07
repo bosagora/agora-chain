@@ -50,6 +50,16 @@ if [ "$1" = "el-node" ]; then
         init \
         /root/config/el/genesis.json
 
+    elif [ "$2" = "upgrade" ]; then
+
+        docker run -it \
+        -v "$(pwd)"/root:/root \
+        --name el-node --rm \
+        bosagora/agora-el-node:v2.0.0 \
+        --datadir=/root/chain/el \
+        init \
+        /root/config/el/genesis.json
+
     elif [ "$2" = "run" ]; then
 
         docker run -it \
@@ -75,7 +85,7 @@ if [ "$1" = "el-node" ]; then
 
         color "31" "FLAGS '$2' is not found!"
         color "31" "Usage: ./agora.sh el-node FLAGS."
-        color "31" "FLAGS can be init, run, attach"
+        color "31" "FLAGS can be init, upgrade, run, attach"
         exit 1
 
     fi
