@@ -109,8 +109,8 @@ elif [ "$1" = "cl-node" ]; then
         --config-file=/root/config/cl/config.yaml \
         --p2p-host-ip="$(curl -s https://ifconfig.me/ip)" \
         --monitoring-port=8080 \
-        --checkpoint-sync-url=https://testnet-sync.bosagora.org \
-        --genesis-beacon-api-url=https://testnet-sync.bosagora.org
+        --checkpoint-sync-url=https://sync.testnet.bosagora.org \
+        --genesis-beacon-api-url=https://sync.testnet.bosagora.org
 
     else
 
@@ -300,7 +300,7 @@ elif [ "$1" = "validator" ]; then
         validator withdraw \
         --chain-config-file=/root/config/cl/chain-config.yaml \
         --config-file=/root/config/cl/config.yaml \
-        --beacon-node-host=https://testnet-sync.bosagora.org \
+        --beacon-node-host=https://sync.testnetbosagora.org \
         --accept-terms-of-use \
         --confirm \
         --path=/agora-chain/"$BLS2EXEC_DATA_FOLDER"
