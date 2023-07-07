@@ -132,4 +132,6 @@ then
 
 fi
 
+./agora.sh el-node upgrade
+
 echo "Completed upgrade..."

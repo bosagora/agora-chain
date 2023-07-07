@@ -38,6 +38,15 @@ if "%~1"=="el-node" (
         --datadir=/root/chain/el  ^
         init /root/config/el/genesis.json
 
+     ) else if "%~2"=="upgrade" (
+
+        docker run -it ^
+        -v %cd%\root:/root ^
+        --name el-node --rm  ^
+        bosagora/agora-el-node:v2.0.0  ^
+        --datadir=/root/chain/el  ^
+        init /root/config/el/genesis.json
+
      ) else if "%~2"=="run" (
 
         docker run -it ^
@@ -64,7 +73,7 @@ if "%~1"=="el-node" (
         echo FLAGS are the flags or arguments passed to the PROCESS.
         echo [31mFLAGS '%~2' is not found![0m
         echo [31mUsage: agora.bat el-node FLAGS.[0m
-        echo [31mFLAGS can be init, run[0m
+        echo [31mFLAGS can be init, upgrade, run, attach[0m
 
     )
 
