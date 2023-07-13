@@ -277,7 +277,7 @@ elif [ "$1" = "validator" ]; then
         validator exit \
         --wallet-dir=/root/wallet \
         --chain-config-file=/root/config/cl/chain-config.yaml \
-        --beacon-rpc-provider=https://cl-rpc.testnet.bosagora.org:4000 \
+        --beacon-rpc-provider=cl-rpc.testnet.bosagora.org:4000 \
         --accept-terms-of-use \
         --wallet-password-file=/root/config/cl/password.txt
 
