@@ -2,7 +2,7 @@ version: '3.3'
 services:
   agora-el-node:
     container_name: agora-el-node
-    image: bosagora/agora-el-node:v1.0.1
+    image: bosagora/agora-el-node:v2.0.0
     ports:
       - "6060:6060"
       - "8545:8545"
@@ -26,7 +26,7 @@ services:
 
   agora-cl-node:
     container_name: agora-cl-node
-    image: bosagora/agora-cl-node:v1.0.3
+    image: bosagora/agora-cl-node:v2.0.0
     ports:
       - "3500:3500"
       - "4000:4000"
@@ -43,8 +43,8 @@ services:
       --p2p-host-ip=${P2P_HOST_IP}
       --monitoring-port=8080
       --disable-peer-scorer=true
-      --checkpoint-sync-url=https://mainnet-sync.bosagora.org
-      --genesis-beacon-api-url=https://mainnet-sync.bosagora.org
+      --checkpoint-sync-url=https://sync.mainnet.bosagora.org
+      --genesis-beacon-api-url=https://sync.mainnet.bosagora.org
     depends_on:
       - agora-el-node
     logging:
@@ -55,7 +55,7 @@ services:
 
   agora-cl-validator:
     container_name: agora-cl-validator
-    image: bosagora/agora-cl-validator:v1.0.3
+    image: bosagora/agora-cl-validator:v2.0.0
     ports:
       - "8081:8081"
     volumes:
@@ -64,7 +64,6 @@ services:
     command:
       --chain-config-file=/root/config/cl/chain-config.yaml
       --config-file=/root/config/cl/config.yaml
-      --datadir=/root/chain/cl/
       --accept-terms-of-use
       --beacon-rpc-gateway-provider=agora-cl-node:3500
       --beacon-rpc-provider=agora-cl-node:4000
@@ -80,6 +79,23 @@ services:
       options:
         max-file: "5"
         max-size: "100m"
+
+  validator-balance:
+    image: bosagora/validator-balance:v1.0.0-5498e4
+    container_name: validator-balance
+    ports:
+      - '7000:7000'
+    restart: always
+    environment:
+      HOST_IP: 0.0.0.0
+      HOST_PORT: 7000
+      AGORA_SCAN_URL: http://mainnet.agorascan.io
+      AGORA_CL_NODE_URL: http://agora-cl-node:3500
+      AGORA_CL_VALIDATOR_METRICS_URL: http://agora-cl-validator:8081
+    depends_on:
+      - agora-el-node
+      - agora-cl-node
+      - agora-cl-validator
 
   node_exporter:
     container_name: node_exporter
@@ -106,6 +122,11 @@ services:
     command:
       --web.enable-lifecycle
       --config.file=/etc/prometheus/config.yml
+    depends_on:
+      - agora-el-node
+      - agora-cl-node
+      - agora-cl-validator
+      - validator-balance
     logging:
       driver: "json-file"
       options:

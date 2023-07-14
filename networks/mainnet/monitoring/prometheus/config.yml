@@ -1,5 +1,5 @@
 global:
-  scrape_interval:     1m
+  scrape_interval: 1m
   evaluation_interval: 1m
 
 # A scrape configuration containing exactly one endpoint to scrape:
@@ -13,12 +13,16 @@ scrape_configs:
     metrics_path: /debug/metrics/prometheus
     scheme: http
     static_configs:
-      - targets: ['agora-el-node:6060']
+      - targets: [ 'agora-el-node:6060' ]
 
   - job_name: 'agora-cl-node'
     static_configs:
-      - targets: ['agora-cl-node:8080']
+      - targets: [ 'agora-cl-node:8080' ]
 
   - job_name: 'agora-cl-validator'
     static_configs:
-      - targets: ['agora-cl-validator:8081']
+      - targets: [ 'agora-cl-validator:8081' ]
+
+  - job_name: 'validator-balance'
+    static_configs:
+      - targets: [ 'validator-balance:7000' ]
