@@ -93,6 +93,17 @@ if "%~1"=="el-node" (
         --checkpoint-sync-url=https://sync.testnet.bosagora.org ^
         --genesis-beacon-api-url=https://sync.testnet.bosagora.org
 
+    ) else if "%~2"=="clear-db" (
+
+        if exist .\root\chain\cl\beaconchaindata (
+          RD /S /Q .\root\chain\cl\beaconchaindata
+        )
+
+        if exist .\root\chain\cl\metaData (
+          DEL .\root\chain\cl\metaData
+        )
+
+
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m

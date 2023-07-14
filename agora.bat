@@ -241,9 +241,11 @@ echo        - Initialize agora-el. At this point, all existing block data is del
 echo [34m    el-node run[0m
 echo        - Run agora-el.
 echo.
-echo [33magora.bat cl-node ( run )[0m
+echo [33magora.bat cl-node ( run, clear-db )[0m
 echo [34m    cl-node run[0m
 echo        - Run agora-cl.
+echo [34m    cl-node clear-db[0m
+echo        - Clear stored data of agora-cl.
 echo.
 echo [33magora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )[0m
 echo.

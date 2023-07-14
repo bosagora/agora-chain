@@ -99,9 +99,11 @@ https://docs.docker.com/engine/install/
       el-node run
          - Run agora-el.
   
-  ./agora.sh cl-node ( run )
+  ./agora.sh cl-node ( run, clear-db )
       cl-node run
          - Run agora-cl.
+      cl-node clear-db
+         - Clear stored data of agora-cl.
   
   ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
@@ -446,9 +448,11 @@ or
       el-node run
          - Run agora-el.
   
-  agora.bat cl-node ( run )
+  agora.bat cl-node ( run, clear-db )
       cl-node run
          - Run agora-cl.
+      cl-node clear-db
+         - Clear stored data of agora-cl.
   
   agora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
 

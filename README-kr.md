@@ -102,9 +102,11 @@ https://docs.docker.com/engine/install/
       el-node run
          - 실행계층의 클라이언트를 실행합니다.
   
-  ./agora.sh cl-node ( run )
+  ./agora.sh cl-node ( run, clear-db )
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
+      cl-node clear-db
+         - 합의계층의 저장된 데이타를 삭제합니다.
   
   ./agora.sh validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
@@ -451,9 +453,11 @@ nano ./root/config/cl/proposer_config.json
       el-node run
          - 실행계층의 클라이언트를 실행합니다.
   
-  agora.bat cl-node ( run )
+  agora.bat cl-node ( run, clear-db )
       cl-node run
          - 합의계층의 클라이언트를 실행합니다.
+      cl-node clear-db
+         - 합의계층의 저장된 데이타를 삭제합니다.
   
   agora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
   
