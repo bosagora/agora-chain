@@ -88,6 +88,16 @@ if "%~1"=="el-node" (
         --checkpoint-sync-url=http://node1-2-cl:3500 ^
         --genesis-beacon-api-url=http://node1-2-cl:3500
 
+    ) else if "%~2"=="clear-db" (
+
+        if exist .\root\chain\cl\beaconchaindata (
+          RD /S /Q .\root\chain\cl\beaconchaindata
+        )
+
+        if exist .\root\chain\cl\metaData (
+          DEL .\root\chain\cl\metaData
+        )
+
     ) else (
 
         echo [31mFLAGS '%~2' is not found![0m

@@ -106,6 +106,16 @@ elif [ "$1" = "cl-node" ]; then
         --checkpoint-sync-url=http://node1-2-cl:3500 \
         --genesis-beacon-api-url=http://node1-2-cl:3500
 
+    elif [ "$2" = "clear-db" ]; then
+
+        if [ "$system" == "linux" ]; then
+            sudo rm -rf ./root/chain/cl/beaconchaindata
+            sudo rm ./root/chain/cl/metaData
+        else
+            rm -rf ./root/chain/cl/beaconchaindata
+            rm ./root/chain/cl/metaData
+        fi
+
     else
 
         color "31" "FLAGS '$2' is not found!"
