@@ -536,7 +536,8 @@ elif [ "$1" = "docker-compose" ]; then
 
     fi
 
-    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    rm -f "$(pwd)/.env" && echo "P2P_HOST_IP=$P2P_HOST_IP" >> "$(pwd)/.env"
 
     if [ "$2" = "up" ]; then
 
@@ -565,7 +566,8 @@ elif [ "$1" = "docker-compose-monitoring" ]; then
 
     fi
 
-    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    rm -f "$(pwd)/.env" && echo "P2P_HOST_IP=$P2P_HOST_IP" >> "$(pwd)/.env"
 
     if [ "$2" = "up" ]; then
 
@@ -586,12 +588,14 @@ elif [ "$1" = "docker-compose-monitoring" ]; then
 
 elif [ "$1" = "start" ]; then
 
-    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    rm -f "$(pwd)/.env" && echo "P2P_HOST_IP=$P2P_HOST_IP" >> "$(pwd)/.env"
     docker-compose -f docker-compose-monitoring.yml up -d
 
 elif [ "$1" = "stop" ]; then
 
-    export P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    rm -f "$(pwd)/.env" && echo "P2P_HOST_IP=$P2P_HOST_IP" >> "$(pwd)/.env"
     docker-compose -f docker-compose-monitoring.yml down
 
 elif [ "$1" = "exec" ]; then

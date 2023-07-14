@@ -7,3 +7,5 @@ validator_keys??/
 bls_to_execution_changes/
 backup-wallet/
 slashing-protection-export/
+
+.env
