@@ -1,7 +1,8 @@
 @ECHO OFF
 FOR /F "tokens=* USEBACKQ" %%F IN (`curl -s https://ifconfig.me/ip`) DO (
-SET P2P_HOST_IP=%%F
+    SET P2P_HOST_IP=%%F
 )
+echo P2P_HOST_IP=%P2P_HOST_IP%>.env
 
 if "%~1"=="" (
   goto printError
