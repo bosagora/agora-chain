@@ -2637,7 +2637,7 @@
           "link": true,
           "linkTargetBlank": true,
           "linkTooltip": "agorascan.io",
-          "linkUrl": "https://testnet.agorascan.io/validator/${__cell_1:raw}",
+          "linkUrl": "https://www.agorascan.io/validator/${__cell_1:raw}",
           "mappingType": 1,
           "pattern": "pubkey_short",
           "thresholds": [],

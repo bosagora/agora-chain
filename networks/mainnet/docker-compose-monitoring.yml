@@ -89,7 +89,7 @@ services:
     environment:
       HOST_IP: 0.0.0.0
       HOST_PORT: 7000
-      AGORA_SCAN_URL: http://mainnet.agorascan.io
+      AGORA_SCAN_URL: https://www.agorascan.io
       AGORA_CL_NODE_URL: http://agora-cl-node:3500
       AGORA_CL_VALIDATOR_METRICS_URL: http://agora-cl-validator:8081
     depends_on:
