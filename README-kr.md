@@ -186,7 +186,22 @@ https://docs.docker.com/engine/install/
          - 가장 최신의 버전이 설치됩니다. 이때 데이타는 보존됩니다.
   ```
 
-### 업그레이드 (리눅스 및 맥 사용자용)
+### 업그레이드와 마이그레이션 (리눅스 및 맥 사용자용)
+
+먼저 설치된 폴더로 이동합니다.
+설치된 폴더가 `agora-chain-main` 이면 아래 명령어를 사용하여 이동합니다.
+
+```shell
+cd agora-chain-main
+```
+
+설치된 폴더가 `agora-chain` 이면 아래 명령어를 사용하여 이동합니다.
+
+```shell
+cd agora-chain
+```
+
+그리고 다음 명령어를 설치된 폴더 안에서 실행하면 노드의 업그레이드와 블록데이터와 검증자정보의 마이그레이션이 진행됩니다.
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.sh)"
@@ -537,7 +552,22 @@ nano ./root/config/cl/proposer_config.json
          - 가장 최신의 버전이 설치됩니다. 이때 데이타는 보존됩니다.
   ```
 
-### 업그레이드 (윈도우즈 사용자용)
+### 업그레이드와 마이그레이션 (윈도우즈 사용자용)
+
+먼저 설치된 폴더로 이동합니다.
+설치된 폴더가 agora-chain-main 이면 아래 명령어를 사용하여 이동합니다.
+
+```shell
+cd agora-chain-main
+```
+
+설치된 폴더가 agora-chain 이면 아래 명령어를 사용하여 이동합니다.
+
+```shell
+cd agora-chain
+```
+
+그리고 다음 명령어를 설치된 폴더 안에서 실행하면 노드의 업그레이드와 블록데이터와 검증자정보의 마이그레이션이 진행됩니다.
 
 ```shell
 curl -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
