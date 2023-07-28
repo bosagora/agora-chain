@@ -182,7 +182,22 @@ https://docs.docker.com/engine/install/
          - The latest version is installed, at which point the user data is preserved.
   ```
 
-### Upgrade for Linux or MacOS
+### Upgrade and Migration for Linux or MacOS
+
+Go to the path that was installed first.
+If the installed folder is `agora-chain-main`, use the command below to move the path
+
+```shell
+cd agora-chain-main
+```
+
+If the installed folder is `agora-chain`, use the command below to move the path
+
+```shell
+cd agora-chain
+```
+
+The following commands then run inside the installed folder to upgrade the nodes and migrate block data and validator information.
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.sh)"
@@ -531,7 +546,22 @@ or
          - The latest version is installed, at which point the user data is preserved.
   ```
 
-### Upgrade for Windows
+### Upgrade and Migration for Windows
+
+Go to the path that was installed first.
+If the installed folder is `agora-chain-main`, use the command below to move the path
+
+```shell
+cd agora-chain-main
+```
+
+If the installed folder is `agora-chain`, use the command below to move the path
+
+```shell
+cd agora-chain
+```
+
+The following commands then run inside the installed folder to upgrade the nodes and migrate block data and validator information.
 
 ```shell
 curl -S -L -o upgrade.bat https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/upgrade.bat
