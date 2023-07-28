@@ -144,31 +144,31 @@ then
 
     if find . | grep -q "2151" "$FILENAME"
     then
-        cp -rf root/chain networks/mainnet/root/
-        cp -rf root/wallet networks/mainnet/root/
-        cp -f root/config/cl/password.txt networks/mainnet/root/config/cl/password.txt
-        cp -f root/config/cl/proposer_config.json networks/mainnet/root/config/cl/proposer_config.json
-        mv -f root .root
+        sudo cp -rf root/chain networks/mainnet/root/
+        sudo cp -rf root/wallet networks/mainnet/root/
+        sudo cp -f root/config/cl/password.txt networks/mainnet/root/config/cl/password.txt
+        sudo cp -f root/config/cl/proposer_config.json networks/mainnet/root/config/cl/proposer_config.json
+        sudo mv -f root .root
         rm docker-compose.yml
         rm docker-compose-monitoring.yml
         ./agora.sh network mainnet
     elif find . | grep -q "2019" "$FILENAME"
     then
-        cp -rf root/chain networks/testnet/root/
-        cp -rf root/wallet networks/testnet/root/
-        cp -f root/config/cl/password.txt networks/testnet/root/config/cl/password.txt
-        cp -f root/config/cl/proposer_config.json networks/testnet/root/config/cl/proposer_config.json
-        mv -f root .root
+        sudo cp -rf root/chain networks/testnet/root/
+        sudo cp -rf root/wallet networks/testnet/root/
+        sudo cp -f root/config/cl/password.txt networks/testnet/root/config/cl/password.txt
+        sudo cp -f root/config/cl/proposer_config.json networks/testnet/root/config/cl/proposer_config.json
+        sudo mv -f root .root
         rm docker-compose.yml
         rm docker-compose-monitoring.yml
         ./agora.sh network testnet
     elif find . | grep -q "1337" "$FILENAME"
     then
-        cp -rf root/chain networks/devnet/root/
-        cp -rf root/wallet networks/devnet/root/
-        cp -f root/config/cl/password.txt networks/devnet/root/config/cl/password.txt
-        cp -f root/config/cl/proposer_config.json networks/devnet/root/config/cl/proposer_config.json
-        mv -f root .root
+        sudo cp -rf root/chain networks/devnet/root/
+        sudo cp -rf root/wallet networks/devnet/root/
+        sudo cp -f root/config/cl/password.txt networks/devnet/root/config/cl/password.txt
+        sudo cp -f root/config/cl/proposer_config.json networks/devnet/root/config/cl/proposer_config.json
+        sudo mv -f root .root
         rm docker-compose.yml
         rm docker-compose-monitoring.yml
         ./agora.sh network devnet
