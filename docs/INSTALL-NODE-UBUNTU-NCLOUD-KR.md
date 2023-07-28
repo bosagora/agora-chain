@@ -821,7 +821,7 @@ http://[서버의 IP]:3000
 왼쪽 메뉴의 위에서 네번째 아이콘을 클릭하면 `Dashboards` 리는 메뉴가 나타납니다. 메뉴창에서 `+ import` 를 선택합니다.  
 아래 URL 의 내용을 복사합니다.  
 
-https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json  
+https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/networks/mainnet/monitoring/dashboard/agora-chain-dashboard.json  
 
 복사한 내용을 `Dashboards / Import dashboard` 화면의 `Import via panel json` 입력창에 붙여넣습니다.  
 그러면 새로운 Dashboard 가 추가되고 화면에 나타납니다.  

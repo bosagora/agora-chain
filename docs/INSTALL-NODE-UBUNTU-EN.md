@@ -733,7 +733,7 @@ If all the courses are set up well, a pop-up message `Data source is working` wi
 When you click the fourth icon at the top of the left menu, a menu called `Dashboards` appears. Select `+ import` from the menu pane.  
 Copy the contents of the URL below.  
 
-https://raw.githubusercontent.com/bosagora/agora-chain/mainnet/monitoring/dashboard/agora-chain-dashboard.json
+https://raw.githubusercontent.com/bosagora/agora-chain/v0.x.x/networks/mainnet/monitoring/dashboard/agora-chain-dashboard.json
 
 Paste the copy into the `Import via panel json` input window on the `Dashboard/Import dashboard` screen.  
 This adds a new dashboard and appears on the screen.   
