@@ -45,7 +45,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --name el-node --rm \
-        bosagora/agora-el-node:v2.0.0 \
+        bosagora/agora-el-node:v2.0.1 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
@@ -55,7 +55,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --name el-node --rm \
-        bosagora/agora-el-node:v2.0.0 \
+        bosagora/agora-el-node:v2.0.1 \
         --datadir=/root/chain/el \
         init \
         /root/config/el/genesis.json
@@ -66,7 +66,7 @@ if [ "$1" = "el-node" ]; then
         -v "$(pwd)"/root:/root \
         -p 6060:6060 -p 8545:8545 -p 30303:30303 -p 30303:30303/udp \
         --name el-node --rm \
-        bosagora/agora-el-node:v2.0.0 \
+        bosagora/agora-el-node:v2.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         --syncmode=full --metrics --metrics.addr=0.0.0.0 --metrics.port=6060
@@ -76,7 +76,7 @@ if [ "$1" = "el-node" ]; then
         docker run -it \
         -v "$(pwd)"/root:/root \
         --name el-node-attach --rm \
-        bosagora/agora-el-node:v2.0.0 \
+        bosagora/agora-el-node:v2.0.1 \
         --config=/root/config/el/config.toml \
         --datadir=/root/chain/el \
         attach /root/chain/el/geth.ipc
@@ -614,7 +614,7 @@ elif [ "$1" = "exec" ]; then
         -v "$(pwd)"/../../:/agora-chain \
         --network host \
         --name el-node-exec --rm \
-        bosagora/agora-el-node:v2.0.0 \
+        bosagora/agora-el-node:v2.0.1 \
         --datadir=/root/chain/el \
         --config=/root/config/el/config.toml \
         "$@"
