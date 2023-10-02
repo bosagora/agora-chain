@@ -81,7 +81,7 @@ services:
         max-size: "100m"
 
   validator-balance:
-    image: bosagora/validator-balance:v1.0.0-5498e4
+    image: bosagora/validator-balance:v1.0.0-e8001d
     container_name: validator-balance
     ports:
       - '7000:7000'
