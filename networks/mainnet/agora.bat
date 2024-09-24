@@ -480,6 +480,24 @@ if "%~1"=="el-node" (
 
     )
 
+) else if "%~1"=="docker-compose-no-validator" (
+
+    if "%~2"=="up" (
+
+        docker-compose -f docker-compose-no-validator.yml up -d
+
+    ) else if "%~2"=="down" (
+
+        docker-compose -f docker-compose-no-validator.yml down
+
+    ) else (
+
+        echo [31mFLAGS '%~2' is not found![0m
+        echo [31mUsage: agora.bat docker-compose-no-validator FLAGS.[0m
+        echo [31mFLAGS can be up down[0m
+
+    )
+
 ) else if "%~1"=="start" (
 
     docker-compose -f docker-compose-monitoring.yml up -d

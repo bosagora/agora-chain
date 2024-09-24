@@ -18,6 +18,7 @@ English | [한국어](./README-kr.md)
   - [Validator slashing protection](#validator-slashing-protection-for-linux-or-macos)
   - [Using docker-compose](#using-docker-compose-for-linux-or-macos)
   - [Using docker-compose with monitoring](#using-docker-compose-with-monitoring-for-linux-or-macos)
+  - [Using docker-compose that do not run validator](#using-docker-compose-that-do-not-run-validator-for-linux-or-macos)
 
 
 - [For Windows users](#for-windows-users)
@@ -32,6 +33,7 @@ English | [한국어](./README-kr.md)
   - [Validator slashing protection](#validator-slashing-protection-for-windows)
   - [Using docker-compose](#using-docker-compose-for-windows)
   - [Using docker-compose with monitoring](#using-docker-compose-with-monitoring-for-windows)
+  - [Using docker-compose that do not run validator](#using-docker-compose-that-do-not-run-validator-for-windows)
 
 
 - [Installing the BOSagora's node on Ubuntu on AWS](docs/INSTALL-NODE-UBUNTU-EN.md)
@@ -154,6 +156,12 @@ https://docs.docker.com/engine/install/
       docker-compose down
          - Stop agora-el, agora-cl, validator.
   
+  ./agora.sh docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - Run agora-el, agora-cl.
+      docker-compose-no-validator down
+         - Stop agora-el, agora-cl.
+  
   ./agora.sh docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
           - Run agora-el, agora-cl, validator, and containers required for monitoring.
@@ -167,7 +175,7 @@ https://docs.docker.com/engine/install/
   ./agora.sh stop
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as './agora.sh docker-compose-monitoring down'
-
+  
   ./agora.sh exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - Run agora-el-node with user-entered parameters.
@@ -414,6 +422,50 @@ or
 ./agora.sh stop
 ```
 
+### Using docker-compose that do not run validator for Linux or MacOS
+
+1. Init the execution node
+
+```shell
+./agora.sh el-node init
+```
+
+2. Import your key stores
+
+```shell
+./agora.sh validator import <your key stores folder>
+```
+
+or
+
+```shell
+./agora.sh validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+
+```shell
+nano ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+
+```shell
+nano ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+
+```shell
+./agora.sh docker-compose-no-validator up
+```
+
+6. Stop docker-compose
+
+```shell
+./agora.sh docker-compose-no-validator down
+```
+
 ## For Windows users
 
 ### Install for Windows
@@ -470,7 +522,7 @@ or
          - Clear stored data of agora-cl.
   
   agora.bat validator ( accounts, exit, withdraw, slashing-protection-history, wallet )
-
+  
   agora.bat validator accounts ( import, list, backup )
       validator accounts import <validator keys folder>
          - Add the validator's keys to the local wallet.
@@ -486,7 +538,7 @@ or
       validator withdraw <data folder>
          - Send pre-created withdrawal address registration data to the network.
          - Currently, only devnet is supported. Other networks will be supported later.
-
+  
   agora.bat validator slashing-protection-history ( export, import ) 
       validator slashing-protection-history export <data folder>
          - Save the information that the verifiers worked on as a file. At this point, the validator on the current server must be stopped.
@@ -518,6 +570,12 @@ or
       docker-compose down
          - Stop agora-el, agora-cl, validator.
   
+  agora.bat docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - Run agora-el, agora-cl.
+      docker-compose-no-validator down
+         - Stop agora-el, agora-cl.
+  
   agora.bat docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
           - Run agora-el, agora-cl, validator, and containers required for monitoring.
@@ -531,7 +589,7 @@ or
   agora.bat stop
          - Stop agora-el, agora-cl, validator, and containers required for monitoring.
          - It's the same as 'agora.bat docker-compose-monitoring down'
-  
+
   agora.bat exec ( el-node, cl-node, cl-validator, cl-ctl )
       exec el-node ...
          - Run agora-el-node with user-entered parameters.
@@ -779,6 +837,50 @@ agora.bat docker-compose-monitoring down
 or
 ```shell
 agora.bat stop
+```
+
+### Using docker-compose that do not run validator for Windows
+
+1. Init the execution node
+
+```shell
+agora.bat el-node init
+```
+
+2. Import your key stores
+
+```shell
+agora.bat validator import <your key stores folder>
+```
+
+or
+
+```shell
+agora.bat validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+
+```shell
+notepad ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+
+```shell
+notepad ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+
+```shell
+agora.bat docker-compose-no-validator up
+```
+
+6. Stop docker-compose
+
+```shell
+agora.bat docker-compose-no-validator down
 ```
 
 ## Additional Information

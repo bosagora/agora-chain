@@ -18,6 +18,7 @@ English | [한국어](./README-kr.md)
   - [Validator slashing protection](#validator-slashing-protection-for-linux-or-macos)
   - [Using docker-compose](#using-docker-compose-for-linux-or-macos)
   - [Using docker-compose with monitoring](#using-docker-compose-with-monitoring-for-linux-or-macos)
+  - [Using docker-compose that do not run validator](#using-docker-compose-that-do-not-run-validator-for-linux-or-macos)
 
 
 - [For Windows users](#for-windows-users)
@@ -32,6 +33,7 @@ English | [한국어](./README-kr.md)
   - [Validator slashing protection](#validator-slashing-protection-for-windows)
   - [Using docker-compose](#using-docker-compose-for-windows)
   - [Using docker-compose with monitoring](#using-docker-compose-with-monitoring-for-windows)
+  - [Using docker-compose that do not run validator](#using-docker-compose-that-do-not-run-validator-for-windows)
 
 
 - [Installing the BOSagora's node on Ubuntu on AWS](docs/INSTALL-NODE-UBUNTU-EN.md)
@@ -87,7 +89,7 @@ https://docs.docker.com/engine/install/
   ./agora.sh 
   agora.sh version 2.0.0
   Usage: ./agora.sh PROCESS FLAGS.
-  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, upgrade
+  PROCESS can be el-node, cl-node, validator, docker-compose, docker-compose-monitoring, start, stop, exec, upgrade
   
   ./agora.sh network <network to change>
          - <network to change> is one of mainnet, testnet, and devnet, and the default is mainnet.
@@ -153,6 +155,12 @@ https://docs.docker.com/engine/install/
          - Run agora-el, agora-cl, validator.
       docker-compose down
          - Stop agora-el, agora-cl, validator.
+  
+  ./agora.sh docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - Run agora-el, agora-cl.
+      docker-compose-no-validator down
+         - Stop agora-el, agora-cl.
   
   ./agora.sh docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
@@ -414,6 +422,50 @@ or
 ./agora.sh stop
 ```
 
+### Using docker-compose that do not run validator for Linux or MacOS
+
+1. Init the execution node
+
+```shell
+./agora.sh el-node init
+```
+
+2. Import your key stores
+
+```shell
+./agora.sh validator import <your key stores folder>
+```
+
+or
+
+```shell
+./agora.sh validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+
+```shell
+nano ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+
+```shell
+nano ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+
+```shell
+./agora.sh docker-compose-no-validator up
+```
+
+6. Stop docker-compose
+
+```shell
+./agora.sh docker-compose-no-validator down
+```
+
 ## For Windows users
 
 ### Install for Windows
@@ -517,6 +569,12 @@ or
          - Run agora-el, agora-cl, validator.
       docker-compose down
          - Stop agora-el, agora-cl, validator.
+  
+  agora.bat docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - Run agora-el, agora-cl.
+      docker-compose-no-validator down
+         - Stop agora-el, agora-cl.
   
   agora.bat docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
@@ -779,6 +837,50 @@ agora.bat docker-compose-monitoring down
 or
 ```shell
 agora.bat stop
+```
+
+### Using docker-compose that do not run validator for Windows
+
+1. Init the execution node
+
+```shell
+agora.bat el-node init
+```
+
+2. Import your key stores
+
+```shell
+agora.bat validator import <your key stores folder>
+```
+
+or
+
+```shell
+agora.bat validator accounts import <your key stores folder>
+```
+
+3. Edit wallet password
+
+```shell
+notepad ./root/config/cl/password.txt
+```
+
+4. Edit transaction fee receiving address
+
+```shell
+notepad ./root/config/cl/proposer_config.json
+```
+
+5. Run docker-compose
+
+```shell
+agora.bat docker-compose-no-validator up
+```
+
+6. Stop docker-compose
+
+```shell
+agora.bat docker-compose-no-validator down
 ```
 
 ## Additional Information

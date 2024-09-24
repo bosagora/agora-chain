@@ -18,6 +18,7 @@
   - [슬래싱 방지](#슬래싱-방지-리눅스-및-맥-사용자용)
   - [도커 컴포우즈 사용](#도커-컴포우즈-사용-리눅스-및-맥-사용자용)
   - [모니터링을 위한 도커 컴포우즈 사용](#모니터링을-위한-도커-컴포우즈-사용-리눅스-및-맥-사용자용)
+  - [검증자를 실행하지 않는 도커 컴포우즈 사용](#검증자를-실행하지-않는-도커-컴포우즈-사용-리눅스-및-맥-사용자용)
 
 - [윈도우즈 사용자용](#윈도우즈-사용자용)
   - [설치](#설치-윈도우즈-사용자용)
@@ -31,6 +32,7 @@
   - [슬래싱 방지](#슬래싱-방지-윈도우즈-사용자용)
   - [도커 컴포우즈 사용](#도커-컴포우즈-사용-윈도우즈-사용자용)
   - [모니터링을 위한 도커 컴포우즈 사용](#모니터링을-위한-도커-컴포우즈-사용-윈도우즈-사용자용)
+  - [검증자를 실행하지 않는 도커 컴포우즈 사용](#검증자를-실행하지-않는-도커-컴포우즈-사용-윈도우즈-사용자용)
 
 - [AWS 의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-KR.md)
 - [NHN 클라우드의 Ubuntu 에 BOSagora 노드 설치하기](docs/INSTALL-NODE-UBUNTU-NHNCLOUD-KR.md)
@@ -157,6 +159,12 @@ https://docs.docker.com/engine/install/
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 실행합니다.
       docker-compose down
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 중지합니다.
+  
+  ./agora.sh docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - 실행 계층 클라이언트, 합의 계층 클라이언트를 실행합니다.
+      docker-compose-no-validator down
+         - 실행 계층 클라이언트, 합의 계층 클라이언트를 중지합니다.
   
   ./agora.sh docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
@@ -417,6 +425,50 @@ nano ./root/config/cl/proposer_config.json
 ./agora.sh stop
 ```
 
+### 검증자를 실행하지 않는 도커 컴포우즈 사용 (리눅스 및 맥 사용자용)
+
+1. 실행 계층의 블록데이타를 초기화하기
+
+```shell
+./agora.sh el-node init
+```
+
+2. 검증자 키를 임포트하기
+
+```shell
+./agora.sh validator import <your key stores folder>
+```
+
+또는
+
+```shell
+./agora.sh validator accounts import <your key stores folder>
+```
+
+3. 프로세스 자동실행을 위해 월렛의 비밀번호를 기록하기
+
+```shell
+nano ./root/config/cl/password.txt
+```
+
+4. 트랜잭션 수수료를 받을 주소를 등록하기
+
+```shell
+nano ./root/config/cl/proposer_config.json
+```
+
+5. 도커 컴포우즈를 실행
+
+```shell
+./agora.sh docker-compose-no-validator up
+```
+
+6. 도커 컴포우즈를 종료
+
+```shell
+./agora.sh docker-compose-no-validator down
+```
+
 ## 윈도우즈 사용자용
 
 ### 설치 (윈도우즈 사용자용)
@@ -523,6 +575,12 @@ nano ./root/config/cl/proposer_config.json
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 실행합니다.
       docker-compose down
          - 실행 계층 클라이언트, 합의 계층 클라이언트, 검증자를 중지합니다.
+  
+  agora.bat docker-compose-no-validator ( up, down )
+      docker-compose-no-validator up
+         - 실행 계층 클라이언트, 합의 계층 클라이언트를 실행합니다.
+      docker-compose-no-validator down
+         - 실행 계층 클라이언트, 합의 계층 클라이언트를 중지합니다.
   
   agora.bat docker-compose-monitoring ( up, down )
       docker-compose-monitoring up
@@ -734,7 +792,7 @@ agora.bat docker-compose up
 agora.bat docker-compose down
 ```
 
-### 모니터링을 위한 도커 컴포우즈 사용 (윈도우즈 사용자용)
+### 검증자를 실행하지 않는 도커 컴포우즈 사용 (윈도우즈 사용자용)
 
 1. 실행 계층의 블록데이타를 초기화하기
 
@@ -778,6 +836,12 @@ agora.bat docker-compose-monitoring up
 agora.bat start
 ```
 
+검증자를 실행하지 않을 때는
+
+```shell
+./agora.sh docker-compose-no-validator up
+```
+
 6. 도커 컴포우즈를 종료
 
 ```shell
@@ -788,6 +852,58 @@ agora.bat docker-compose-monitoring down
 
 ```shell
 agora.bat stop
+```
+
+검증자를 실행하지 않을 때는
+
+```shell
+./agora.sh docker-compose-no-validator down
+```
+
+### 모니터링을 위한 도커 컴포우즈 사용 (윈도우즈 사용자용)
+
+1. 실행 계층의 블록데이타를 초기화하기
+
+```shell
+agora.bat el-node init
+```
+
+2. 검증자 키를 임포트하기
+
+```shell
+agora.bat validator import <your key stores folder>
+```
+
+또는
+
+```shell
+agora.bat validator accounts import <your key stores folder>
+```
+
+3. 프로세스 자동실행을 위해 월렛의 비밀번호를 기록하기
+
+```shell
+notepad ./root/config/cl/password.txt
+```
+
+4. 트랜잭션 수수료를 받을 주소를 등록하기
+
+```shell
+notepad ./root/config/cl/proposer_config.json
+```
+
+5. 도커 컴포우즈를 실행
+
+
+```shell
+./agora.sh docker-compose-no-validator up
+```
+
+6. 도커 컴포우즈를 종료
+
+
+```shell
+./agora.sh docker-compose-no-validator down
 ```
 
 ## 부가적인 정보들

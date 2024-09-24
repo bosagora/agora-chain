@@ -579,6 +579,36 @@ elif [ "$1" = "docker-compose-monitoring" ]; then
 
     fi
 
+elif [ "$1" = "docker-compose-no-validator" ]; then
+
+    if [ "$#" -lt 2 ]; then
+
+        color "31" "Usage: ./agora.sh docker-compose-no-validator FLAGS."
+        color "31" "FLAGS can be up, down"
+        exit 1
+
+    fi
+
+    P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
+    rm -f "$(pwd)/.env" && echo "P2P_HOST_IP=$P2P_HOST_IP" >> "$(pwd)/.env"
+
+    if [ "$2" = "up" ]; then
+
+      docker-compose -f docker-compose-no-validator.yml up -d
+
+    elif [ "$2" = "down" ]; then
+
+      docker-compose -f docker-compose-no-validator.yml down
+
+    else
+
+        color "31" "FLAGS '$2' is not found!"
+        color "31" "Usage: ./agora.sh docker-compose-no-validator FLAGS."
+        color "31" "FLAGS can be up, down"
+        exit 1
+
+    fi
+
 elif [ "$1" = "start" ]; then
 
     P2P_HOST_IP=$(curl -s https://ifconfig.me/ip)
