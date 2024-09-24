@@ -124,7 +124,7 @@ services:
   prometheus:
     container_name: prometheus
     hostname: prometheus
-    image: prom/prometheus
+    image: prom/prometheus:v2.24.0
     ports:
       - "9090:9090"
     volumes:
@@ -150,7 +150,7 @@ services:
   grafana:
     container_name: grafana
     hostname: grafana
-    image: grafana/grafana
+    image: grafana/grafana:9.3.6
     depends_on:
       - prometheus
     ports:
