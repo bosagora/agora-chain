@@ -55,6 +55,7 @@ downloadFile networks/mainnet/agora.bat
 downloadFile networks/mainnet/agora.sh
 downloadFile networks/mainnet/docker-compose.yml
 downloadFile networks/mainnet/docker-compose-monitoring.yml
+downloadFile networks/mainnet/docker-compose-no-validator.yml
 
 echo "Downloading files used on the test network ..."
 downloadFile networks/testnet/monitoring/dashboard/agora-chain-dashboard.json
@@ -67,6 +68,7 @@ downloadFile networks/testnet/agora.bat
 downloadFile networks/testnet/agora.sh
 downloadFile networks/testnet/docker-compose.yml
 downloadFile networks/testnet/docker-compose-monitoring.yml
+downloadFile networks/testnet/docker-compose-no-validator.yml
 
 echo "Downloading files used on the development network ..."
 downloadFile networks/devnet/monitoring/dashboard/agora-chain-dashboard.json
