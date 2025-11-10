@@ -59,6 +59,7 @@ if not exist "networks" (
   call :downloadFile networks/mainnet/agora.sh
   call :downloadFile networks/mainnet/docker-compose.yml
   call :downloadFile networks/mainnet/docker-compose-monitoring.yml
+  call :downloadFile networks/mainnet/docker-compose-no-validator.yml
 
   echo Downloading files used on the test network ...
   call :downloadFile networks/testnet/monitoring/dashboard/agora-chain-dashboard.json
@@ -73,6 +74,7 @@ if not exist "networks" (
   call :downloadFile networks/testnet/agora.sh
   call :downloadFile networks/testnet/docker-compose.yml
   call :downloadFile networks/testnet/docker-compose-monitoring.yml
+  call :downloadFile networks/testnet/docker-compose-no-validator.yml
 
   echo Downloading files used on the development network ...
   call :downloadFile networks/devnet/monitoring/dashboard/agora-chain-dashboard.json
@@ -87,6 +89,7 @@ if not exist "networks" (
   call :downloadFile networks/devnet/agora.sh
   call :downloadFile networks/devnet/docker-compose.yml
   call :downloadFile networks/devnet/docker-compose-monitoring.yml
+  call :downloadFile networks/devnet/docker-compose-no-validator.yml
 
   call :downloadFile agora.bat
   call :downloadFile agora.sh
